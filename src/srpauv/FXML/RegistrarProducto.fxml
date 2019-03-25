@@ -1,0 +1,899 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1300.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="srpauv.controlador.RegistrarProductoController">
+    <stylesheets>
+        <URL value="@/srpauv/FXML/css/registrarproducto.css" />
+    </stylesheets>
+   <children>
+      <AnchorPane prefHeight="100.0" prefWidth="1300.0" styleClass="header" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="250.0" layoutY="24.0" text="SRPAUV" AnchorPane.leftAnchor="250.0">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+      <AnchorPane fx:id="apnProductos" layoutY="106.0" prefWidth="250.0" styleClass="listProductos" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="100.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ToggleButton fx:id="btnTesis" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="btnProducto" text="%btnTesis">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </ToggleButton>
+                  <ToggleButton fx:id="btnArticuloIndexado" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="btnProducto" text="%btnArtIndex">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </ToggleButton>
+                  <ToggleButton fx:id="btnArticuloArbitrado" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="btnProducto" text="%btnArtArb">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </ToggleButton>
+                  <ToggleButton fx:id="btnArticulo" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="btnProducto" text="%btnArt">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </ToggleButton>
+                  <ToggleButton fx:id="btnCapituloLibro" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="btnProducto" text="%btnCapLibro">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </ToggleButton>
+                  <ToggleButton fx:id="btnLibro" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="btnProducto" text="%btnLibro">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </ToggleButton>
+                  <ToggleButton fx:id="btnProduccionInnovadora" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="btnProducto" text="%btnProdInnov">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </ToggleButton>
+                  <ToggleButton fx:id="btnMemoriaExtenso" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="btnProducto" text="%btnMemExtenso">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </ToggleButton>
+                  <ToggleButton fx:id="btnPrototipo" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="btnProducto" text="%btnProto">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </ToggleButton>
+               </children>
+               <padding>
+                  <Insets bottom="30.0" top="30.0" />
+               </padding>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="250.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #C4C4C4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+         <children>
+            <AnchorPane fx:id="apnTesis" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TextField alignment="CENTER" prefHeight="30.0" promptText="%txtTitulo" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="30.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <ComboBox prefHeight="30.0" prefWidth="419.0" promptText="%cbxLGAC" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="30.0" />
+                           </GridPane.margin>
+                        </ComboBox>
+                        <TextField alignment="CENTER" prefHeight="30.0" promptText="%txtGrado" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="90.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField alignment="CENTER" prefHeight="30.0" promptText="%txtNoAlumnos" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="90.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField alignment="CENTER" prefHeight="30.0" promptText="%txtFechaInicio" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="150.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField alignment="CENTER" prefHeight="30.0" promptText="%txtFechaFin" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="150.0" />
+                           </GridPane.margin>
+                        </TextField>
+                     </children>
+                  </GridPane>
+                  <AnchorPane layoutX="850.0" layoutY="90.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <CheckBox layoutX="27.0" layoutY="37.0" mnemonicParsing="false" prefHeight="30.0" text="CheckBox" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="30.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="apnArticuloIndexado" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #C4C4C4;" visible="false" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <TextField prefHeight="30.0" text="autor" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="30.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField prefHeight="30.0" text="titulo" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="30.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextArea maxHeight="90.0" prefHeight="90.0" prefWidth="406.0" text="descripcion" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="90.0" />
+                           </GridPane.margin>
+                        </TextArea>
+                        <TextField prefHeight="30.0" text="nombre revista" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="90.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField prefHeight="30.0" text="editorial" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="150.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField prefHeight="30.0" text="proposito" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="210.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField prefHeight="30.0" text="issn" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="210.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField prefHeight="30.0" text="dirElect" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="270.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <GridPane maxHeight="90.0" prefHeight="292.0" prefWidth="465.0" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <GridPane.margin>
+                              <Insets top="270.0" />
+                           </GridPane.margin>
+                           <children>
+                              <TextField prefHeight="30.0" text="volumen" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" right="15.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="paginas" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" right="30.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="pais" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" right="15.0" top="60.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="año" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" right="30.0" top="60.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                           </children>
+                        </GridPane>
+                        <ComboBox prefHeight="30.0" prefWidth="406.0" promptText="lgac" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="330.0" />
+                           </GridPane.margin>
+                        </ComboBox>
+                        <TextField prefHeight="30.0" text="estado actual" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="390.0" />
+                           </GridPane.margin>
+                        </TextField>
+                     </children>
+                  </GridPane>
+                  <AnchorPane layoutX="850.0" layoutY="90.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <CheckBox layoutX="27.0" layoutY="37.0" mnemonicParsing="false" prefHeight="30.0" text="CheckBox" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="30.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="apnArticuloArbitrado" layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #C4C4C4;" visible="false" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <TextField prefHeight="30.0" text="autor" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="30.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField prefHeight="30.0" text="titulo" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="30.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextArea maxHeight="90.0" prefHeight="90.0" prefWidth="406.0" text="descripcion" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="90.0" />
+                           </GridPane.margin>
+                        </TextArea>
+                        <TextField prefHeight="30.0" text="nombre revista" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="90.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField prefHeight="30.0" text="editorial" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="150.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField prefHeight="30.0" text="proposito" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="210.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField prefHeight="30.0" text="issn" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="210.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField prefHeight="30.0" text="dirElect" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="270.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <GridPane maxHeight="90.0" prefHeight="292.0" prefWidth="465.0" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <children>
+                              <TextField prefHeight="30.0" text="volumen" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" right="15.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="paginas" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" right="30.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="pais" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" right="15.0" top="60.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="año" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" right="30.0" top="60.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <GridPane.margin>
+                              <Insets top="270.0" />
+                           </GridPane.margin>
+                        </GridPane>
+                        <ComboBox prefHeight="30.0" prefWidth="406.0" promptText="lgac" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="330.0" />
+                           </GridPane.margin>
+                        </ComboBox>
+                        <TextField prefHeight="30.0" text="estado actual" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="390.0" />
+                           </GridPane.margin>
+                        </TextField>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <AnchorPane layoutX="850.0" layoutY="90.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <CheckBox layoutX="27.0" layoutY="37.0" mnemonicParsing="false" prefHeight="30.0" text="CheckBox" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="30.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="apnArticulo" layoutX="30.0" layoutY="30.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #C4C4C4;" visible="false" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <TextField prefHeight="30.0" text="autor" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="30.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField prefHeight="30.0" text="titulo" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="30.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextArea maxHeight="90.0" prefHeight="90.0" prefWidth="406.0" text="descripcion" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="90.0" />
+                           </GridPane.margin>
+                        </TextArea>
+                        <TextField prefHeight="30.0" text="nombre revista" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="90.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField prefHeight="30.0" text="editorial" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="150.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField prefHeight="30.0" text="proposito" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="210.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField prefHeight="30.0" text="issn" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="210.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <GridPane maxHeight="90.0" prefHeight="292.0" prefWidth="465.0" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <children>
+                              <TextField prefHeight="30.0" text="volumen" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" right="15.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="paginas" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" right="30.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="pais" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" right="15.0" top="60.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="año" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" right="30.0" top="60.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <GridPane.margin>
+                              <Insets top="270.0" />
+                           </GridPane.margin>
+                        </GridPane>
+                        <ComboBox prefHeight="30.0" prefWidth="406.0" promptText="lgac" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="270.0" />
+                           </GridPane.margin>
+                        </ComboBox>
+                        <TextField prefHeight="30.0" text="estado actual" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="330.0" />
+                           </GridPane.margin>
+                        </TextField>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <AnchorPane layoutX="850.0" layoutY="90.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <CheckBox layoutX="27.0" layoutY="37.0" mnemonicParsing="false" prefHeight="30.0" text="CheckBox" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="30.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="apnCapituloLibro" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <TextField alignment="CENTER" prefHeight="30.0" text="tituloCap" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="30.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <ComboBox prefHeight="30.0" prefWidth="419.0" promptText="lgac" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="30.0" />
+                           </GridPane.margin>
+                        </ComboBox>
+                        <TextField alignment="CENTER" prefHeight="30.0" prefWidth="400.0" text="tituloLib" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="90.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField alignment="CENTER" prefHeight="30.0" text="autores" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="90.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField alignment="CENTER" prefHeight="30.0" text="estadoactual" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="150.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <GridPane maxHeight="150.0" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <GridPane.margin>
+                              <Insets top="150.0" />
+                           </GridPane.margin>
+                           <children>
+                              <TextField prefHeight="30.0" text="pais" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" right="15.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="editorial" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" right="30.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="noEdiciones" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" right="15.0" top="60.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="paginas" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" right="30.0" top="60.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="totalEjempl" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" right="15.0" top="120.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="año" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" right="30.0" top="120.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                           </children>
+                        </GridPane>
+                        <TextField alignment="CENTER" prefHeight="30.0" text="ISBN" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="210.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField alignment="CENTER" prefHeight="30.0" text="propositp" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="270.0" />
+                           </GridPane.margin>
+                        </TextField>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <AnchorPane layoutX="850.0" layoutY="90.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <CheckBox layoutX="27.0" layoutY="37.0" mnemonicParsing="false" prefHeight="30.0" text="CheckBox" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="30.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="apnLibro" layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <TextField alignment="CENTER" prefHeight="30.0" text="tituloLib" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="30.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <ComboBox prefHeight="30.0" prefWidth="419.0" promptText="lgac" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="30.0" />
+                           </GridPane.margin>
+                        </ComboBox>
+                        <TextField alignment="CENTER" prefHeight="30.0" prefWidth="400.0" text="autores" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="90.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <GridPane maxHeight="150.0" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <children>
+                              <TextField prefHeight="30.0" text="pais" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" right="15.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="editorial" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" right="30.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="noEdiciones" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" right="15.0" top="60.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="estadoactual" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" right="30.0" top="60.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="totalEjempl" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" right="15.0" top="120.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="año" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" right="30.0" top="120.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <GridPane.margin>
+                              <Insets top="90.0" />
+                           </GridPane.margin>
+                        </GridPane>
+                        <TextField alignment="CENTER" prefHeight="30.0" text="ISBN" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="150.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField alignment="CENTER" prefHeight="30.0" text="propositp" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="210.0" />
+                           </GridPane.margin>
+                        </TextField>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <AnchorPane layoutX="850.0" layoutY="90.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <CheckBox layoutX="27.0" layoutY="37.0" mnemonicParsing="false" prefHeight="30.0" text="CheckBox" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="30.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="apnProduccionInnovadora" layoutX="30.0" layoutY="30.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <TextField alignment="CENTER" prefHeight="30.0" text="tituloLib" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="30.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <ComboBox prefHeight="30.0" prefWidth="419.0" promptText="lgac" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="30.0" />
+                           </GridPane.margin>
+                        </ComboBox>
+                        <TextField alignment="CENTER" prefHeight="30.0" prefWidth="400.0" text="participante" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="90.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <GridPane maxHeight="90.0" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <children>
+                              <TextField prefHeight="30.0" text="clasifInterna" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" right="15.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="numRegistro" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" right="30.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="pais" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" right="15.0" top="60.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <DatePicker prefHeight="30.0" prefWidth="187.0" promptText="fecha" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" right="30.0" top="60.0" />
+                                 </GridPane.margin>
+                              </DatePicker>
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <GridPane.margin>
+                              <Insets top="90.0" />
+                           </GridPane.margin>
+                        </GridPane>
+                        <TextField alignment="CENTER" prefHeight="30.0" text="propositp" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="210.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextArea maxHeight="90.0" prefHeight="200.0" prefWidth="200.0" text="descripcion&#10;" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="150.0" />
+                           </GridPane.margin>
+                        </TextArea>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <AnchorPane layoutX="850.0" layoutY="90.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <CheckBox layoutX="27.0" layoutY="37.0" mnemonicParsing="false" prefHeight="30.0" text="CheckBox" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="30.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="apnMemoriaExtenso" layoutX="40.0" layoutY="40.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <TextField alignment="CENTER" prefHeight="30.0" text="autor" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="30.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <ComboBox prefHeight="30.0" prefWidth="419.0" promptText="lgac" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="30.0" />
+                           </GridPane.margin>
+                        </ComboBox>
+                        <TextField alignment="CENTER" prefHeight="30.0" prefWidth="400.0" text="tituloPresentacion" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="90.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <GridPane maxHeight="150.0" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <children>
+                              <TextField prefHeight="30.0" text="rangPaginas" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" right="15.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="estado" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" right="15.0" top="60.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="pais" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" right="30.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="ciudad" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" right="30.0" top="60.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="año" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" right="15.0" top="120.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="estActual" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" right="30.0" top="120.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <GridPane.margin>
+                              <Insets top="90.0" />
+                           </GridPane.margin>
+                        </GridPane>
+                        <TextArea maxHeight="90.0" prefHeight="200.0" prefWidth="200.0" text="Proposito&#10;" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="150.0" />
+                           </GridPane.margin>
+                        </TextArea>
+                        <TextField prefHeight="30.0" text="congreso" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="270.0" />
+                           </GridPane.margin>
+                        </TextField>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <AnchorPane layoutX="850.0" layoutY="90.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <CheckBox layoutX="27.0" layoutY="37.0" mnemonicParsing="false" prefHeight="30.0" text="CheckBox" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="30.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="apnPrototipo" layoutX="50.0" layoutY="50.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <TextField alignment="CENTER" prefHeight="30.0" text="nombreProto" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="30.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <ComboBox prefHeight="30.0" prefWidth="419.0" promptText="lgac" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="30.0" />
+                           </GridPane.margin>
+                        </ComboBox>
+                        <GridPane maxHeight="90.0" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <children>
+                              <TextField prefHeight="30.0" text="año" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" right="15.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="pais" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" right="15.0" top="60.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="30.0" text="estado" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                                 <GridPane.margin>
+                                    <Insets left="15.0" right="30.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <GridPane.margin>
+                              <Insets top="210.0" />
+                           </GridPane.margin>
+                        </GridPane>
+                        <TextArea maxHeight="90.0" prefHeight="200.0" prefWidth="200.0" text="objetivps&#10;&#10;" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="90.0" />
+                           </GridPane.margin>
+                        </TextArea>
+                        <TextField prefHeight="30.0" text="instCreadora" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="210.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextArea maxHeight="90.0" prefHeight="200.0" prefWidth="200.0" text="caracteristicas&#10;&#10;" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="90.0" />
+                           </GridPane.margin>
+                        </TextArea>
+                        <TextArea maxHeight="90.0" prefHeight="200.0" prefWidth="200.0" text="Proposito&#10;&#10;" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="30.0" right="30.0" top="270.0" />
+                           </GridPane.margin>
+                        </TextArea>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <AnchorPane layoutX="850.0" layoutY="90.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <CheckBox layoutX="27.0" layoutY="37.0" mnemonicParsing="false" prefHeight="30.0" text="CheckBox" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="30.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="apnBotones" prefHeight="60.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Button fx:id="btnCancelar" layoutX="56.0" layoutY="25.0" mnemonicParsing="false" prefWidth="150.0" styleClass="btnCancelar" text="%btnCancelar" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="15.0" />
+                  <Button fx:id="btnGuardar" layoutX="875.0" layoutY="25.0" mnemonicParsing="false" prefWidth="150.0" styleClass="btnGuardar" text="%btnGuardar" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="15.0" />
+                  <Button fx:id="btnAgregarColaborador" layoutX="703.0" layoutY="25.0" mnemonicParsing="false" prefWidth="150.0" styleClass="btnAsociar" text="%btnAgColab" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="15.0" />
+                  <Button fx:id="btnAsociarProyecto" layoutX="536.0" layoutY="25.0" mnemonicParsing="false" prefWidth="150.0" styleClass="btnAsociar" text="%btnAsProy" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="375.0" AnchorPane.topAnchor="15.0" />
+               </children>
+            </AnchorPane>
+            <Button fx:id="btnPollo" layoutX="468.0" layoutY="176.0" mnemonicParsing="false" prefHeight="188.0" prefWidth="191.0" style="-fx-background-color: 0,0,0,0;" AnchorPane.bottomAnchor="236.0" AnchorPane.leftAnchor="468.0" AnchorPane.rightAnchor="467.0" AnchorPane.topAnchor="176.0">
+               <graphic>
+                  <ImageView fitHeight="201.0" fitWidth="180.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                     <image>
+                        <Image url="@../../img/buho.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children></AnchorPane>
+   </children>
+</AnchorPane>
