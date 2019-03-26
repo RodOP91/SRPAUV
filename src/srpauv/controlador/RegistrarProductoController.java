@@ -18,6 +18,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
+import srpauv.clases.Tesis;
 
 /**
  * FXML Controller class
@@ -194,7 +195,7 @@ public class RegistrarProductoController implements Initializable {
         
         btnGuardar.setOnAction((ActionEvent event) -> {
             if(flagProducto == 1){
-                
+                guardarTesis();
             }
             if(flagProducto == 2){
                 
@@ -296,5 +297,6 @@ public class RegistrarProductoController implements Initializable {
     
     private void guardarTesis(){
         
+        Tesis tesis = new Tesis();
     }
 }
