@@ -12,6 +12,10 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 
@@ -56,6 +60,18 @@ public class RegistrarProductoController implements Initializable {
     @FXML ToggleButton btnMemoriaExtenso;
     @FXML ToggleButton btnPrototipo;
     //--------------------------------------------------------------------------
+    
+//CAMPOS DE PRODUCTOS-------------------------------------------------------------------------
+    //TESIS---------------------------------------------------------------------
+    @FXML TextField txtTituloTesis;
+    @FXML TextField txtGradoTesis;
+    @FXML TextField txtNoAlumnosTesis;
+    @FXML DatePicker dtpFechaInicioTesis;
+    @FXML DatePicker dtpFechaFinTesis;
+    @FXML ComboBox  cbxLGACtesis;
+    @FXML CheckBox chkCAtesis;
+    //--------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -177,8 +193,33 @@ public class RegistrarProductoController implements Initializable {
         });
         
         btnGuardar.setOnAction((ActionEvent event) -> {
-            
-            
+            if(flagProducto == 1){
+                
+            }
+            if(flagProducto == 2){
+                
+            }
+            if(flagProducto == 3){
+                
+            }
+            if(flagProducto == 4){
+                
+            }
+            if(flagProducto == 5){
+                
+            }
+            if(flagProducto == 6){
+                
+            }
+            if(flagProducto == 7){
+                
+            }
+            if(flagProducto == 8){
+                
+            }
+            if(flagProducto == 9){
+                
+            }
         });
     }
     
@@ -251,5 +292,9 @@ public class RegistrarProductoController implements Initializable {
             btnAsociarProyecto.setVisible(!flag);
             btnAgregarColaborador.setVisible(!flag);
         }
+    }
+    
+    private void guardarTesis(){
+        
     }
 }

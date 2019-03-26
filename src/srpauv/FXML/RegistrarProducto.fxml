@@ -82,7 +82,7 @@
       </AnchorPane>
       <AnchorPane layoutX="250.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #C4C4C4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
          <children>
-            <AnchorPane fx:id="apnTesis" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="apnTesis" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
                     <columnConstraints>
@@ -93,41 +93,41 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField alignment="CENTER" prefHeight="30.0" promptText="%txtTitulo" GridPane.valignment="TOP">
+                        <TextField fx:id="txtTituloTesis" prefHeight="30.0" promptText="%txtTitulo" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="30.0" right="30.0" top="30.0" />
                            </GridPane.margin>
                         </TextField>
-                        <ComboBox prefHeight="30.0" prefWidth="419.0" promptText="%cbxLGAC" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                        <ComboBox fx:id="cbxLGACtesis" prefHeight="30.0" prefWidth="419.0" promptText="%cbxLGAC" GridPane.columnIndex="1" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="30.0" right="30.0" top="30.0" />
                            </GridPane.margin>
                         </ComboBox>
-                        <TextField alignment="CENTER" prefHeight="30.0" promptText="%txtGrado" GridPane.valignment="TOP">
+                        <TextField fx:id="txtGradoTesis" prefHeight="30.0" promptText="%txtGrado" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="30.0" right="30.0" top="90.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField alignment="CENTER" prefHeight="30.0" promptText="%txtNoAlumnos" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                        <TextField fx:id="txtNoAlumnosTesis" prefHeight="30.0" promptText="%txtNoAlumnos" GridPane.columnIndex="1" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="30.0" right="30.0" top="90.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField alignment="CENTER" prefHeight="30.0" promptText="%txtFechaInicio" GridPane.valignment="TOP">
+                        <DatePicker fx:id="dtpFechaInicioTesis" prefHeight="30.0" prefWidth="420.0" promptText="%dtpFechaInicio" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="30.0" right="30.0" top="150.0" />
                            </GridPane.margin>
-                        </TextField>
-                        <TextField alignment="CENTER" prefHeight="30.0" promptText="%txtFechaFin" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                        </DatePicker>
+                        <DatePicker fx:id="dtpFechaFinTesis" prefHeight="30.0" prefWidth="423.0" promptText="%dtpFechaFin" GridPane.columnIndex="1" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="30.0" right="30.0" top="150.0" />
                            </GridPane.margin>
-                        </TextField>
+                        </DatePicker>
                      </children>
                   </GridPane>
                   <AnchorPane layoutX="850.0" layoutY="90.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <CheckBox layoutX="27.0" layoutY="37.0" mnemonicParsing="false" prefHeight="30.0" text="CheckBox" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="30.0" />
+                        <CheckBox fx:id="chkCAtesis" layoutX="27.0" layoutY="37.0" mnemonicParsing="false" prefHeight="30.0" text="%chkCuerpoAcademico" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="30.0" />
                      </children>
                   </AnchorPane>
                </children>
