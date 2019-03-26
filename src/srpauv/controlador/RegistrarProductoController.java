@@ -8,6 +8,7 @@ package srpauv.controlador;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -22,6 +23,8 @@ import javafx.scene.layout.AnchorPane;
 public class RegistrarProductoController implements Initializable {
     
     @FXML Button btnPollo;
+    
+    private int flagProducto = 0;
     
     //BOTONES ACCION------------------------------------------------------------
     @FXML Button btnCancelar;
@@ -65,7 +68,8 @@ public class RegistrarProductoController implements Initializable {
             btnProduccionInnovadora.setSelected(false);
             btnMemoriaExtenso.setSelected(false);
             btnPrototipo.setSelected(false);
-            MostrarProductos();            
+            MostrarProductos();
+            flagProducto = 1;
         });
         
         btnArticuloIndexado.setOnAction((ActionEvent event) -> {
@@ -78,6 +82,7 @@ public class RegistrarProductoController implements Initializable {
             btnMemoriaExtenso.setSelected(false);
             btnPrototipo.setSelected(false);
             MostrarProductos();
+            flagProducto = 2;
         });
         
         btnArticuloArbitrado.setOnAction((ActionEvent event) -> {
@@ -90,6 +95,7 @@ public class RegistrarProductoController implements Initializable {
             btnMemoriaExtenso.setSelected(false);
             btnPrototipo.setSelected(false);
             MostrarProductos();
+            flagProducto = 3;
         });
         
         btnArticulo.setOnAction((ActionEvent event) -> {
@@ -102,6 +108,7 @@ public class RegistrarProductoController implements Initializable {
             btnMemoriaExtenso.setSelected(false);
             btnPrototipo.setSelected(false);
             MostrarProductos();
+            flagProducto = 4;
         });
         
         btnCapituloLibro.setOnAction((ActionEvent event) -> {
@@ -114,6 +121,7 @@ public class RegistrarProductoController implements Initializable {
             btnMemoriaExtenso.setSelected(false);
             btnPrototipo.setSelected(false);
             MostrarProductos();
+            flagProducto = 5;
         });
         
         btnLibro.setOnAction((ActionEvent event) -> {
@@ -126,6 +134,7 @@ public class RegistrarProductoController implements Initializable {
             btnMemoriaExtenso.setSelected(false);
             btnPrototipo.setSelected(false);
             MostrarProductos();
+            flagProducto = 6;
         });
         
         btnProduccionInnovadora.setOnAction((ActionEvent event) -> {
@@ -138,6 +147,7 @@ public class RegistrarProductoController implements Initializable {
             btnMemoriaExtenso.setSelected(false);
             btnPrototipo.setSelected(false);
             MostrarProductos();
+            flagProducto = 7;
         });
         
         btnMemoriaExtenso.setOnAction((ActionEvent event) -> {
@@ -150,6 +160,7 @@ public class RegistrarProductoController implements Initializable {
             btnProduccionInnovadora.setSelected(false);
             btnPrototipo.setSelected(false);
             MostrarProductos();
+            flagProducto = 8;
         });
         
         btnPrototipo.setOnAction((ActionEvent event) -> {
@@ -162,8 +173,16 @@ public class RegistrarProductoController implements Initializable {
             btnProduccionInnovadora.setSelected(false);
             btnMemoriaExtenso.setSelected(false);
             MostrarProductos();
+            flagProducto = 9; 
+        });
+        
+        btnGuardar.setOnAction((ActionEvent event) -> {
+            
+            
         });
     }
+    
+    
     private void MostrarProductos(){
         boolean flag = true;
         if(btnTesis.isSelected()){
@@ -228,7 +247,6 @@ public class RegistrarProductoController implements Initializable {
             btnAgregarColaborador.setVisible(!flag);
         }else{
             btnPollo.setVisible(flag);
-            btnCancelar.setVisible(!flag);
             btnGuardar.setVisible(!flag);
             btnAsociarProyecto.setVisible(!flag);
             btnAgregarColaborador.setVisible(!flag);
