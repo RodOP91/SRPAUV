@@ -6,17 +6,12 @@
 package srpauv.controlador;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import srpauv.clases.Tesis;
 
@@ -69,7 +64,7 @@ public class RegistrarProductoController implements Initializable {
     @FXML TextField txtNoAlumnosTesis;
     @FXML DatePicker dtpFechaInicioTesis;
     @FXML DatePicker dtpFechaFinTesis;
-    @FXML ComboBox  cbxLGACtesis;
+    @FXML ComboBox<String>  cbxLGACtesis;
     @FXML CheckBox chkCAtesis;
     //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------
@@ -296,7 +291,33 @@ public class RegistrarProductoController implements Initializable {
     }
     
     private void guardarTesis(){
-        
         Tesis tesis = new Tesis();
+        String titulo = txtTituloTesis.getText();
+        String grado = txtGradoTesis.getText();
+        String numAlumnos = txtNoAlumnosTesis.getText();
+        String lgac = cbxLGACtesis.getSelectionModel().getSelectedItem();
+        boolean ca = chkCAtesis.isSelected();
+        LocalDate fechaInicio = dtpFechaInicioTesis.getValue();
+        LocalDate fechaFin = dtpFechaFinTesis.getValue();
+        if(titulo.isEmpty() || grado.isEmpty() || numAlumnos.isEmpty()){
+            System.err.println("campos vacios");
+        }else{
+            if(lgac == null){
+                System.out.println("lgac no seleccionada");
+            }else{
+                if(fechaInicio == null || fechaFin == null){
+                    System.out.println("selecciona ambas fechas");
+                }else{
+                    tesis.setTitulo(titulo);                    
+                    tesis.setGrado(grado);
+                    tesis.setNumAlumnos(Integer.parseInt(numAlumnos));
+                    tesis.setLgac(lgac);
+                    tesis.setValidadoCA(ca);
+                    tesis.setFechaInicio(fechaInicio);
+                    tesis.setFechaFin(fechaFin);
+                    tesis.registrarProducto();
+                }
+            }
+        }
     }
 }

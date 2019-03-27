@@ -18,10 +18,10 @@ public abstract class Producto {
     //protected Colaborador colaboradorExterno;
     private boolean validadoCA;
     
-    protected abstract int actualizarProducto();
-    protected abstract int eliminarProducto();
-    protected abstract int recuperarProducto();
-    protected abstract int registrarProducto();
+    public abstract int actualizarProducto();
+    public abstract int eliminarProducto();
+    public abstract int recuperarProducto();
+    public abstract int registrarProducto();
 
     /**
      * @return the idProducto
