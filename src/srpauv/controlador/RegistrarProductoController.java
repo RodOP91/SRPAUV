@@ -5,15 +5,17 @@
  */
 package srpauv.controlador;
 
+import DAO.DAOregistrarProducto;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import srpauv.clases.Tesis;
+import srpauv.clases.*;
 
 /**
  * FXML Controller class
@@ -64,13 +66,48 @@ public class RegistrarProductoController implements Initializable {
     @FXML TextField txtNoAlumnosTesis;
     @FXML DatePicker dtpFechaInicioTesis;
     @FXML DatePicker dtpFechaFinTesis;
-    @FXML ComboBox<String>  cbxLGACtesis;
+    @FXML ComboBox<Linea>  cbxLGACtesis;
     @FXML CheckBox chkCAtesis;
+    //--------------------------------------------------------------------------
+    
+    //ARTICULO ARBITRADO--------------------------------------------------------
+    
+    //--------------------------------------------------------------------------
+    
+    //ARTICULO INDEXADO---------------------------------------------------------
+    
+    //--------------------------------------------------------------------------
+    
+    //ARTICULO------------------------------------------------------------------
+    
+    //--------------------------------------------------------------------------
+    
+    //CAPITULO DE LIBRO---------------------------------------------------------
+    
+    //--------------------------------------------------------------------------
+    
+    //LIBRO---------------------------------------------------------------------
+    
+    //--------------------------------------------------------------------------
+    
+    //PRODUCCIÓN INNOVADORA-----------------------------------------------------
+    
+    //--------------------------------------------------------------------------
+    
+    //MEMORIA EN EXTENSO--------------------------------------------------------
+    
+    //--------------------------------------------------------------------------
+    
+    //PROTOTIPO-----------------------------------------------------------------
+    
     //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        llenarCombos();
+        
         btnTesis.setOnAction((ActionEvent event) -> {
             btnArticuloIndexado.setSelected(false);
             btnArticuloArbitrado.setSelected(false);
@@ -219,7 +256,6 @@ public class RegistrarProductoController implements Initializable {
         });
     }
     
-    
     private void MostrarProductos(){
         boolean flag = true;
         if(btnTesis.isSelected()){
@@ -290,12 +326,19 @@ public class RegistrarProductoController implements Initializable {
         }
     }
     
+    private void llenarCombos(){
+        List<Linea> listaLineas = DAOregistrarProducto.recuperarLineas();
+        for(int i = 0; i < listaLineas.size(); i++){
+            cbxLGACtesis.getItems().add(listaLineas.get(i));
+        }
+    }
+    
     private void guardarTesis(){
         Tesis tesis = new Tesis();
         String titulo = txtTituloTesis.getText();
         String grado = txtGradoTesis.getText();
         String numAlumnos = txtNoAlumnosTesis.getText();
-        String lgac = cbxLGACtesis.getSelectionModel().getSelectedItem();
+        String lgac = cbxLGACtesis.getSelectionModel().getSelectedItem().getNombre();
         boolean ca = chkCAtesis.isSelected();
         LocalDate fechaInicio = dtpFechaInicioTesis.getValue();
         LocalDate fechaFin = dtpFechaFinTesis.getValue();
