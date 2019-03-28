@@ -439,31 +439,31 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="apnCapituloLibro" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="apnCapituloLibro" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <TextField alignment="CENTER" prefHeight="30.0" text="tituloCap" GridPane.valignment="TOP">
+                        <TextField fx:id="txtTituloCL" prefHeight="30.0" promptText="%txtTitulo" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="30.0" right="30.0" top="30.0" />
                            </GridPane.margin>
                         </TextField>
-                        <ComboBox prefHeight="30.0" prefWidth="419.0" promptText="lgac" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                        <ComboBox fx:id="cbxLGACcl" prefHeight="30.0" prefWidth="419.0" promptText="lgac" GridPane.columnIndex="1" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="30.0" right="30.0" top="30.0" />
                            </GridPane.margin>
                         </ComboBox>
-                        <TextField alignment="CENTER" prefHeight="30.0" prefWidth="400.0" text="tituloLib" GridPane.valignment="TOP">
+                        <TextField fx:id="txtTituloLibroCL" prefHeight="30.0" prefWidth="400.0" promptText="%txtTituloLib" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="30.0" right="30.0" top="90.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField alignment="CENTER" prefHeight="30.0" text="autores" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                        <TextField fx:id="txtAutoresCL" prefHeight="30.0" text="autores" GridPane.columnIndex="1" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="30.0" right="30.0" top="90.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField alignment="CENTER" prefHeight="30.0" text="estadoactual" GridPane.valignment="TOP">
+                        <TextField fx:id="txtEstadoActualCL" prefHeight="30.0" text="estadoactual" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="30.0" right="30.0" top="150.0" />
                            </GridPane.margin>
@@ -480,44 +480,44 @@
                               <Insets top="150.0" />
                            </GridPane.margin>
                            <children>
-                              <TextField prefHeight="30.0" text="pais" GridPane.valignment="TOP">
+                              <TextField fx:id="txtPaisCL" prefHeight="30.0" text="pais" GridPane.valignment="TOP">
                                  <GridPane.margin>
                                     <Insets left="30.0" right="15.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField prefHeight="30.0" text="editorial" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                              <TextField fx:id="txtEditorialCL" prefHeight="30.0" text="editorial" GridPane.columnIndex="1" GridPane.valignment="TOP">
                                  <GridPane.margin>
                                     <Insets left="15.0" right="30.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField prefHeight="30.0" text="noEdiciones" GridPane.valignment="TOP">
+                              <TextField fx:id="txtNoEdicionesCL" prefHeight="30.0" text="noEdiciones" GridPane.valignment="TOP">
                                  <GridPane.margin>
                                     <Insets left="30.0" right="15.0" top="60.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField prefHeight="30.0" text="paginas" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                              <TextField fx:id="txtPaginasCL" prefHeight="30.0" text="paginas" GridPane.columnIndex="1" GridPane.valignment="TOP">
                                  <GridPane.margin>
                                     <Insets left="15.0" right="30.0" top="60.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField prefHeight="30.0" text="totalEjempl" GridPane.valignment="TOP">
+                              <TextField fx:id="txtTotalEjemplaresCL" prefHeight="30.0" text="totalEjempl" GridPane.valignment="TOP">
                                  <GridPane.margin>
                                     <Insets left="30.0" right="15.0" top="120.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField prefHeight="30.0" text="año" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                              <TextField fx:id="txtAñoCL" prefHeight="30.0" text="año" GridPane.columnIndex="1" GridPane.valignment="TOP">
                                  <GridPane.margin>
                                     <Insets left="15.0" right="30.0" top="120.0" />
                                  </GridPane.margin>
                               </TextField>
                            </children>
                         </GridPane>
-                        <TextField alignment="CENTER" prefHeight="30.0" text="ISBN" GridPane.valignment="TOP">
+                        <TextField fx:id="txtISBNcl" prefHeight="30.0" text="ISBN" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="30.0" right="30.0" top="210.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField alignment="CENTER" prefHeight="30.0" text="propositp" GridPane.valignment="TOP">
+                        <TextField fx:id="txtPropositoCL" prefHeight="30.0" text="propositp" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="30.0" right="30.0" top="270.0" />
                            </GridPane.margin>
@@ -533,7 +533,7 @@
                   </GridPane>
                   <AnchorPane layoutX="850.0" layoutY="90.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <CheckBox layoutX="27.0" layoutY="37.0" mnemonicParsing="false" prefHeight="30.0" text="CheckBox" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="30.0" />
+                        <CheckBox fx:id="chkCAcl" layoutX="27.0" layoutY="37.0" mnemonicParsing="false" prefHeight="30.0" text="CheckBox" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="30.0" />
                      </children>
                   </AnchorPane>
                </children>

@@ -18,6 +18,8 @@ public class Tesis extends Producto{
     private String grado;
     private int numAlumnos;
     
+    private String tipo;
+    
     @Override
     public int actualizarProducto() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

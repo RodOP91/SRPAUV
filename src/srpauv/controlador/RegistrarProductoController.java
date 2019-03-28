@@ -83,7 +83,20 @@ public class RegistrarProductoController implements Initializable {
     //--------------------------------------------------------------------------
     
     //CAPITULO DE LIBRO---------------------------------------------------------
-    
+    @FXML TextField txtTituloCL;
+    @FXML TextField txtTituloLibroCL;
+    @FXML TextField txtEstadoActualCL;
+    @FXML TextField txtISBNcl;
+    @FXML TextField txtPropositoCL;
+    @FXML TextField txtAutoresCL;
+    @FXML TextField txtPaisCL;
+    @FXML TextField txtEditorialCL;
+    @FXML TextField txtNoEdicionesCL;
+    @FXML TextField txtPaginasCL;
+    @FXML TextField txtTotalEjemplaresCL;
+    @FXML TextField txtAñoCL;
+    @FXML ComboBox<Linea> cbxLGACcl;
+    @FXML CheckBox chkCAcl;
     //--------------------------------------------------------------------------
     
     //LIBRO---------------------------------------------------------------------
@@ -330,11 +343,11 @@ public class RegistrarProductoController implements Initializable {
         List<Linea> listaLineas = DAOregistrarProducto.recuperarLineas();
         for(int i = 0; i < listaLineas.size(); i++){
             cbxLGACtesis.getItems().add(listaLineas.get(i));
+            cbxLGACcl.getItems().add(listaLineas.get(i));
         }
     }
     
     private void guardarTesis(){
-        Tesis tesis = new Tesis();
         String titulo = txtTituloTesis.getText();
         String grado = txtGradoTesis.getText();
         String numAlumnos = txtNoAlumnosTesis.getText();
@@ -342,6 +355,7 @@ public class RegistrarProductoController implements Initializable {
         boolean ca = chkCAtesis.isSelected();
         LocalDate fechaInicio = dtpFechaInicioTesis.getValue();
         LocalDate fechaFin = dtpFechaFinTesis.getValue();
+        
         if(titulo.isEmpty() || grado.isEmpty() || numAlumnos.isEmpty()){
             System.err.println("campos vacios");
         }else{
@@ -351,6 +365,7 @@ public class RegistrarProductoController implements Initializable {
                 if(fechaInicio == null || fechaFin == null){
                     System.out.println("selecciona ambas fechas");
                 }else{
+                    Tesis tesis = new Tesis();
                     tesis.setTitulo(titulo);                    
                     tesis.setGrado(grado);
                     tesis.setNumAlumnos(Integer.parseInt(numAlumnos));
@@ -360,6 +375,50 @@ public class RegistrarProductoController implements Initializable {
                     tesis.setFechaFin(fechaFin);
                     tesis.registrarProducto();
                 }
+            }
+        }
+    }
+    
+    private void guardarCapituloLibro(){
+        String titulo = txtTituloCL.getText();
+        String tituloLibro = txtTituloLibroCL.getText();
+        String estadoActual = txtEstadoActualCL.getText();
+        String isbn = txtISBNcl.getText();
+        String proposito = txtPropositoCL.getText();
+        String lgac =cbxLGACcl.getSelectionModel().getSelectedItem().getNombre();
+        String autores = txtAutoresCL.getText();
+        String pais = txtPaisCL.getText();
+        String editorial = txtEditorialCL.getText();
+        String noEdiciones = txtNoEdicionesCL.getText();
+        String paginas = txtPaginasCL.getText();
+        String totalEjemplares = txtTotalEjemplaresCL.getText();
+        String año = txtAñoCL.getText();
+        boolean ca = chkCAcl.isSelected();
+        
+        if(titulo.isEmpty() || tituloLibro.isEmpty() || estadoActual.isEmpty()
+                || isbn.isEmpty() || proposito.isEmpty() || autores.isEmpty()
+                || pais.isEmpty() || editorial.isEmpty() || noEdiciones.isEmpty()
+                || paginas.isEmpty() || totalEjemplares.isEmpty() || año.isEmpty()){
+            System.err.println("campos vacios");
+        }else{
+            if(lgac == null){
+                System.out.println("lgac no seleccionada");
+            }else{
+                CapituloLibro capLib = new CapituloLibro();
+                capLib.setTitulo(titulo);
+                capLib.setTituloLibro(tituloLibro);
+                capLib.setAutor_es(autores);
+                capLib.setAño(año);
+                capLib.setConsiderarCA(ca);
+                capLib.setEditorial(editorial);
+                capLib.setISBN(isbn);
+                capLib.setLgac(lgac);
+                capLib.setNoEdiciones(Integer.parseInt(noEdiciones));
+                capLib.setPaginas(paginas);
+                capLib.setPais(pais);
+                capLib.setProposito(proposito);
+                capLib.setTotalEjemplares(Integer.parseInt(totalEjemplares));
+                capLib.registrarProducto();
             }
         }
     }
