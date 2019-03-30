@@ -95,6 +95,20 @@ public class Tesis extends Producto{
     public void setNumAlumnos(int numAlumnos) {
         this.numAlumnos = numAlumnos;
     }
+
+    /**
+     * @return the tipo
+     */
+    public String getTipo() {
+        return tipo;
+    }
+
+    /**
+     * @param tipo the tipo to set
+     */
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
     
     
 }

@@ -9,21 +9,18 @@ package srpauv.clases;
  *
  * @author edson
  */
-public class CapituloLibro extends Producto{
+public class Libro extends Producto{
     
     private String autor_es;
     private String editorial;
-    private String paginas;
     private String pais;
     private String año;
     private String proposito;
     private int noEdiciones;
     private int totalEjemplares;
     private String ISBN;
-    private String tituloLibro;
     
     private String tipo;
-    
 
     @Override
     public int actualizarProducto() {
@@ -71,20 +68,6 @@ public class CapituloLibro extends Producto{
      */
     public void setEditorial(String editorial) {
         this.editorial = editorial;
-    }
-
-    /**
-     * @return the paginas
-     */
-    public String getPaginas() {
-        return paginas;
-    }
-
-    /**
-     * @param paginas the paginas to set
-     */
-    public void setPaginas(String paginas) {
-        this.paginas = paginas;
     }
 
     /**
@@ -169,20 +152,6 @@ public class CapituloLibro extends Producto{
      */
     public void setISBN(String ISBN) {
         this.ISBN = ISBN;
-    }
-
-    /**
-     * @return the tituloLibro
-     */
-    public String getTituloLibro() {
-        return tituloLibro;
-    }
-
-    /**
-     * @param tituloLibro the tituloLibro to set
-     */
-    public void setTituloLibro(String tituloLibro) {
-        this.tituloLibro = tituloLibro;
     }
 
     /**

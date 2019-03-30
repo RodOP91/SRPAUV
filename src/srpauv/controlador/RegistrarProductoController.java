@@ -10,10 +10,14 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import srpauv.clases.*;
 
@@ -23,6 +27,8 @@ import srpauv.clases.*;
  * @author edson
  */
 public class RegistrarProductoController implements Initializable {
+    
+    String textoTextField = "";
     
     @FXML Button btnPollo;
     
@@ -100,7 +106,18 @@ public class RegistrarProductoController implements Initializable {
     //--------------------------------------------------------------------------
     
     //LIBRO---------------------------------------------------------------------
-    
+    @FXML TextField txtTituloLibro;
+    @FXML TextField txtAutoresLibro;
+    @FXML TextField txtISBNlibro;
+    @FXML TextField txtPropositoLibro;
+    @FXML TextField txtPaisLibro;
+    @FXML TextField txtEditorialLibro;
+    @FXML TextField txtNoEdicionesLibro;
+    @FXML TextField txtEstadoActualLibro;
+    @FXML TextField txtTotalEjemplaresLibro;
+    @FXML TextField txtAñoLibro;
+    @FXML ComboBox<Linea> cbxLGAClibro;
+    @FXML CheckBox chkCAlibro;
     //--------------------------------------------------------------------------
     
     //PRODUCCIÓN INNOVADORA-----------------------------------------------------
@@ -112,7 +129,16 @@ public class RegistrarProductoController implements Initializable {
     //--------------------------------------------------------------------------
     
     //PROTOTIPO-----------------------------------------------------------------
-    
+    @FXML TextField txtNombreProto;
+    @FXML TextField txtInstitucionCreadoraProto;
+    @FXML TextField txtAñoProto;
+    @FXML TextField txtPaisProto;
+    @FXML TextField txtEstadoActualProto;
+    @FXML TextArea txaObjetivosProto;
+    @FXML TextArea txaCaracteristicasProto;
+    @FXML TextArea txaPropositoProto;
+    @FXML ComboBox<Linea> cbxLGACproto;
+    @FXML CheckBox chkCAproto;
     //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------
     
@@ -120,6 +146,15 @@ public class RegistrarProductoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         llenarCombos();
+        
+        txtNoAlumnosTesis.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,7}([\\.]\\d{0,4})?")) {
+                    txtNoAlumnosTesis.setText(oldValue);
+                }
+            }
+        });
         
         btnTesis.setOnAction((ActionEvent event) -> {
             btnArticuloIndexado.setSelected(false);
