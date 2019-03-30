@@ -13,11 +13,9 @@ import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import srpauv.clases.*;
 
@@ -27,8 +25,6 @@ import srpauv.clases.*;
  * @author edson
  */
 public class RegistrarProductoController implements Initializable {
-    
-    String textoTextField = "";
     
     @FXML Button btnPollo;
     
@@ -455,6 +451,7 @@ public class RegistrarProductoController implements Initializable {
                 capLib.setProposito(proposito);
                 capLib.setTotalEjemplares(Integer.parseInt(totalEjemplares));
                 capLib.registrarProducto();
+                capLib.setEstado(estadoActual);
             }   
         }catch(NullPointerException ex){
             System.out.println("lgac no seleccionada");
@@ -503,6 +500,39 @@ public class RegistrarProductoController implements Initializable {
     }
     
     private void guardarPrototipo(){
+        String nombre = txtNombreProto.getText();
+        String institucion = txtInstitucionCreadoraProto.getText();
+        String año = txtAñoProto.getText();
+        String pais = txtPaisProto.getText();
+        String estado = txtEstadoActualProto.getText();
+        String objetivos = txaObjetivosProto.getText();
+        String caracteristicas = txaCaracteristicasProto.getText();
+        String proposito = txaPropositoProto.getText();
+        boolean ca = chkCAproto.isSelected();
         
+        try{
+            String lgac = cbxLGACproto.getSelectionModel().getSelectedItem().getNombre();
+            
+            if(nombre.isEmpty() || institucion.isEmpty() || año.isEmpty() ||
+                    pais.isEmpty() || estado.isEmpty() || objetivos.isEmpty() ||
+                    caracteristicas.isEmpty() || proposito.isEmpty()){
+                System.err.println("campos vacios");
+            }else{
+                Prototipo proto = new Prototipo();
+                proto.setTitulo(nombre);
+                proto.setInstitucion(institucion);
+                proto.setAño(año);
+                proto.setPais(pais);
+                proto.setEstado(estado);
+                proto.setObjetivos(objetivos);
+                proto.setCaracteristicas(caracteristicas);
+                proto.setProposito(proposito);
+                proto.setConsiderarCA(ca);
+                proto.setLgac(lgac);
+                proto.recuperarProducto();
+            }
+        }catch(NullPointerException ex){
+            System.out.println("lgac no seleccionada");
+        }
     }
 }

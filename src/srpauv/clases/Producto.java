@@ -17,6 +17,7 @@ public abstract class Producto {
     private String titulo;
     //protected Colaborador colaboradorExterno;
     private boolean validadoCA;
+    private String estado;
     
     public abstract int actualizarProducto();
     public abstract int eliminarProducto();
@@ -92,4 +93,20 @@ public abstract class Producto {
     public void setValidadoCA(boolean validadoCA) {
         this.validadoCA = validadoCA;
     }
+
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
+    
 }
