@@ -7,9 +7,12 @@ package srpauv.controlador;
 
 import DAO.DAOregistrarProducto;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -371,10 +374,16 @@ public class RegistrarProductoController implements Initializable {
     }
     
     private void llenarCombos(){
-        List<Linea> listaLineas = DAOregistrarProducto.recuperarLineas();
-        for(int i = 0; i < listaLineas.size(); i++){
-            cbxLGACtesis.getItems().add(listaLineas.get(i));
-            cbxLGACcl.getItems().add(listaLineas.get(i));
+        try {
+            List<Linea> listaLineas = DAOregistrarProducto.recuperarLineas();
+            for(int i = 0; i < listaLineas.size(); i++){
+                cbxLGACtesis.getItems().add(listaLineas.get(i));
+                cbxLGACcl.getItems().add(listaLineas.get(i));
+                cbxLGAClibro.getItems().add(listaLineas.get(i));
+                cbxLGACproto.getItems().add(listaLineas.get(i));
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error con la bd");
         }
     }
     

@@ -14,6 +14,17 @@ public class Linea {
     private String nombre;
     private String idCA;
 
+    public Linea(int idLinea, String nombre, String idCA) {
+        this.idLinea = idLinea;
+        this.nombre = nombre;
+        this.idCA = idCA;
+    }
+    
+    @Override
+    public String toString(){
+        return this.nombre;
+    }
+
     /**
      * @return the idLinea
      */
