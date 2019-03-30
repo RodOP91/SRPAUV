@@ -9,22 +9,20 @@ package srpauv.clases;
  *
  * @author edson
  */
-public class CapituloLibro extends Producto{
+public class Prototipo extends Producto{
     
+    //FALTA EL ARCHIVO PDF
+
     private String autor_es;
-    private String editorial;
-    private String paginas;
     private String pais;
     private String año;
     private String proposito;
-    private int noEdiciones;
-    private int totalEjemplares;
-    private String ISBN;
-    private String tituloLibro;
+    private String objetivos;
+    private String caracteristicas;
+    private String institucion;
     
-    private String tipo = "capituloLibro";
+    private String tipo = "prototipo";
     
-
     @Override
     public int actualizarProducto() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -57,34 +55,6 @@ public class CapituloLibro extends Producto{
      */
     public void setAutor_es(String autor_es) {
         this.autor_es = autor_es;
-    }
-
-    /**
-     * @return the editorial
-     */
-    public String getEditorial() {
-        return editorial;
-    }
-
-    /**
-     * @param editorial the editorial to set
-     */
-    public void setEditorial(String editorial) {
-        this.editorial = editorial;
-    }
-
-    /**
-     * @return the paginas
-     */
-    public String getPaginas() {
-        return paginas;
-    }
-
-    /**
-     * @param paginas the paginas to set
-     */
-    public void setPaginas(String paginas) {
-        this.paginas = paginas;
     }
 
     /**
@@ -130,59 +100,45 @@ public class CapituloLibro extends Producto{
     }
 
     /**
-     * @return the noEdiciones
+     * @return the objetivos
      */
-    public int getNoEdiciones() {
-        return noEdiciones;
+    public String getObjetivos() {
+        return objetivos;
     }
 
     /**
-     * @param noEdiciones the noEdiciones to set
+     * @param objetivos the objetivos to set
      */
-    public void setNoEdiciones(int noEdiciones) {
-        this.noEdiciones = noEdiciones;
+    public void setObjetivos(String objetivos) {
+        this.objetivos = objetivos;
     }
 
     /**
-     * @return the totalEjemplares
+     * @return the caracteristicas
      */
-    public int getTotalEjemplares() {
-        return totalEjemplares;
+    public String getCaracteristicas() {
+        return caracteristicas;
     }
 
     /**
-     * @param totalEjemplares the totalEjemplares to set
+     * @param caracteristicas the caracteristicas to set
      */
-    public void setTotalEjemplares(int totalEjemplares) {
-        this.totalEjemplares = totalEjemplares;
+    public void setCaracteristicas(String caracteristicas) {
+        this.caracteristicas = caracteristicas;
     }
 
     /**
-     * @return the ISBN
+     * @return the institucion
      */
-    public String getISBN() {
-        return ISBN;
+    public String getInstitucion() {
+        return institucion;
     }
 
     /**
-     * @param ISBN the ISBN to set
+     * @param institucion the institucion to set
      */
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
-    }
-
-    /**
-     * @return the tituloLibro
-     */
-    public String getTituloLibro() {
-        return tituloLibro;
-    }
-
-    /**
-     * @param tituloLibro the tituloLibro to set
-     */
-    public void setTituloLibro(String tituloLibro) {
-        this.tituloLibro = tituloLibro;
+    public void setInstitucion(String institucion) {
+        this.institucion = institucion;
     }
 
     /**
@@ -198,5 +154,6 @@ public class CapituloLibro extends Producto{
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+    
     
 }

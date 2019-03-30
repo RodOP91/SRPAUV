@@ -19,8 +19,9 @@ public class Libro extends Producto{
     private int noEdiciones;
     private int totalEjemplares;
     private String ISBN;
+    private String estado;
     
-    private String tipo;
+    private String tipo = "libro";
 
     @Override
     public int actualizarProducto() {
@@ -153,7 +154,7 @@ public class Libro extends Producto{
     public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
-
+    
     /**
      * @return the tipo
      */
@@ -166,6 +167,20 @@ public class Libro extends Producto{
      */
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
     
 }

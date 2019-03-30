@@ -386,16 +386,16 @@ public class RegistrarProductoController implements Initializable {
         String titulo = txtTituloTesis.getText();
         String grado = txtGradoTesis.getText();
         String numAlumnos = txtNoAlumnosTesis.getText();
-        String lgac = cbxLGACtesis.getSelectionModel().getSelectedItem().getNombre();
         boolean ca = chkCAtesis.isSelected();
         LocalDate fechaInicio = dtpFechaInicioTesis.getValue();
         LocalDate fechaFin = dtpFechaFinTesis.getValue();
         
-        if(titulo.isEmpty() || grado.isEmpty() || numAlumnos.isEmpty()){
-            System.err.println("campos vacios");
-        }else{
-            if(lgac == null){
-                System.out.println("lgac no seleccionada");
+        
+        try{
+            String lgac = cbxLGACtesis.getSelectionModel().getSelectedItem().getNombre();
+            
+            if(titulo.isEmpty() || grado.isEmpty() || numAlumnos.isEmpty()){
+                System.err.println("campos vacios");
             }else{
                 if(fechaInicio == null || fechaFin == null){
                     System.out.println("selecciona ambas fechas");
@@ -411,6 +411,8 @@ public class RegistrarProductoController implements Initializable {
                     tesis.registrarProducto();
                 }
             }
+        }catch(NullPointerException ex){
+            System.err.println("lgac nula");
         }
     }
     
@@ -420,7 +422,6 @@ public class RegistrarProductoController implements Initializable {
         String estadoActual = txtEstadoActualCL.getText();
         String isbn = txtISBNcl.getText();
         String proposito = txtPropositoCL.getText();
-        String lgac =cbxLGACcl.getSelectionModel().getSelectedItem().getNombre();
         String autores = txtAutoresCL.getText();
         String pais = txtPaisCL.getText();
         String editorial = txtEditorialCL.getText();
@@ -430,14 +431,14 @@ public class RegistrarProductoController implements Initializable {
         String año = txtAñoCL.getText();
         boolean ca = chkCAcl.isSelected();
         
-        if(titulo.isEmpty() || tituloLibro.isEmpty() || estadoActual.isEmpty()
-                || isbn.isEmpty() || proposito.isEmpty() || autores.isEmpty()
-                || pais.isEmpty() || editorial.isEmpty() || noEdiciones.isEmpty()
-                || paginas.isEmpty() || totalEjemplares.isEmpty() || año.isEmpty()){
-            System.err.println("campos vacios");
-        }else{
-            if(lgac == null){
-                System.out.println("lgac no seleccionada");
+        try{    
+            String lgac = cbxLGACcl.getSelectionModel().getSelectedItem().getNombre();
+        
+            if(titulo.isEmpty() || tituloLibro.isEmpty() || estadoActual.isEmpty()
+                    || isbn.isEmpty() || proposito.isEmpty() || autores.isEmpty()
+                    || pais.isEmpty() || editorial.isEmpty() || noEdiciones.isEmpty()
+                    || paginas.isEmpty() || totalEjemplares.isEmpty() || año.isEmpty()){
+                System.err.println("campos vacios");
             }else{
                 CapituloLibro capLib = new CapituloLibro();
                 capLib.setTitulo(titulo);
@@ -454,7 +455,54 @@ public class RegistrarProductoController implements Initializable {
                 capLib.setProposito(proposito);
                 capLib.setTotalEjemplares(Integer.parseInt(totalEjemplares));
                 capLib.registrarProducto();
-            }
+            }   
+        }catch(NullPointerException ex){
+            System.out.println("lgac no seleccionada");
         }
+    }
+    
+    private void guardarLibro(){
+        String titulo = txtTituloLibro.getText();
+        String autor_es = txtAutoresLibro.getText();
+        String isbn = txtISBNlibro.getText();
+        String proposito = txtPropositoLibro.getText();
+        String pais = txtPaisLibro.getText();
+        String editorial = txtEditorialLibro.getText();
+        String noEdiciones = txtNoEdicionesLibro.getText();
+        String estadoActual = txtEstadoActualLibro.getText();
+        String totalEjemplares = txtTotalEjemplaresLibro.getText();
+        String año = txtAñoLibro.getText();
+        boolean ca = chkCAlibro.isSelected();
+        
+        try{
+            String lgac = cbxLGAClibro.getSelectionModel().getSelectedItem().getNombre();
+            
+            if(titulo.isEmpty() || autor_es.isEmpty() || isbn.isEmpty() ||
+                    proposito.isEmpty() || pais.isEmpty() || editorial.isEmpty()
+                    || noEdiciones.isEmpty() || estadoActual.isEmpty() || 
+                    totalEjemplares.isEmpty() || año.isEmpty()){
+                System.err.println("campos vacios");
+            }else{
+                Libro libro = new Libro();
+                libro.setTitulo(titulo);
+                libro.setAutor_es(autor_es);
+                libro.setISBN(isbn);
+                libro.setProposito(proposito);
+                libro.setPais(pais);
+                libro.setEditorial(editorial);
+                libro.setNoEdiciones(Integer.parseInt(noEdiciones));
+                libro.setEstado(estadoActual);
+                libro.setTotalEjemplares(Integer.parseInt(totalEjemplares));
+                libro.setConsiderarCA(ca);
+                libro.setLgac(lgac);
+                libro.registrarProducto();
+            }
+        }catch(NullPointerException ex){
+            System.out.println("lgac no seleccionada");
+        }
+    }
+    
+    private void guardarPrototipo(){
+        
     }
 }

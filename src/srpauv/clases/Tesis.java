@@ -18,7 +18,7 @@ public class Tesis extends Producto{
     private String grado;
     private int numAlumnos;
     
-    private String tipo;
+    private String tipo = "tesis";
     
     @Override
     public int actualizarProducto() {
