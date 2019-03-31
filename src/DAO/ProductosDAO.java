@@ -5,8 +5,8 @@
  */
 package DAO;
 
-import srpauv.clases.Producto;
-import srpauv.clases.Tesis;
+import srpauv.clases.CapituloLibro;
+import srpauv.clases.*;
 
 /**
  *
@@ -14,11 +14,45 @@ import srpauv.clases.Tesis;
  */
 public class ProductosDAO {
     public static int registrar(Producto producto){
+        int flag = -1;
         if(producto.getTipoProducto().equals("tesis")){
-            System.out.println("registro tesis");
             Tesis tesis = (Tesis) producto;
-            System.out.println(tesis.getTitulo());
+            Conexion conn = new Conexion();
+            
+            String sql = "INSERT INTO `tesis`(`idProducto`, `titulo`, `estado`, "
+                    + "`fechaInicio`, `fechaFin`, `noAlumnos`, `lgac`, `ca`, `tipo`, `grado`) "
+                    + "VALUES (NULL,'"+tesis.getTitulo()+"','"+tesis.getEstado()+"'"
+                    + ",'"+tesis.getFechaInicio()+"','"+tesis.getFechaFin()+"'"
+                    + ","+tesis.getNumAlumnos()+",'"+tesis.getLgac()+"',"+tesis.isValidadoCA()+""
+                    + ",'"+tesis.getTipoProducto()+"','"+tesis.getGrado()+"')";
+            flag = conn.ejecutar(sql);
+            conn.cerrar();
         }
-        return 1;
+        if(producto.getTipoProducto().equals("capituloLibro")){
+            CapituloLibro capLib = (CapituloLibro) producto;
+            Conexion conn = new Conexion();
+            
+            String sql = "";
+            flag = conn.ejecutar(sql);
+            conn.cerrar();
+        }
+        if(producto.getTipoProducto().equals("libro")){
+            Libro libro = (Libro) producto;
+            Conexion conn = new Conexion();
+            
+            String sql = "";
+            flag = conn.ejecutar(sql);
+            conn.cerrar();
+        }
+        if(producto.getTipoProducto().equals("prototipo")){
+            Prototipo proto = (Prototipo) producto;
+            Conexion conn = new Conexion();
+            
+            String sql = "";
+            flag = conn.ejecutar(sql);
+            conn.cerrar();
+        }
+        
+        return flag;
     }
 }

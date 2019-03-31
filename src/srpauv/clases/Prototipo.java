@@ -21,7 +21,9 @@ public class Prototipo extends Producto{
     private String caracteristicas;
     private String institucion;
     
-    private String tipo = "prototipo";
+    public Prototipo(){
+        this.setTipoProducto("prototipo");
+    }
     
     @Override
     public int actualizarProducto() {
@@ -140,20 +142,4 @@ public class Prototipo extends Producto{
     public void setInstitucion(String institucion) {
         this.institucion = institucion;
     }
-
-    /**
-     * @return the tipo
-     */
-    public String getTipo() {
-        return tipo;
-    }
-
-    /**
-     * @param tipo the tipo to set
-     */
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-    
-    
 }

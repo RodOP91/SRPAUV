@@ -25,6 +25,7 @@ public class DAOregistrarProducto {
         while(rs.next()){
             lineas.add(new Linea(rs.getInt(1), rs.getString(2), rs.getString(3)));
         }
+        conn.cerrar();
         return lineas;
     }
 }

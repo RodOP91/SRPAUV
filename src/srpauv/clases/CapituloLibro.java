@@ -22,7 +22,9 @@ public class CapituloLibro extends Producto{
     private String ISBN;
     private String tituloLibro;
     
-    private String tipo = "capituloLibro";
+    public CapituloLibro(){
+        this.setTipoProducto("capituloLibro");
+    }
     
 
     @Override
@@ -184,19 +186,4 @@ public class CapituloLibro extends Producto{
     public void setTituloLibro(String tituloLibro) {
         this.tituloLibro = tituloLibro;
     }
-
-    /**
-     * @return the tipo
-     */
-    public String getTipo() {
-        return tipo;
-    }
-
-    /**
-     * @param tipo the tipo to set
-     */
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-    
 }

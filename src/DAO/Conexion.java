@@ -60,16 +60,16 @@ public class Conexion {
      * @return flag
      * Valor boolean que indica si se realizo la instrucción sql
      */
-    public boolean ejecutar(String sql){
-        boolean flag;
+    public int ejecutar(String sql){
+        int flag;
         try{
             sentencia.execute(sql);
             sentencia.close();
-            flag = true;
+            flag = 0;
         }
         catch(SQLException ex){
             System.err.println(ex);
-            flag = false;
+            flag = 1;
         }
         return flag;
     }
