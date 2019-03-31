@@ -5,17 +5,13 @@
  */
 package srpauv;
 
-import com.sun.javaws.security.Resource;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.beans.Observable;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -34,6 +30,10 @@ public class Srpauv extends Application {
         primaryStage.setMaximized(true);
         primaryStage.setMinWidth(1000);
         primaryStage.setMinHeight(650);
+        primaryStage.maximizedProperty().addListener((Observable observable) -> {
+            primaryStage.setWidth(1000);
+            primaryStage.setHeight(650);
+        });
         primaryStage.show();
     }
 
