@@ -5,6 +5,7 @@
  */
 package srpauv.clases;
 
+import DAO.ProductosDAO;
 import java.time.LocalDate;
 
 /**
@@ -18,7 +19,9 @@ public class Tesis extends Producto{
     private String grado;
     private int numAlumnos;
     
-    private String tipo = "tesis";
+    public Tesis(){
+        this.setTipoProducto("tesis");
+    }
     
     @Override
     public int actualizarProducto() {
@@ -37,7 +40,7 @@ public class Tesis extends Producto{
 
     @Override
     public int registrarProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ProductosDAO.registrar(this);
     }
 
     /**
@@ -95,20 +98,4 @@ public class Tesis extends Producto{
     public void setNumAlumnos(int numAlumnos) {
         this.numAlumnos = numAlumnos;
     }
-
-    /**
-     * @return the tipo
-     */
-    public String getTipo() {
-        return tipo;
-    }
-
-    /**
-     * @param tipo the tipo to set
-     */
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-    
-    
 }

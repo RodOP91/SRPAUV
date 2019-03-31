@@ -19,6 +19,8 @@ public abstract class Producto {
     private boolean validadoCA;
     private String estado;
     
+    private String tipoProducto;
+    
     public abstract int actualizarProducto();
     public abstract int eliminarProducto();
     public abstract int recuperarProducto();
@@ -107,6 +109,18 @@ public abstract class Producto {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
-    
+
+    /**
+     * @return the tipoProducto
+     */
+    public String getTipoProducto() {
+        return tipoProducto;
+    }
+
+    /**
+     * @param tipoProducto the tipoProducto to set
+     */
+    public void setTipoProducto(String tipoProducto) {
+        this.tipoProducto = tipoProducto;
+    }
 }
