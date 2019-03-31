@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import srpauv.clases.ArticuloIndexado;
 import srpauv.clases.Tesis;
 
 /**
@@ -66,6 +67,77 @@ public class RegistrarProductoController implements Initializable {
     @FXML DatePicker dtpFechaFinTesis;
     @FXML ComboBox<String>  cbxLGACtesis;
     @FXML CheckBox chkCAtesis;
+    //ARTICULO INDEXADO---------------------------------------------------------
+    @FXML TextField txtautorindexado;
+    @FXML TextField txttituloindexado;
+    @FXML TextField txtnomrevistaindexado;
+    @FXML TextField txteditorialindexado;
+    @FXML TextField txtpropositoindexado;
+    @FXML TextField txtissnindexado;
+    @FXML TextField txtdirelecindexado;
+    @FXML TextField txtvolindexado;
+    @FXML TextField txtpagsindexado;
+    @FXML TextField txtpaisindexado;
+    @FXML TextField txtanoindexado;
+    @FXML TextField txtedoactualindexado;
+    @FXML ComboBox<String> cbxlgacindexado;
+    @FXML TextArea txtadescindexado;
+    @FXML CheckBox chkcaindexado;
+    //ARTICULO ARBITRADO-------------------------------------------------------
+    @FXML TextField txtautorarbitrado;
+    @FXML TextField txttituloarbitrado;
+    @FXML TextField txtnomrevistaarbitrado;
+    @FXML TextField txteditorialarbitrado;
+    @FXML TextField txtpropositoarbitrado;
+    @FXML TextField txtissnarbitrado;
+    @FXML TextField txtdirelecarbitrado;
+    @FXML TextField txtvolarbitrado;
+    @FXML TextField txtpagsarbitrado;
+    @FXML TextField txtpaisarbitrado;
+    @FXML TextField txtanoarbitrado;
+    @FXML TextField txtedoactualarbitrado;
+    @FXML ComboBox<String> cbxlgacarbitrado;
+    @FXML TextArea txtadescarbitrado;
+    @FXML CheckBox chkcaarbitrado;
+    //ARTICULO------------------------------------------------------------------
+    @FXML TextField txtautorarticulo;
+    @FXML TextField txttituloarticulo;
+    @FXML TextField txtnomrevistaarticulo;
+    @FXML TextField txteditorialarticulo;
+    @FXML TextField txtpropositoarticulo;
+    @FXML TextField txtissnarticulo;    
+    @FXML TextField txtvolarticulo;
+    @FXML TextField txtpagsarticulo;
+    @FXML TextField txtpaisarticulo;
+    @FXML TextField txtanoarticulo;
+    @FXML TextField txtedoactualarticulo;
+    @FXML ComboBox<String> cbxlgacarticulo;
+    @FXML TextArea txtadescarticulo;
+    @FXML CheckBox chkcaarticulo;
+    //PRODUCCION INNOVADORA-----------------------------------------------------
+    @FXML TextField txttituloprod;
+    @FXML TextField txtparticipanteprod;
+    @FXML TextField txtclasfiprod;
+    @FXML TextField txtnumregprod;
+    @FXML TextField txtpaisprod;
+    @FXML TextField txtpropositoprod;
+    @FXML TextArea txtadescprod;
+    @FXML DatePicker dtpfechaprod;
+    @FXML ComboBox<String> cbxlgacprod;    
+    @FXML CheckBox chkcaprod;
+    //MEMORIA EN EXTENSO
+    @FXML TextField txtautormem;
+    @FXML TextField txttitulopresmem;
+    @FXML TextField txtpagsmem;
+    @FXML TextField txtedomem;
+    @FXML TextField txtpaismem;
+    @FXML TextField txtciudadmem;    
+    @FXML TextField txtanomem;
+    @FXML TextField txtedoactualmem;
+    @FXML TextField txtcongresomem;
+    @FXML ComboBox<String> cbxlgacmem;
+    @FXML TextArea txtapropositomem;
+    @FXML CheckBox chkcamem;
     //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------
     
@@ -193,13 +265,13 @@ public class RegistrarProductoController implements Initializable {
                 guardarTesis();
             }
             if(flagProducto == 2){
-                
+                guardarArticuloIndexado();
             }
             if(flagProducto == 3){
-                
+                guardarArticuloArbitrado();
             }
             if(flagProducto == 4){
-                
+                guardarArticulo();
             }
             if(flagProducto == 5){
                 
@@ -208,10 +280,10 @@ public class RegistrarProductoController implements Initializable {
                 
             }
             if(flagProducto == 7){
-                
+                guardarProduccionInnovadora();
             }
             if(flagProducto == 8){
-                
+                guardarMemoriaExtenso();
             }
             if(flagProducto == 9){
                 
@@ -316,6 +388,53 @@ public class RegistrarProductoController implements Initializable {
                     tesis.setFechaInicio(fechaInicio);
                     tesis.setFechaFin(fechaFin);
                     tesis.registrarProducto();
+                }
+            }
+        }
+    }
+    private void guardarArticuloIndexado(){
+        /**
+         * Recopilación de datos de campos de texto
+         */
+        ArticuloIndexado articuloindexado = new ArticuloIndexado();
+        String titulo = txttituloindexado.getText();
+        String autor = txtautorindexado.getText();
+        String nomrevista = txtnomrevistaindexado.getText();
+        String editorial = txteditorialindexado.getText();
+        String proposito = txtpropositoindexado.getText();
+        String issn = txtissnindexado.getText();
+        String direlec = txtdirelecindexado.getText();
+        String vol = txtvolindexado.getText();
+        String pags = txtpagsindexado.getText();
+        String pais = txtpaisindexado.getText();
+        String ano = txtanoindexado.getText();
+        String edoactual = txtedoactualindexado.getText();
+        String lgac = cbxlgacindexado.getSelectionModel().getSelectedItem();
+        boolean ca = chkcaindexado.isSelected();
+        /**
+         * Validación de campos vacíos
+         */
+        if(titulo.isEmpty() || autor.isEmpty() || nomrevista.isEmpty() || editorial.isEmpty()
+                || proposito.isEmpty() || issn.isEmpty() || direlec.isEmpty()||
+                vol.isEmpty() || pags.isEmpty() || pais.isEmpty() || ano.isEmpty()
+                || edoactual.isEmpty()){
+            System.err.println("Campos Vacíos");
+        }else{
+            if(lgac == null){
+                System.out.println("LGAC no seleccionada");
+            }else{
+                    articuloindexado.setTitulo(titulo);          
+                    articuloindexado.setAutor(autor); 
+                    articuloindexado.setNomrevista(nomrevista); 
+                    articuloindexado.setEditorial(editorial); 
+                    articuloindexado.setVolumen(vol);
+                    articuloindexado.setPags(pags);
+                    articuloindexado.setPais(pais);
+                    articuloindexado.setAno(ano);
+                    articuloindexado.setEdoactual(edoactual);
+                    articuloindexado.setLgac(lgac);
+                    articuloindexado.setValidadoCA(ca);                    
+                    articuloindexado.registrarProducto();
                 }
             }
         }
