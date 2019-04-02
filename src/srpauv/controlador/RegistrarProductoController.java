@@ -488,7 +488,7 @@ public class RegistrarProductoController implements Initializable {
                     articuloarbitrado.setNomrevista(nomrevista); 
                     articuloarbitrado.setEditorial(editorial); 
                     articuloarbitrado.setVolumen(vol);
-                    articuloarbitrado.setPags(pags);
+                    articuloarbitrado.setPaginas(pags);
                     articuloarbitrado.setPais(pais);
                     articuloarbitrado.setAno(ano);
                     articuloarbitrado.setEstado(edoactual);
