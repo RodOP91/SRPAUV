@@ -339,13 +339,13 @@ public class RegistrarProductoController implements Initializable {
                     guardarTesis();                    
                     break;
                 case 2:
-                    
+                    guardarArticuloIndexado();
                     break;
                 case 3:
-                    
+                    guardarArticuloArbitrado();
                     break;
                 case 4:
-                    
+                    guardarArticulo();
                     break;
                 case 5:
                     guardarCapituloLibro();
@@ -354,10 +354,10 @@ public class RegistrarProductoController implements Initializable {
                     guardarLibro();
                     break;
                 case 7:
-                    
+                    guardarProduccionInnovadora();
                     break;
                 case 8:
-                    
+                    guardarMemoriaExtenso();
                     break;
                 case 9:
                     guardarPrototipo();
