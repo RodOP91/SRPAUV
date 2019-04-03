@@ -14,7 +14,7 @@ import DAO.ProductosDAO;
 public class MemoriaExtenso extends Producto{
     private String autor;    
     private String congreso;
-    private String estado;
+    private String estadoGeo;
     private String ciudad;
     private String rangopags;
     private String pais;
@@ -62,12 +62,12 @@ public class MemoriaExtenso extends Producto{
         this.congreso = congreso;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getEstadoG() {
+        return estadoGeo;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setEstadoG(String estado) {
+        this.estadoGeo = estado;
     }
 
     public String getCiudad() {

@@ -454,6 +454,11 @@ public class RegistrarProductoController implements Initializable {
                 cbxLGACcl.getItems().add(listaLineas.get(i));
                 cbxLGAClibro.getItems().add(listaLineas.get(i));
                 cbxLGACproto.getItems().add(listaLineas.get(i));                
+                cbxlgacarbitrado.getItems().add(listaLineas.get(i));
+                cbxlgacarticulo.getItems().add(listaLineas.get(i));
+                cbxlgacindexado.getItems().add(listaLineas.get(i));
+                cbxlgacmem.getItems().add(listaLineas.get(i));
+                cbxlgacprod.getItems().add(listaLineas.get(i));
             }
         } catch (SQLException ex) {
             System.err.println("Error con la bd");
@@ -804,7 +809,7 @@ public class RegistrarProductoController implements Initializable {
                     memoriaextenso.setCongreso(congreso);
                     memoriaextenso.setRangopags(pags);
                     memoriaextenso.setCiudad(ciudad);
-                    memoriaextenso.setEstado(estado);
+                    memoriaextenso.setEstadoG(estado);
                     memoriaextenso.setPais(pais);
                     memoriaextenso.setAno(ano);
                     memoriaextenso.setProposito(proposito);
