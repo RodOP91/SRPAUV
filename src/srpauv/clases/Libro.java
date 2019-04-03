@@ -5,6 +5,8 @@
  */
 package srpauv.clases;
 
+import DAO.ProductosDAO;
+
 /**
  *
  * @author edson
@@ -41,7 +43,7 @@ public class Libro extends Producto{
 
     @Override
     public int registrarProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ProductosDAO.registrar(this);
     }
 
     /**
