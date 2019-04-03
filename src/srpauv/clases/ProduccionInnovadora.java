@@ -5,6 +5,7 @@
  */
 package srpauv.clases;
 
+import DAO.ProductosDAO;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -15,7 +16,7 @@ import java.util.Date;
 public class ProduccionInnovadora extends Producto {
 
     public ProduccionInnovadora() {
-
+        this.setTipoProducto("produccionInnovadora");
     }
     private String participante;
 
@@ -45,7 +46,7 @@ public class ProduccionInnovadora extends Producto {
 
     @Override
     public int registrarProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ProductosDAO.registrar(this);    
     }
 
     public String getDescripcion() {
