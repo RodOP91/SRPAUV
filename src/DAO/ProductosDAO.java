@@ -33,7 +33,18 @@ public class ProductosDAO {
             ArticuloIndexado articuloindexado = (ArticuloIndexado) producto;
             Conexion conn = new Conexion();
             
-            String sql ="";
+            String sql ="INSERT INTO `articulo_ind_arb`(`idProducto`, `titulo`,"
+                    + " `estado`, `lgac`, `ca`, `autor_es`, `descripcion`, `nombreRevista`, "
+                    + "`editorial`, `volumen`, `isnn`, `rangoPaginas`, `pais`, `año`, "
+                    + "`direccionElectronica`, `proposito`) VALUES "
+                    + "(null,'" + articuloindexado.getTitulo() + "','" + articuloindexado.getEstado() + "',"
+                    + "'" + articuloindexado.getLgac() + "'," + articuloindexado.isConsiderarCA() + ","
+                    + "'" + articuloindexado.getAutor() + "','" + articuloindexado.getDescripcion() + "',"
+                    + "'" + articuloindexado.getNomrevista() + "','" + articuloindexado.getEditorial() + "',"
+                    + "'" + articuloindexado.getVolumen() + "','" + articuloindexado.getIssn() + "',"
+                    + "'" + articuloindexado.getPags() + "','" + articuloindexado.getPais() + "',"
+                    + "'" + articuloindexado.getAno() + "','" + articuloindexado.getDirelectronica() + "',"
+                    + "'" + articuloindexado.getProposito() + "')";
             flag = conn.ejecutar(sql);
             conn.cerrar();
         }

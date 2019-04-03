@@ -453,7 +453,7 @@ public class RegistrarProductoController implements Initializable {
                 cbxLGACtesis.getItems().add(listaLineas.get(i));
                 cbxLGACcl.getItems().add(listaLineas.get(i));
                 cbxLGAClibro.getItems().add(listaLineas.get(i));
-                cbxLGACproto.getItems().add(listaLineas.get(i));
+                cbxLGACproto.getItems().add(listaLineas.get(i));                
             }
         } catch (SQLException ex) {
             System.err.println("Error con la bd");
@@ -856,6 +856,4 @@ public class RegistrarProductoController implements Initializable {
             System.out.println("lgac no seleccionada");
         }
     }
-    
-    
 }
