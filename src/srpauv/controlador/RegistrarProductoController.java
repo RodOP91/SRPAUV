@@ -559,33 +559,36 @@ public class RegistrarProductoController implements Initializable {
         String pais = txtpaisarbitrado.getText();
         String ano = txtanoarbitrado.getText();
         String edoactual = txtedoactualarbitrado.getText();
-        String lgac = cbxlgacarbitrado.getSelectionModel().getSelectedItem();
+        
         boolean ca = chkcaarbitrado.isSelected();
         /**
          * Validación de campos vacíos
          */
-        if(titulo.isEmpty() || autor.isEmpty() || nomrevista.isEmpty() || editorial.isEmpty()
+        try{
+            String lgac = cbxlgacarbitrado.getSelectionModel().getSelectedItem().getNombre();
+            if(titulo.isEmpty() || autor.isEmpty() || nomrevista.isEmpty() || editorial.isEmpty()
                 || proposito.isEmpty() || issn.isEmpty() || direlec.isEmpty()||
                 vol.isEmpty() || pags.isEmpty() || pais.isEmpty() || ano.isEmpty()
                 || edoactual.isEmpty()){
             System.err.println("Campos Vacíos");
-        }else{
-            if(lgac == null){
-                System.out.println("LGAC no seleccionada");
-            }else{
-                    articuloarbitrado.setTitulo(titulo);          
-                    articuloarbitrado.setAutor(autor); 
-                    articuloarbitrado.setNomrevista(nomrevista); 
-                    articuloarbitrado.setEditorial(editorial); 
-                    articuloarbitrado.setVolumen(vol);
-                    articuloarbitrado.setPaginas(pags);
-                    articuloarbitrado.setPais(pais);
-                    articuloarbitrado.setAno(ano);
-                    articuloarbitrado.setEstado(edoactual);
-                    articuloarbitrado.setLgac(lgac);
-                    articuloarbitrado.setValidadoCA(ca);                    
-                    articuloarbitrado.registrarProducto();
+            }else{               
+                articuloarbitrado.setTitulo(titulo);          
+                articuloarbitrado.setAutor(autor); 
+                articuloarbitrado.setNomrevista(nomrevista); 
+                articuloarbitrado.setEditorial(editorial); 
+                articuloarbitrado.setVolumen(vol);
+                articuloarbitrado.setPaginas(pags);
+                articuloarbitrado.setPais(pais);
+                articuloarbitrado.setAno(ano);
+                articuloarbitrado.setEstado(edoactual);
+                articuloarbitrado.setLgac(lgac);
+                articuloarbitrado.setValidadoCA(ca);                    
+                articuloarbitrado.registrarProducto();
+                    
                 }
+        
+            }catch(NullPointerException ex){
+                System.err.println("lgac nula");
             }
 }
     
@@ -605,19 +608,18 @@ public class RegistrarProductoController implements Initializable {
         String pais = txtpaisarticulo.getText();
         String ano = txtanoarticulo.getText();
         String edoactual = txtedoactualarticulo.getText();
-        String lgac = cbxlgacarticulo.getSelectionModel().getSelectedItem();
+        
         boolean ca = chkcaarticulo.isSelected();
         /**
          * Validación de campos vacíos
          */
-        if(titulo.isEmpty() || autor.isEmpty() || nomrevista.isEmpty() || editorial.isEmpty()
+        try{
+            String lgac = cbxlgacarticulo.getSelectionModel().getSelectedItem().getNombre();
+            if(titulo.isEmpty() || autor.isEmpty() || nomrevista.isEmpty() || editorial.isEmpty()
                 || proposito.isEmpty() || issn.isEmpty() || vol.isEmpty() || 
                 pags.isEmpty() || pais.isEmpty() || ano.isEmpty()
                 || edoactual.isEmpty()){
             System.err.println("Campos Vacíos");
-        }else{
-            if(lgac == null){
-                System.out.println("LGAC no seleccionada");
             }else{
                     articulo.setTitulo(titulo);          
                     articulo.setAutor(autor); 
@@ -631,8 +633,12 @@ public class RegistrarProductoController implements Initializable {
                     articulo.setLgac(lgac);
                     articulo.setValidadoCA(ca);                    
                     articulo.registrarProducto();
+
                 }
-            }
+        }catch(NullPointerException ex){
+            System.err.println("lgac nula");
+        }
+        
 }
     
     private void guardarCapituloLibro(){
@@ -735,30 +741,34 @@ public class RegistrarProductoController implements Initializable {
         String proposito = txtpropositoindexado.getText();
         String pais = txtpaisindexado.getText();
         String edoactual = txtedoactualindexado.getText();
-        String lgac = cbxlgacindexado.getSelectionModel().getSelectedItem();
+        
         boolean ca = chkcaindexado.isSelected();
         /**
          * Validación de campos vacíos
          */
-        if(titulo.isEmpty() || participante.isEmpty() || clasifinter.isEmpty() || numreg.isEmpty()
+        try{
+            String lgac = cbxlgacindexado.getSelectionModel().getSelectedItem().getNombre();
+            if(titulo.isEmpty() || participante.isEmpty() || clasifinter.isEmpty() || numreg.isEmpty()
                 || proposito.isEmpty() || fecha == null){
             System.err.println("Campos Vacíos");
-        }else{
-            if(lgac == null){
-                System.out.println("LGAC no seleccionada");
             }else{
-                    produccioninnovadora.setTitulo(titulo);          
-                    produccioninnovadora.setParticipante(participante); 
-                    produccioninnovadora.setClasifinternacional(clasifinter); 
-                    produccioninnovadora.setNumregistro(numreg); 
-                    produccioninnovadora.setFechapub(fecha);
-                    produccioninnovadora.setPais(pais);
-                    produccioninnovadora.setEstado(edoactual);
-                    produccioninnovadora.setLgac(lgac);
-                    produccioninnovadora.setValidadoCA(ca);                    
-                    produccioninnovadora.registrarProducto();
+
+                        produccioninnovadora.setTitulo(titulo);          
+                        produccioninnovadora.setParticipante(participante); 
+                        produccioninnovadora.setClasifinternacional(clasifinter); 
+                        produccioninnovadora.setNumregistro(numreg); 
+                        produccioninnovadora.setFechapub(fecha);
+                        produccioninnovadora.setPais(pais);
+                        produccioninnovadora.setEstado(edoactual);
+                        produccioninnovadora.setLgac(lgac);
+                        produccioninnovadora.setValidadoCA(ca);                    
+                        produccioninnovadora.registrarProducto();
+
                 }
-            }
+        }catch(NullPointerException ex){
+            System.err.println("lgac nula");
+        }
+        
 }
     
     private void guardarMemoriaExtenso(){
@@ -776,19 +786,19 @@ public class RegistrarProductoController implements Initializable {
         String ano = txtanomem.getText();
         String proposito = txtapropositomem.getText();
         String edoactual = txtedoactualmem.getText();
-        String lgac = cbxlgacmem.getSelectionModel().getSelectedItem();
+        
         boolean ca = chkcamem.isSelected();
         /**
          * Validación de campos vacíos
          */
-        if(titulo.isEmpty() || autor.isEmpty() || congreso.isEmpty() || estado.isEmpty()
+        try{
+            String lgac = cbxlgacmem.getSelectionModel().getSelectedItem().getNombre();
+            if(titulo.isEmpty() || autor.isEmpty() || congreso.isEmpty() || estado.isEmpty()
                 || ciudad.isEmpty() || pags.isEmpty() || pais.isEmpty() || ano.isEmpty()
                 || edoactual.isEmpty()){
             System.err.println("Campos Vacíos");
-        }else{
-            if(lgac == null){
-                System.out.println("LGAC no seleccionada");
             }else{
+            
                     memoriaextenso.setTitulo(titulo);          
                     memoriaextenso.setAutor(autor);
                     memoriaextenso.setCongreso(congreso);
@@ -803,7 +813,11 @@ public class RegistrarProductoController implements Initializable {
                     memoriaextenso.setValidadoCA(ca);                    
                     memoriaextenso.registrarProducto();
                 }
-            }
+        }catch(NullPointerException ex){
+            System.err.println("lgac nula");
+        }
+        
+            
 }
     
     private void guardarPrototipo(){
