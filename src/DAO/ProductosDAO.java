@@ -28,6 +28,34 @@ public class ProductosDAO {
             flag = conn.ejecutar(sql);
             conn.cerrar();
         }
+        
+        if(producto.getTipoProducto().equals("articuloIndexado")){
+            ArticuloIndexado articuloindexado = (ArticuloIndexado) producto;
+            Conexion conn = new Conexion();
+            
+            String sql ="";
+            flag = conn.ejecutar(sql);
+            conn.cerrar();
+        }
+        
+        if(producto.getTipoProducto().equals("articuloArbitrado")){
+            ArticuloArbitrado articuloarbitrado = (ArticuloArbitrado) producto;
+            Conexion conn = new Conexion();
+            
+            String sql ="";
+            flag = conn.ejecutar(sql);
+            conn.cerrar();
+        }
+        
+        if(producto.getTipoProducto().equals("articulo")){
+            Articulo articulo = (Articulo) producto;
+            Conexion conn = new Conexion();
+            
+            String sql ="";
+            flag = conn.ejecutar(sql);
+            conn.cerrar();
+        }
+        
         if(producto.getTipoProducto().equals("capituloLibro")){
             CapituloLibro capLib = (CapituloLibro) producto;
             Conexion conn = new Conexion();
@@ -60,6 +88,25 @@ public class ProductosDAO {
             flag = conn.ejecutar(sql);
             conn.cerrar();
         }
+        
+        if(producto.getTipoProducto().equals("produccionInnovadora")){
+            ProduccionInnovadora produccioninnovadora = (ProduccionInnovadora) producto;
+            Conexion conn = new Conexion();
+            
+            String sql ="";
+            flag = conn.ejecutar(sql);
+            conn.cerrar();
+        }
+        
+        if(producto.getTipoProducto().equals("memoriaExtenso")){
+            MemoriaExtenso memoriaextenso = (MemoriaExtenso) producto;
+            Conexion conn = new Conexion();
+            
+            String sql ="";
+            flag = conn.ejecutar(sql);
+            conn.cerrar();
+        }
+        
         if(producto.getTipoProducto().equals("prototipo")){
             Prototipo proto = (Prototipo) producto;
             Conexion conn = new Conexion();
