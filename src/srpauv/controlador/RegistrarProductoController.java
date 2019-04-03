@@ -14,7 +14,6 @@ import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -89,7 +88,7 @@ public class RegistrarProductoController implements Initializable {
     @FXML TextField txtpaisarbitrado;
     @FXML TextField txtanoarbitrado;
     @FXML TextField txtedoactualarbitrado;
-    @FXML ComboBox<String> cbxlgacarbitrado;
+    @FXML ComboBox<Linea> cbxlgacarbitrado;
     @FXML TextArea txtadescarbitrado;
     @FXML CheckBox chkcaarbitrado;
     //--------------------------------------------------------------------------
@@ -107,7 +106,7 @@ public class RegistrarProductoController implements Initializable {
     @FXML TextField txtpaisindexado;
     @FXML TextField txtanoindexado;
     @FXML TextField txtedoactualindexado;
-    @FXML ComboBox<String> cbxlgacindexado;
+    @FXML ComboBox<Linea> cbxlgacindexado;
     @FXML TextArea txtadescindexado;
     @FXML CheckBox chkcaindexado;
     //--------------------------------------------------------------------------
@@ -124,7 +123,7 @@ public class RegistrarProductoController implements Initializable {
     @FXML TextField txtpaisarticulo;
     @FXML TextField txtanoarticulo;
     @FXML TextField txtedoactualarticulo;
-    @FXML ComboBox<String> cbxlgacarticulo;
+    @FXML ComboBox<Linea> cbxlgacarticulo;
     @FXML TextArea txtadescarticulo;
     @FXML CheckBox chkcaarticulo;
     //--------------------------------------------------------------------------
@@ -170,7 +169,7 @@ public class RegistrarProductoController implements Initializable {
     @FXML TextField txtpropositoprod;
     @FXML TextArea txtadescprod;
     @FXML DatePicker dtpfechaprod;
-    @FXML ComboBox<String> cbxlgacprod;    
+    @FXML ComboBox<Linea> cbxlgacprod;    
     @FXML CheckBox chkcaprod;
     //--------------------------------------------------------------------------
     
@@ -184,7 +183,7 @@ public class RegistrarProductoController implements Initializable {
     @FXML TextField txtanomem;
     @FXML TextField txtedoactualmem;
     @FXML TextField txtcongresomem;
-    @FXML ComboBox<String> cbxlgacmem;
+    @FXML ComboBox<Linea> cbxlgacmem;
     @FXML TextArea txtapropositomem;
     @FXML CheckBox chkcamem;
     //--------------------------------------------------------------------------
@@ -512,35 +511,36 @@ public class RegistrarProductoController implements Initializable {
         String pais = txtpaisindexado.getText();
         String ano = txtanoindexado.getText();
         String edoactual = txtedoactualindexado.getText();
-        String lgac = cbxlgacindexado.getSelectionModel().getSelectedItem();
         boolean ca = chkcaindexado.isSelected();
         /**
          * Validación de campos vacíos
          */
-        if(titulo.isEmpty() || autor.isEmpty() || nomrevista.isEmpty() || editorial.isEmpty()
+        try{
+            String lgac = cbxlgacindexado.getSelectionModel().getSelectedItem().getNombre();
+            if(titulo.isEmpty() || autor.isEmpty() || nomrevista.isEmpty() || editorial.isEmpty()
                 || proposito.isEmpty() || issn.isEmpty() || direlec.isEmpty()||
                 vol.isEmpty() || pags.isEmpty() || pais.isEmpty() || ano.isEmpty()
                 || edoactual.isEmpty()){
             System.err.println("Campos Vacíos");
-        }else{
-            if(lgac == null){
-                System.out.println("LGAC no seleccionada");
             }else{
-                    articuloindexado.setTitulo(titulo);          
-                    articuloindexado.setAutor(autor); 
-                    articuloindexado.setNomrevista(nomrevista); 
-                    articuloindexado.setEditorial(editorial); 
-                    articuloindexado.setVolumen(vol);
-                    articuloindexado.setPags(pags);
-                    articuloindexado.setPais(pais);
-                    articuloindexado.setAno(ano);
-                    articuloindexado.setEstado(edoactual);
-                    articuloindexado.setLgac(lgac);
-                    articuloindexado.setValidadoCA(ca);                    
-                    articuloindexado.registrarProducto();
-                }
+                articuloindexado.setTitulo(titulo);          
+                articuloindexado.setAutor(autor); 
+                articuloindexado.setNomrevista(nomrevista); 
+                articuloindexado.setEditorial(editorial); 
+                articuloindexado.setVolumen(vol);
+                articuloindexado.setPags(pags);
+                articuloindexado.setPais(pais);
+                articuloindexado.setAno(ano);
+                articuloindexado.setEstado(edoactual);
+                articuloindexado.setLgac(lgac);
+                articuloindexado.setValidadoCA(ca);                    
+                articuloindexado.registrarProducto();
             }
-}
+        }catch(NullPointerException ex){
+            System.err.println("lgac nula");
+        }
+        
+    }
     
     private void guardarArticuloArbitrado(){
         /**
