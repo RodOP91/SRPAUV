@@ -5,13 +5,15 @@
  */
 package srpauv.clases;
 
+import DAO.ProductosDAO;
+
 /**
  *
  * @author ferzo
  */
 public class Articulo extends Producto{
     public Articulo(){
-        
+        this.setTipoProducto("articulo");
     }
     
     private String autor;
@@ -42,7 +44,7 @@ public class Articulo extends Producto{
 
     @Override
     public int registrarProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ProductosDAO.registrar(this);        
     }
 
     public String getAutor() {

@@ -5,6 +5,8 @@
  */
 package srpauv.clases;
 
+import DAO.ProductosDAO;
+
 /**
  *
  * @author ferzo
@@ -20,7 +22,7 @@ public class MemoriaExtenso extends Producto{
     private String proposito;
     
     public MemoriaExtenso(){
-        
+        this.setTipoProducto("memoriaExtenso");
     }
     
     
@@ -41,7 +43,7 @@ public class MemoriaExtenso extends Producto{
 
     @Override
     public int registrarProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ProductosDAO.registrar(this);    
     }
 
     public String getAutor() {

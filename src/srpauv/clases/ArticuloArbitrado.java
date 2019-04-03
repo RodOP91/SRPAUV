@@ -5,6 +5,8 @@
  */
 package srpauv.clases;
 
+import DAO.ProductosDAO;
+
 /**
  *
  * @author ferzo
@@ -12,7 +14,7 @@ package srpauv.clases;
 public class ArticuloArbitrado extends Producto{
     
     public ArticuloArbitrado(){
-        
+        this.setTipoProducto("articuloArbitrado");
     }
     
     private String autor;
@@ -54,7 +56,7 @@ public class ArticuloArbitrado extends Producto{
 
     @Override
     public int registrarProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ProductosDAO.registrar(this);    
     }
 
     public String getAutor() {
