@@ -28,4 +28,17 @@ public class DAOregistrarProducto {
         conn.cerrar();
         return lineas;
     }
+    
+    public static List<Proyecto> recuperarProyectos() throws SQLException{
+        List<Proyecto> proyectos = new ArrayList<>();
+        Conexion conn = new Conexion();
+        String sql = "SELECT idProyecto, tituloProyecto FROM `proyecto`";
+        ResultSet rs;
+        rs = conn.consultar(sql);
+        while(rs.next()){
+            proyectos.add(new Proyecto(rs.getInt(1), rs.getString(2)));
+        }
+        conn.cerrar();
+        return proyectos;
+    }
 }

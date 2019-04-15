@@ -11,12 +11,16 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import srpauv.clases.*;
 
@@ -205,8 +209,15 @@ public class RegistrarProductoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        llenarCombos();
+        try{
+            llenarCombos();
+            recuperarProyectos();
+        }catch(SQLException ex) {
+            Logger.getLogger(RegistrarProductoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
+        
+//VALIDACIONES CAMPOS-----------------------------------------------------------
         txtNoAlumnosTesis.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -215,7 +226,8 @@ public class RegistrarProductoController implements Initializable {
                 }
             }
         });
-        
+//------------------------------------------------------------------------------
+
         btnTesis.setOnAction((ActionEvent event) -> {
             btnArticuloIndexado.setSelected(false);
             btnArticuloArbitrado.setSelected(false);
@@ -227,6 +239,9 @@ public class RegistrarProductoController implements Initializable {
             btnPrototipo.setSelected(false);
             MostrarProductos();
             flagProducto = 1;
+            if(listProyectos.isVisible()){
+                listProyectos.setVisible(false);
+            }
         });
         
         btnArticuloIndexado.setOnAction((ActionEvent event) -> {
@@ -240,6 +255,9 @@ public class RegistrarProductoController implements Initializable {
             btnPrototipo.setSelected(false);
             MostrarProductos();
             flagProducto = 2;
+            if(listProyectos.isVisible()){
+                listProyectos.setVisible(false);
+            }
         });
         
         btnArticuloArbitrado.setOnAction((ActionEvent event) -> {
@@ -253,6 +271,9 @@ public class RegistrarProductoController implements Initializable {
             btnPrototipo.setSelected(false);
             MostrarProductos();
             flagProducto = 3;
+            if(listProyectos.isVisible()){
+                listProyectos.setVisible(false);
+            }
         });
         
         btnArticulo.setOnAction((ActionEvent event) -> {
@@ -266,6 +287,9 @@ public class RegistrarProductoController implements Initializable {
             btnPrototipo.setSelected(false);
             MostrarProductos();
             flagProducto = 4;
+            if(listProyectos.isVisible()){
+                listProyectos.setVisible(false);
+            }
         });
         
         btnCapituloLibro.setOnAction((ActionEvent event) -> {
@@ -279,6 +303,9 @@ public class RegistrarProductoController implements Initializable {
             btnPrototipo.setSelected(false);
             MostrarProductos();
             flagProducto = 5;
+            if(listProyectos.isVisible()){
+                listProyectos.setVisible(false);
+            }
         });
         
         btnLibro.setOnAction((ActionEvent event) -> {
@@ -292,6 +319,9 @@ public class RegistrarProductoController implements Initializable {
             btnPrototipo.setSelected(false);
             MostrarProductos();
             flagProducto = 6;
+            if(listProyectos.isVisible()){
+                listProyectos.setVisible(false);
+            }
         });
         
         btnProduccionInnovadora.setOnAction((ActionEvent event) -> {
@@ -305,6 +335,9 @@ public class RegistrarProductoController implements Initializable {
             btnPrototipo.setSelected(false);
             MostrarProductos();
             flagProducto = 7;
+            if(listProyectos.isVisible()){
+                listProyectos.setVisible(false);
+            }
         });
         
         btnMemoriaExtenso.setOnAction((ActionEvent event) -> {
@@ -318,6 +351,9 @@ public class RegistrarProductoController implements Initializable {
             btnPrototipo.setSelected(false);
             MostrarProductos();
             flagProducto = 8;
+            if(listProyectos.isVisible()){
+                listProyectos.setVisible(false);
+            }
         });
         
         btnPrototipo.setOnAction((ActionEvent event) -> {
@@ -330,10 +366,16 @@ public class RegistrarProductoController implements Initializable {
             btnProduccionInnovadora.setSelected(false);
             btnMemoriaExtenso.setSelected(false);
             MostrarProductos();
-            flagProducto = 9; 
+            flagProducto = 9;
+            if(listProyectos.isVisible()){
+                listProyectos.setVisible(false);
+            }
         });
         
         btnGuardar.setOnAction((ActionEvent event) -> {
+            if(listProyectos.isVisible()){
+                listProyectos.setVisible(false);
+            }
             switch(flagProducto){
                 case 1:
                     guardarTesis();                    
@@ -366,16 +408,26 @@ public class RegistrarProductoController implements Initializable {
         });
         
         btnAsociarProyecto.setOnAction((ActionEvent event) -> {
-            
             if(listProyectos.isVisible()){
                 listProyectos.setVisible(false);
-            }else{
+            }else{  
                 listProyectos.setVisible(true);
+            } 
+        });
+        
+        listProyectos.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(listProyectos.isVisible()){
+                    listProyectos.setVisible(false);
+                    Proyecto proy = (Proyecto) listProyectos.getSelectionModel().getSelectedItem();
+                    listProyectos.getSelectionModel().select(0);
+                }
             }
-            
         });
     }
     
+    //Método que maneja la navegavilidad de la ventana
     private void MostrarProductos(){
         boolean flag = true;
         if(btnTesis.isSelected()){
@@ -446,25 +498,41 @@ public class RegistrarProductoController implements Initializable {
         }
     }
     
-    private void llenarCombos(){
-        try {
-            List<Linea> listaLineas = DAOregistrarProducto.recuperarLineas();
-            for(int i = 0; i < listaLineas.size(); i++){
-                cbxLGACtesis.getItems().add(listaLineas.get(i));
-                cbxLGACcl.getItems().add(listaLineas.get(i));
-                cbxLGAClibro.getItems().add(listaLineas.get(i));
-                cbxLGACproto.getItems().add(listaLineas.get(i));                
-                cbxlgacarbitrado.getItems().add(listaLineas.get(i));
-                cbxlgacarticulo.getItems().add(listaLineas.get(i));
-                cbxlgacindexado.getItems().add(listaLineas.get(i));
-                cbxlgacmem.getItems().add(listaLineas.get(i));
-                cbxlgacprod.getItems().add(listaLineas.get(i));
-            }
-        } catch (SQLException ex) {
-            System.err.println("Error con la bd");
+    //Método que llena los combos de lgac de cada producto
+    private void llenarCombos() throws SQLException{
+        List<Linea> listaLineas = DAOregistrarProducto.recuperarLineas();
+        for(int i = 0; i < listaLineas.size(); i++){
+            cbxLGACtesis.getItems().add(listaLineas.get(i));
+            cbxLGACcl.getItems().add(listaLineas.get(i));
+            cbxLGAClibro.getItems().add(listaLineas.get(i));
+            cbxLGACproto.getItems().add(listaLineas.get(i));                
+            cbxlgacarbitrado.getItems().add(listaLineas.get(i));
+            cbxlgacarticulo.getItems().add(listaLineas.get(i));
+            cbxlgacindexado.getItems().add(listaLineas.get(i));
+            cbxlgacmem.getItems().add(listaLineas.get(i));
+            cbxlgacprod.getItems().add(listaLineas.get(i));
         }
     }
     
+    //Método que llena la lista de proyectos
+    private void recuperarProyectos() throws SQLException{
+        List<Proyecto> listaProyectos = DAO.DAOregistrarProducto.recuperarProyectos();
+        for(int i = 0; i < listaProyectos.size(); i++){
+            listProyectos.getItems().add(listaProyectos.get(i));
+        }
+    }
+    
+    //Método que recupera los colaboradores
+    private void recuperarColaboradores(){
+        
+    }
+    
+    //Método que recupera los integrantes del CA
+    private void recuperarIntegrantes(){
+        
+    }
+    
+    //Método que recupera y valida los campos de Tesis
     private void guardarTesis(){
         String titulo = txtTituloTesis.getText();
         String grado = txtGradoTesis.getText();
@@ -499,6 +567,7 @@ public class RegistrarProductoController implements Initializable {
         }
     }
     
+    //Método que recupera y valida los campos de Articulo Indexado
     private void guardarArticuloIndexado(){
         /**
          * Recopilación de datos de campos de texto
@@ -547,6 +616,7 @@ public class RegistrarProductoController implements Initializable {
         
     }
     
+    //Método que recupera y valida los campos de Articulo Arbitrado
     private void guardarArticuloArbitrado(){
         /**
          * Recopilación de datos de campos de texto
@@ -597,6 +667,7 @@ public class RegistrarProductoController implements Initializable {
             }
 }
     
+    //Método que recupera y valida los campos de Articulo
     private void guardarArticulo(){
         /**
          * Recopilación de datos de campos de texto
@@ -646,6 +717,7 @@ public class RegistrarProductoController implements Initializable {
         
 }
     
+    //Método que recupera y valida los campos de Cap de Libro
     private void guardarCapituloLibro(){
         String titulo = txtTituloCL.getText();
         String tituloLibro = txtTituloLibroCL.getText();
@@ -692,6 +764,7 @@ public class RegistrarProductoController implements Initializable {
         }
     }
     
+    //Método que recupera y valida los campos de Libro
     private void guardarLibro(){
         String titulo = txtTituloLibro.getText();
         String autor_es = txtAutoresLibro.getText();
@@ -733,6 +806,7 @@ public class RegistrarProductoController implements Initializable {
         }
     }
     
+    //Método que recupera y valida los campos de Prod Innov
     private void guardarProduccionInnovadora(){
         /**
          * Recopilación de datos de campos de texto
@@ -775,7 +849,8 @@ public class RegistrarProductoController implements Initializable {
         }
         
 }
-    
+   
+    //Método que recupera y valida los campos de Memoria en extenso
     private void guardarMemoriaExtenso(){
         /**
          * Recopilación de datos de campos de texto
@@ -825,6 +900,7 @@ public class RegistrarProductoController implements Initializable {
             
 }
     
+    //Método que recupera y valida los campos de Prototipo
     private void guardarPrototipo(){
         String nombre = txtNombreProto.getText();
         String institucion = txtInstitucionCreadoraProto.getText();

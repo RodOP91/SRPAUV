@@ -18,6 +18,7 @@ public abstract class Producto {
     //protected Colaborador colaboradorExterno;
     private boolean validadoCA;
     private String estado;
+    private int idProyecto;
     
     private String tipoProducto;
     
@@ -122,5 +123,19 @@ public abstract class Producto {
      */
     public void setTipoProducto(String tipoProducto) {
         this.tipoProducto = tipoProducto;
+    }
+
+    /**
+     * @return the idProyecto
+     */
+    public int getIdProyecto() {
+        return idProyecto;
+    }
+
+    /**
+     * @param idProyecto the idProyecto to set
+     */
+    public void setIdProyecto(int idProyecto) {
+        this.idProyecto = idProyecto;
     }
 }
