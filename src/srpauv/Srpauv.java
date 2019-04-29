@@ -23,17 +23,11 @@ public class Srpauv extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         ResourceBundle idioma = ResourceBundle.getBundle("recursos.default_MX_es");        
-        Parent root = FXMLLoader.load(getClass().getResource("/srpauv/FXML/RegistrarProducto.fxml"), idioma);
+        Parent root = FXMLLoader.load(getClass().getResource("/srpauv/FXML/Menu.fxml"), idioma);
         
         Scene escena = new Scene(root);
         primaryStage.setScene(escena);
-        primaryStage.setMaximized(true);
-        primaryStage.setMinWidth(1000);
-        primaryStage.setMinHeight(650);
-        primaryStage.maximizedProperty().addListener((Observable observable) -> {
-            primaryStage.setWidth(1000);
-            primaryStage.setHeight(650);
-        });
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
@@ -45,3 +39,16 @@ public class Srpauv extends Application {
     }
     
 }
+
+
+
+
+/*  CONFIG VENTANA REGISTRO PRODUCTO
+        primaryStage.setMaximized(true);
+        primaryStage.setMinWidth(1000);
+        primaryStage.setMinHeight(650);
+        primaryStage.maximizedProperty().addListener((Observable observable) -> {
+            primaryStage.setWidth(1000);
+            primaryStage.setHeight(650);
+        });
+*/

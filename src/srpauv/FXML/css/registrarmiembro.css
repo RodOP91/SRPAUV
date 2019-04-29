@@ -1,0 +1,22 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+.header{
+    -fx-background-color: #3979F0;
+}
+
+
+.btnGuardar{
+    -fx-background-color: #249108;
+    -fx-border-color: #249108;
+    -fx-border-radius: 0px;
+}
+.btnCancelar{
+    -fx-background-color: #DB0000;
+    -fx-border-color: #DB0000;
+    -fx-border-radius: 0px;
+}

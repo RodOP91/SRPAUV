@@ -5,6 +5,8 @@
  */
 package srpauv.clases;
 
+import java.util.List;
+
 /**
  *
  * @author edson
@@ -13,12 +15,15 @@ public abstract class Producto {
     private int idProducto;
     private  boolean considerarCA;
     private String lgac;
-    //protected IntegranteCA integrantesCA;
     private String titulo;
-    //protected Colaborador colaboradorExterno;
     private boolean validadoCA;
     private String estado;
     private int idProyecto;
+    
+    private Proyecto proyectoAsociado;
+    private int idIntegranteR; //integrante que registra el producto
+    private List<Colaborador> colaboradores;
+    private List<Integrante> integrantes;
     
     private String tipoProducto;
     
@@ -137,5 +142,61 @@ public abstract class Producto {
      */
     public void setIdProyecto(int idProyecto) {
         this.idProyecto = idProyecto;
+    }
+
+    /**
+     * @return the proyectoAsociado
+     */
+    public Proyecto getProyectoAsociado() {
+        return proyectoAsociado;
+    }
+
+    /**
+     * @param proyectoAsociado the proyectoAsociado to set
+     */
+    public void setProyectoAsociado(Proyecto proyectoAsociado) {
+        this.proyectoAsociado = proyectoAsociado;
+    }
+
+    /**
+     * @return the idIntegranteR
+     */
+    public int getIdIntegranteR() {
+        return idIntegranteR;
+    }
+
+    /**
+     * @param idIntegranteR the idIntegranteR to set
+     */
+    public void setIdIntegranteR(int idIntegranteR) {
+        this.idIntegranteR = idIntegranteR;
+    }
+
+    /**
+     * @return the colaboradores
+     */
+    public List<Colaborador> getColaboradores() {
+        return colaboradores;
+    }
+
+    /**
+     * @param colaboradores the colaboradores to set
+     */
+    public void setColaboradores(List<Colaborador> colaboradores) {
+        this.colaboradores = colaboradores;
+    }
+
+    /**
+     * @return the integrantes
+     */
+    public List<Integrante> getIntegrantes() {
+        return integrantes;
+    }
+
+    /**
+     * @param integrantes the integrantes to set
+     */
+    public void setIntegrantes(List<Integrante> integrantes) {
+        this.integrantes = integrantes;
     }
 }

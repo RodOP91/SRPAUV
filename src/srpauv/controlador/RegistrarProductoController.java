@@ -6,6 +6,7 @@
 package srpauv.controlador;
 
 import DAO.DAOregistrarProducto;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -16,12 +17,15 @@ import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import srpauv.clases.*;
 
 /**
@@ -34,8 +38,22 @@ public class RegistrarProductoController implements Initializable {
     @FXML Button btnPollo;
     
     @FXML ListView listProyectos;
+    private Proyecto proySelec = null;
     
     private int flagProducto = 0;
+    
+    
+    private static List<Colaborador> colaboradores;
+    private static List<Integrante> integrantes;
+
+    public static void setColaboradores(List<Colaborador> colaboradores) {
+        RegistrarProductoController.colaboradores = colaboradores;
+    }
+
+    public static void setIntegrantes(List<Integrante> integrantes) {
+        RegistrarProductoController.integrantes = integrantes;
+    }
+    
     
     //BOTONES ACCION------------------------------------------------------------
     @FXML Button btnCancelar;
@@ -206,8 +224,12 @@ public class RegistrarProductoController implements Initializable {
     //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------
     
+    private ResourceBundle rb;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        this.rb = rb;
         
         try{
             llenarCombos();
@@ -227,7 +249,7 @@ public class RegistrarProductoController implements Initializable {
             }
         });
 //------------------------------------------------------------------------------
-
+    
         btnTesis.setOnAction((ActionEvent event) -> {
             btnArticuloIndexado.setSelected(false);
             btnArticuloArbitrado.setSelected(false);
@@ -241,6 +263,10 @@ public class RegistrarProductoController implements Initializable {
             flagProducto = 1;
             if(listProyectos.isVisible()){
                 listProyectos.setVisible(false);
+            }
+            if(proySelec != null){
+                listProyectos.getSelectionModel().select(-1);
+                proySelec = null;
             }
         });
         
@@ -258,6 +284,10 @@ public class RegistrarProductoController implements Initializable {
             if(listProyectos.isVisible()){
                 listProyectos.setVisible(false);
             }
+            if(proySelec != null){
+                listProyectos.getSelectionModel().select(-1);
+                proySelec = null;
+            }
         });
         
         btnArticuloArbitrado.setOnAction((ActionEvent event) -> {
@@ -273,6 +303,10 @@ public class RegistrarProductoController implements Initializable {
             flagProducto = 3;
             if(listProyectos.isVisible()){
                 listProyectos.setVisible(false);
+            }
+            if(proySelec != null){
+                listProyectos.getSelectionModel().select(-1);
+                proySelec = null;
             }
         });
         
@@ -290,6 +324,10 @@ public class RegistrarProductoController implements Initializable {
             if(listProyectos.isVisible()){
                 listProyectos.setVisible(false);
             }
+            if(proySelec != null){
+                listProyectos.getSelectionModel().select(-1);
+                proySelec = null;
+            }
         });
         
         btnCapituloLibro.setOnAction((ActionEvent event) -> {
@@ -305,6 +343,10 @@ public class RegistrarProductoController implements Initializable {
             flagProducto = 5;
             if(listProyectos.isVisible()){
                 listProyectos.setVisible(false);
+            }
+            if(proySelec != null){
+                listProyectos.getSelectionModel().select(-1);
+                proySelec = null;
             }
         });
         
@@ -322,6 +364,10 @@ public class RegistrarProductoController implements Initializable {
             if(listProyectos.isVisible()){
                 listProyectos.setVisible(false);
             }
+            if(proySelec != null){
+                listProyectos.getSelectionModel().select(-1);
+                proySelec = null;
+            }
         });
         
         btnProduccionInnovadora.setOnAction((ActionEvent event) -> {
@@ -337,6 +383,10 @@ public class RegistrarProductoController implements Initializable {
             flagProducto = 7;
             if(listProyectos.isVisible()){
                 listProyectos.setVisible(false);
+            }
+            if(proySelec != null){
+                listProyectos.getSelectionModel().select(-1);
+                proySelec = null;
             }
         });
         
@@ -354,6 +404,10 @@ public class RegistrarProductoController implements Initializable {
             if(listProyectos.isVisible()){
                 listProyectos.setVisible(false);
             }
+            if(proySelec != null){
+                listProyectos.getSelectionModel().select(-1);
+                proySelec = null;
+            }
         });
         
         btnPrototipo.setOnAction((ActionEvent event) -> {
@@ -369,6 +423,10 @@ public class RegistrarProductoController implements Initializable {
             flagProducto = 9;
             if(listProyectos.isVisible()){
                 listProyectos.setVisible(false);
+            }
+            if(proySelec != null){
+                listProyectos.getSelectionModel().select(-1);
+                proySelec = null;
             }
         });
         
@@ -406,23 +464,34 @@ public class RegistrarProductoController implements Initializable {
                     break;
             }
         });
-        
+       
         btnAsociarProyecto.setOnAction((ActionEvent event) -> {
             if(listProyectos.isVisible()){
                 listProyectos.setVisible(false);
-            }else{  
+            }else{
+                if(proySelec == null){
+                    listProyectos.getSelectionModel().select(-1);
+                }
                 listProyectos.setVisible(true);
             } 
         });
         
-        listProyectos.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if(listProyectos.isVisible()){
-                    listProyectos.setVisible(false);
-                    Proyecto proy = (Proyecto) listProyectos.getSelectionModel().getSelectedItem();
-                    listProyectos.getSelectionModel().select(0);
-                }
+        btnAgregarColaborador.setOnAction((ActionEvent event) -> {
+            try {
+                mostrarVentanaColaboradores();
+            } catch (IOException ex) {
+                Logger.getLogger(RegistrarProductoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        listProyectos.setOnMouseClicked((MouseEvent event) -> {
+            proySelec = (Proyecto) listProyectos.getSelectionModel().getSelectedItem();
+        });
+        
+        listProyectos.setOnMouseExited((MouseEvent event) -> {
+            if(listProyectos.isVisible()){
+                Proyecto proy = (Proyecto) listProyectos.getSelectionModel().getSelectedItem();
+                listProyectos.setVisible(false);
             }
         });
     }
@@ -522,13 +591,15 @@ public class RegistrarProductoController implements Initializable {
         }
     }
     
-    //Método que recupera los colaboradores
-    private void recuperarColaboradores(){
-        
-    }
-    
-    //Método que recupera los integrantes del CA
-    private void recuperarIntegrantes(){
+    //
+    private void mostrarVentanaColaboradores() throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("/srpauv/FXML/AgregarColaborador.fxml"), rb);
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        //stage.setTitle(rb.getString("tituloG"));
+        stage.show();
         
     }
     
@@ -559,6 +630,12 @@ public class RegistrarProductoController implements Initializable {
                     tesis.setValidadoCA(ca);
                     tesis.setFechaInicio(fechaInicio);
                     tesis.setFechaFin(fechaFin);
+                    
+                    tesis.setIdIntegranteR(1);//Id del integrante que registra el producto
+                    tesis.setProyectoAsociado(proySelec);
+                    tesis.setIntegrantes(integrantes);
+                    tesis.setColaboradores(colaboradores);
+                    
                     tesis.registrarProducto();
                 }
             }
@@ -566,6 +643,13 @@ public class RegistrarProductoController implements Initializable {
             System.err.println("lgac nula");
         }
     }
+    
+    /*
+    .setIdIntegranteR(1);
+    .setProyectoAsociado(proySelec);
+    .setIntegrantes(integrantes);
+    .setColaboradores(colaboradores);
+    */
     
     //Método que recupera y valida los campos de Articulo Indexado
     private void guardarArticuloIndexado(){
@@ -607,7 +691,8 @@ public class RegistrarProductoController implements Initializable {
                 articuloindexado.setAno(ano);
                 articuloindexado.setEstado(edoactual);
                 articuloindexado.setLgac(lgac);
-                articuloindexado.setValidadoCA(ca);                    
+                articuloindexado.setValidadoCA(ca);     
+                articuloindexado.setProyectoAsociado(proySelec);
                 articuloindexado.registrarProducto();
             }
         }catch(NullPointerException ex){
@@ -657,7 +742,8 @@ public class RegistrarProductoController implements Initializable {
                 articuloarbitrado.setAno(ano);
                 articuloarbitrado.setEstado(edoactual);
                 articuloarbitrado.setLgac(lgac);
-                articuloarbitrado.setValidadoCA(ca);                    
+                articuloarbitrado.setValidadoCA(ca);  
+                articuloarbitrado.setProyectoAsociado(proySelec);
                 articuloarbitrado.registrarProducto();
                     
                 }
@@ -707,7 +793,8 @@ public class RegistrarProductoController implements Initializable {
                     articulo.setAno(ano);
                     articulo.setEstado(edoactual);
                     articulo.setLgac(lgac);
-                    articulo.setValidadoCA(ca);                    
+                    articulo.setValidadoCA(ca);      
+                    articulo.setProyectoAsociado(proySelec);
                     articulo.registrarProducto();
 
                 }
@@ -757,6 +844,7 @@ public class RegistrarProductoController implements Initializable {
                 capLib.setProposito(proposito);
                 capLib.setTotalEjemplares(Integer.parseInt(totalEjemplares));
                 capLib.setEstado(estadoActual);
+                capLib.setProyectoAsociado(proySelec);
                 capLib.registrarProducto();
             }   
         }catch(NullPointerException ex){
@@ -799,6 +887,7 @@ public class RegistrarProductoController implements Initializable {
                 libro.setTotalEjemplares(Integer.parseInt(totalEjemplares));
                 libro.setConsiderarCA(ca);
                 libro.setLgac(lgac);
+                libro.setProyectoAsociado(proySelec);
                 libro.registrarProducto();
             }
         }catch(NullPointerException ex){
@@ -840,7 +929,8 @@ public class RegistrarProductoController implements Initializable {
                         produccioninnovadora.setPais(pais);
                         produccioninnovadora.setEstado(edoactual);
                         produccioninnovadora.setLgac(lgac);
-                        produccioninnovadora.setValidadoCA(ca);                    
+                        produccioninnovadora.setValidadoCA(ca);  
+                        produccioninnovadora.setProyectoAsociado(proySelec);
                         produccioninnovadora.registrarProducto();
 
                 }
@@ -890,7 +980,8 @@ public class RegistrarProductoController implements Initializable {
                     memoriaextenso.setProposito(proposito);
                     memoriaextenso.setEstado(edoactual);
                     memoriaextenso.setLgac(lgac);
-                    memoriaextenso.setValidadoCA(ca);                    
+                    memoriaextenso.setValidadoCA(ca);  
+                    memoriaextenso.setProyectoAsociado(proySelec);
                     memoriaextenso.registrarProducto();
                 }
         }catch(NullPointerException ex){
@@ -931,6 +1022,7 @@ public class RegistrarProductoController implements Initializable {
                 proto.setProposito(proposito);
                 proto.setConsiderarCA(ca);
                 proto.setLgac(lgac);
+                proto.setProyectoAsociado(proySelec);
                 proto.recuperarProducto();
             }
         }catch(NullPointerException ex){
