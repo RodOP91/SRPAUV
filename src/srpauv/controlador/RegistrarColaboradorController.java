@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Paint;
 import srpauv.clases.Colaborador;
 
 /**
@@ -55,7 +56,8 @@ public class RegistrarColaboradorController implements Initializable {
         String cuerpoA = txtCuerpoA.getText();
         if(nombre.equals("") || apellidoP.equals("") || apellidoM.equals("") ||
                 institucion.equals("") || cuerpoA.equals("")){
-            
+            lblMensaje.setTextFill(Paint.valueOf("red"));
+            lblMensaje.setText("Por favor completa los campos");
         }else{
             Colaborador colaborador = new Colaborador();
             colaborador.setNombre(nombre);

@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.paint.Paint;
 import srpauv.clases.Integrante;
 
 /**
@@ -54,7 +55,8 @@ public class RegistrarMiembroController implements Initializable {
         String pass = txtPass.getText();
         if(nombre.equals("") || apellidoP.equals("") || usuario.equals("") || 
                 pass.equals("")){
-            lblMensaje.setText("Por favor completa \n los campos");
+            lblMensaje.setTextFill(Paint.valueOf("red"));
+            lblMensaje.setText("Por favor completa los campos");
         }else{
             boolean flag;
             if(apellidoM.equals("")){

@@ -85,9 +85,9 @@
                               <Insets left="50.0" />
                            </GridPane.margin>
                         </Button>
-                        <Label fx:id="lblMensaje" alignment="CENTER" prefHeight="30.0" text="" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>
+                  <Label fx:id="lblMensaje" alignment="TOP_LEFT" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
          </bottom>
