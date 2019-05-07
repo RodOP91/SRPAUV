@@ -23,6 +23,11 @@ public class Prototipo extends Producto{
     private String caracteristicas;
     private String institucion;
     
+    public Prototipo(int id, String lgac, String titulo, Integrante integrante){
+        super(id, lgac, titulo, integrante);
+        this.setTipoProducto("prototipo");
+    }
+    
     public Prototipo(){
         this.setTipoProducto("prototipo");
     }

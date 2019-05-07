@@ -631,7 +631,7 @@ public class RegistrarProductoController implements Initializable {
                     tesis.setFechaInicio(fechaInicio);
                     tesis.setFechaFin(fechaFin);
                     
-                    tesis.setIdIntegranteR(1);//Id del integrante que registra el producto
+                    //tesis.setIntegranteR();//integrante que registra el producto
                     tesis.setProyectoAsociado(proySelec);
                     tesis.setIntegrantes(integrantes);
                     tesis.setColaboradores(colaboradores);

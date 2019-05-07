@@ -21,6 +21,11 @@ public class MemoriaExtenso extends Producto{
     private String ano;
     private String proposito;
     
+    public MemoriaExtenso(int id, String lgac, String titulo, Integrante integrante){
+        super(id, lgac, titulo, integrante);
+        this.setTipoProducto("memoriaExtenso");
+    }
+    
     public MemoriaExtenso(){
         this.setTipoProducto("memoriaExtenso");
     }

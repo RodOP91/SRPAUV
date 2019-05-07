@@ -13,10 +13,6 @@ import DAO.ProductosDAO;
  */
 public class ArticuloIndexado extends Producto{
     
-    public ArticuloIndexado(){
-        this.setTipoProducto("articuloIndexado");
-    }
-    
     private String autor;
     private String descripcion;
     private String nomrevista;
@@ -29,9 +25,14 @@ public class ArticuloIndexado extends Producto{
     private String proposito;
     private String pais;
 
+    public ArticuloIndexado(int id, String lgac, String titulo, Integrante integrante){
+        super(id, lgac, titulo, integrante);
+        this.setTipoProducto("articuloIndexado");
+    }
     
-    
-    
+    public ArticuloIndexado(){
+        this.setTipoProducto("articuloIndexado");
+    }
 
     @Override
     public int actualizarProducto() {

@@ -19,6 +19,11 @@ public class Tesis extends Producto{
     private String grado;
     private int numAlumnos;
     
+    public Tesis(int id, String lgac, String titulo, Integrante integrante){
+        super(id, lgac, titulo, integrante);
+        this.setTipoProducto("tesis");
+    }
+    
     public Tesis(){
         this.setTipoProducto("tesis");
     }

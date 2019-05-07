@@ -15,6 +15,11 @@ import java.util.Date;
  */
 public class ProduccionInnovadora extends Producto {
 
+    public ProduccionInnovadora(int id, String lgac, String titulo, Integrante integrante){
+        super(id, lgac, titulo, integrante);
+        this.setTipoProducto("produccionInnovadora");
+    }
+    
     public ProduccionInnovadora() {
         this.setTipoProducto("produccionInnovadora");
     }

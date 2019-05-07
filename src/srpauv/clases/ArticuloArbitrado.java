@@ -13,9 +13,7 @@ import DAO.ProductosDAO;
  */
 public class ArticuloArbitrado extends Producto{
     
-    public ArticuloArbitrado(){
-        this.setTipoProducto("articuloArbitrado");
-    }
+    
     
     private String autor;
     private String descripcion;
@@ -29,15 +27,14 @@ public class ArticuloArbitrado extends Producto{
     private String ano;
     
     
+    public ArticuloArbitrado(int id, String lgac, String titulo, Integrante integrante){
+        super(id, lgac, titulo, integrante);
+        this.setTipoProducto("articuloArbitrado");
+    }    
     
-    
-    
-    
-    
-    
-    
-    
-    
+    public ArticuloArbitrado(){
+        this.setTipoProducto("articuloArbitrado");
+    }
     
     @Override
     public int actualizarProducto() {

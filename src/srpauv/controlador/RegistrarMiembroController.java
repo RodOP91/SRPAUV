@@ -61,10 +61,10 @@ public class RegistrarMiembroController implements Initializable {
             boolean flag;
             if(apellidoM.equals("")){
                 Integrante integrante = new Integrante(nombre, apellidoP, usuario, pass);
-                flag = integrante.registrarUsuario();
+                flag = integrante.registrarIntegrante();
             }else{
                 Integrante integrante = new Integrante(nombre, apellidoP, apellidoM, usuario, pass);
-                flag = integrante.registrarUsuario();
+                flag = integrante.registrarIntegrante();
             }
                     
             if(flag == true){

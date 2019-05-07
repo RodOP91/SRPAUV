@@ -21,16 +21,30 @@ public abstract class Producto {
     private int idProyecto;
     
     private Proyecto proyectoAsociado;
-    private int idIntegranteR; //integrante que registra el producto
+    private Integrante IntegranteR; //integrante que registra el producto
     private List<Colaborador> colaboradores;
     private List<Integrante> integrantes;
     
     private String tipoProducto;
+
+    public Producto(int idProducto, String lgac, String titulo, Integrante integrante) {
+        this.idProducto = idProducto;
+        this.lgac = lgac;
+        this.titulo = titulo;
+        this.IntegranteR = integrante;
+    }
+    
+    public Producto(){}
     
     public abstract int actualizarProducto();
     public abstract int eliminarProducto();
     public abstract int recuperarProducto();
     public abstract int registrarProducto();
+    
+    @Override
+    public String toString(){
+        return titulo;
+    }
 
     /**
      * @return the idProducto
@@ -159,17 +173,17 @@ public abstract class Producto {
     }
 
     /**
-     * @return the idIntegranteR
+     * @return the IntegranteR
      */
-    public int getIdIntegranteR() {
-        return idIntegranteR;
+    public Integrante getIntegranteR() {
+        return IntegranteR;
     }
 
     /**
-     * @param idIntegranteR the idIntegranteR to set
+     * @param IntegranteR the IntegranteR to set
      */
-    public void setIdIntegranteR(int idIntegranteR) {
-        this.idIntegranteR = idIntegranteR;
+    public void setIntegranteR(Integrante IntegranteR) {
+        this.IntegranteR = IntegranteR;
     }
 
     /**

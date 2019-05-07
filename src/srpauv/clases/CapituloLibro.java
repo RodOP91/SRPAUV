@@ -24,6 +24,11 @@ public class CapituloLibro extends Producto{
     private String ISBN;
     private String tituloLibro;
     
+    public CapituloLibro(int id, String lgac, String titulo, Integrante integrante){
+        super(id, lgac, titulo, integrante);
+        this.setTipoProducto("capituloLibro");
+    }
+    
     public CapituloLibro(){
         this.setTipoProducto("capituloLibro");
     }

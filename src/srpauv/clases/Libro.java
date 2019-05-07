@@ -22,6 +22,11 @@ public class Libro extends Producto{
     private int totalEjemplares;
     private String ISBN;
     
+    public Libro(int id, String lgac, String titulo, Integrante integrante){
+        super(id, lgac, titulo, integrante);
+        this.setTipoProducto("libro");
+    }
+    
     public Libro(){
         this.setTipoProducto("libro");
     }

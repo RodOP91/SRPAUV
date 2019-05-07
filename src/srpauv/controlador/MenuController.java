@@ -31,11 +31,8 @@ public class MenuController implements Initializable {
     @FXML Button btnRegistrarIntegrante;
     @FXML Button btnRegistrarProducto;
     @FXML Button btnRegistrarColaborador;
+    @FXML Button btnValidarProductos;
     
-            
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         btnRegistrarIntegrante.setOnAction((ActionEvent event) -> {
@@ -77,6 +74,20 @@ public class MenuController implements Initializable {
         btnRegistrarColaborador.setOnAction((event) -> {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("/srpauv/FXML/RegistrarColaborador.fxml"), rb);
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                //stage.setTitle(rb.getString("tituloG"));
+                stage.setResizable(false);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        btnValidarProductos.setOnAction((event) -> {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/srpauv/FXML/ValidarProductos.fxml"), rb);
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);

@@ -12,6 +12,12 @@ import DAO.ProductosDAO;
  * @author ferzo
  */
 public class Articulo extends Producto{
+    
+    public Articulo(int id, String lgac, String titulo, Integrante integrante){
+        super(id, lgac, titulo, integrante);
+        this.setTipoProducto("articulo");
+    }
+    
     public Articulo(){
         this.setTipoProducto("articulo");
     }

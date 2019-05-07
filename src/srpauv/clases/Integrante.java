@@ -60,14 +60,18 @@ public class Integrante {
         this.password = password;
     }
     
-    public boolean registrarUsuario(){
+    public boolean registrarIntegrante(){
         return IntegranteDAO.registrar(this);
     }
     
     
     @Override
     public String toString(){
-        return nombre + apellidoP;
+        if(apellidoM == null){
+            return nombre + " " + apellidoP;
+        } else {
+            return nombre + " " + apellidoP + " " + apellidoM;
+        }
     }
 
     /**
