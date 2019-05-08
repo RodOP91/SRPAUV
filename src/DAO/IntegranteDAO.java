@@ -15,7 +15,7 @@ import srpauv.clases.Integrante;
  */
 public class IntegranteDAO {
     
-    public static boolean registrar(Integrante integrante) throws SQLException{
+    public static boolean registrar(Integrante integrante) {
         Conexion conn = new Conexion();
         String sql;
         
