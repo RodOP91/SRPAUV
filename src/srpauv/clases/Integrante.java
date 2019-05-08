@@ -6,6 +6,7 @@
 package srpauv.clases;
 
 import DAO.IntegranteDAO;
+import java.time.LocalDate;
 
 /**
  *
@@ -16,6 +17,8 @@ public class Integrante {
     private String nombre;
     private String apellidoP;
     private String apellidoM;
+    private String genero;
+    private LocalDate fechanacimiento;
     private String area;
     private String correoUV;
     private String correoAdicional;
@@ -32,13 +35,16 @@ public class Integrante {
     private String password;
     private int responsable;
 
-    public Integrante(int idIntegrante, String nombre, String apellidoP, String apellidoM, String area, String correoUV,
-            String correoAdicional, String curp, String disciplina, String edoCivil, String nacionalidad, String noPersonal,
+    public Integrante(int idIntegrante, String nombre, String apellidoP, String apellidoM, String genero,
+            LocalDate fechanacimiento, String area, String correoUV,String correoAdicional, 
+            String curp, String disciplina, String edoCivil, String nacionalidad, String noPersonal,
             String rfc, String telcasa, String teltrabajo, String usuario, String password, int responsable){
         this.idIntegrante = idIntegrante;
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
+        this.genero = genero;
+        this.fechanacimiento = fechanacimiento;
         this.area = area;
         this.correoUV = correoUV;
         this.correoAdicional = correoAdicional;
@@ -152,6 +158,24 @@ public class Integrante {
         this.apellidoM = apellidoM;
     }
 
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public LocalDate getFechanacimiento() {
+        return fechanacimiento;
+    }
+
+    public void setFechanacimiento(LocalDate fechanacimiento) {
+        this.fechanacimiento = fechanacimiento;
+    }
+
+    
+    
     /**
      * @return the area
      */

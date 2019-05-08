@@ -166,7 +166,7 @@
                                             </rowConstraints>
                                              <children>
                                                 <TextField fx:id="txtTelCasa" GridPane.columnIndex="1" />
-                                                <TextField fx:id="txtTrabajo" GridPane.columnIndex="3" />
+                                                <TextField fx:id="txtTelTrabajo" GridPane.columnIndex="3" />
                                                 <Label text="Casa:" />
                                                 <Label text="Trabajo:" GridPane.columnIndex="2" />
                                              </children>
@@ -183,7 +183,8 @@
                                                 <Label text="Nacionalidad:" GridPane.valignment="TOP" />
                                                 <ComboBox fx:id="cbxNacionalidad" prefHeight="25.0" prefWidth="234.0" GridPane.valignment="BOTTOM" />
                                                 <Label text="Fecha de nacimiento:" GridPane.columnIndex="1" GridPane.valignment="TOP" />
-                                                <DatePicker fx:id="dtpFechaNacimiento" prefHeight="25.0" prefWidth="282.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM" />
+                                                <DatePicker fx:id="dtpFechaNacimiento" prefHeight="25.0" prefWidth="282.0" visible="false" GridPane.columnIndex="1" GridPane.valignment="BOTTOM" />
+                                                <TextField fx:id="txtFechaNacimiento" prefHeight="25.0" prefWidth="131.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM" />
                                              </children>
                                              <VBox.margin>
                                                 <Insets top="10.0" />
