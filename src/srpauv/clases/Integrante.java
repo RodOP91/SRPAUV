@@ -32,6 +32,28 @@ public class Integrante {
     private String password;
     private int responsable;
 
+    public Integrante(int idIntegrante, String nombre, String apellidoP, String apellidoM, String area, String correoUV,
+            String correoAdicional, String curp, String disciplina, String edoCivil, String nacionalidad, String noPersonal,
+            String rfc, String telcasa, String teltrabajo, String usuario, String password, int responsable){
+        this.idIntegrante = idIntegrante;
+        this.nombre = nombre;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
+        this.area = area;
+        this.correoUV = correoUV;
+        this.correoAdicional = correoAdicional;
+        this.CURP = curp;
+        this.disciplina = disciplina;
+        this.estadoCivil = edoCivil;
+        this.nacionalidad = nacionalidad;
+        this.noPersonal = noPersonal;
+        this.rfc = rfc;
+        this.telefonoCasa = telcasa;
+        this.telefonoTrabajo = teltrabajo;
+        this.usuario = usuario;
+        this.password = password;
+        this.responsable = responsable;
+    }
     public Integrante(int idIntegrante, String nombre, String apellidoP, String apellidoM) {
         this.idIntegrante = idIntegrante;
         this.nombre = nombre;

@@ -5,6 +5,8 @@
  */
 package DAO;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import srpauv.clases.Integrante;
 
 /**
@@ -23,5 +25,21 @@ public class IntegranteDAO {
         int flag = conn.ejecutar(sql);
         conn.cerrar();
         return flag == 0;
+    }
+    
+    public static Integrante getDatosIntegrante(int idIntegrante) throws SQLException{
+        Integrante integrante = null;
+        Conexion conn = new Conexion();
+        String sql = "SELECT * FROM `integrante` WHERE `idIntegrante` = '" + idIntegrante+"'";
+        ResultSet rs;
+        rs = conn.consultar(sql);
+        while(rs.next()){
+            integrante = new Integrante(rs.getInt(1), rs.getString(2),
+            rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),
+            rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), 
+            rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14),
+            rs.getString(15), rs.getString(16), rs.getString(17), rs.getInt(18));           
+        }
+        return integrante;
     }
 }
