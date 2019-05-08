@@ -6,7 +6,10 @@
 package srpauv.controlador;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -40,7 +43,14 @@ public class RegistrarColaboradorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         btnGuardar.setOnAction((event) -> {
-           validarCampos();
+            try {
+                validarCampos();
+            } catch (SQLException ex) {
+                Logger.getLogger(RegistrarColaboradorController.class.getName()).log(Level.SEVERE, null, ex);
+                
+                lblMensaje.setTextFill(Paint.valueOf("red"));
+                lblMensaje.setText("Error de conexion con la bd");
+            }
         });
         
         btnCancelar.setOnAction((event) -> {
@@ -48,16 +58,15 @@ public class RegistrarColaboradorController implements Initializable {
     }    
     
     
-    private void validarCampos(){
+    private void validarCampos() throws SQLException{
         String nombre = txtNombre.getText();
         String apellidoP =  txtApellidoP.getText();
         String apellidoM =  txtApellidoM.getText();
         String institucion = txtInstitucion.getText();
         String cuerpoA = txtCuerpoA.getText();
-        if(nombre.equals("") || apellidoP.equals("") || apellidoM.equals("") ||
-                institucion.equals("") || cuerpoA.equals("")){
+        if(nombre.equals("") || apellidoP.equals("") || institucion.equals("")){
             lblMensaje.setTextFill(Paint.valueOf("red"));
-            lblMensaje.setText("Por favor completa los campos");
+            lblMensaje.setText("Completa los campos vacíos");
         }else{
             Colaborador colaborador = new Colaborador();
             colaborador.setNombre(nombre);
@@ -69,9 +78,16 @@ public class RegistrarColaboradorController implements Initializable {
             boolean flag = colaborador.registrarColaborador();
             
             if(flag == true){
-                lblMensaje.setText("Integrante Registrado");
+                lblMensaje.setTextFill(Paint.valueOf("green"));
+                lblMensaje.setText("Colaborador Registrado");
+                txtNombre.setText("");
+                txtApellidoP.setText("");
+                txtApellidoM.setText("");
+                txtInstitucion.setText("");
+                txtCuerpoA.setText("");
             }else{
-                lblMensaje.setText("Error de conexion con la bd");
+                System.err.println("Error consulta");
+                //lblMensaje.setText("Error de conexion con la bd");
             }
         }
     }

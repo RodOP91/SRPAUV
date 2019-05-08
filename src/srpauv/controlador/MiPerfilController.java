@@ -171,7 +171,6 @@ public class MiPerfilController implements Initializable {
         this.txtCorreoAdicional.setText(integrante.getCorreoAdicional());
         this.cbxArea.setPromptText(integrante.getArea());
         this.cbxDisciplina.setPromptText(integrante.getDisciplina());
-        this.cbxIESA.setPromptText();
     }
     
     private void llenarCamposDatosLaborales(){

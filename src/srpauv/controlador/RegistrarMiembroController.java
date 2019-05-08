@@ -6,7 +6,10 @@
 package srpauv.controlador;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -38,7 +41,14 @@ public class RegistrarMiembroController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         btnGuardar.setOnAction((ActionEvent event) -> {
-            validarCampos();
+            try {
+                validarCampos();
+            } catch (SQLException ex) {
+                Logger.getLogger(RegistrarMiembroController.class.getName()).log(Level.SEVERE, null, ex);
+                
+                lblMensaje.setTextFill(Paint.valueOf("red"));
+                lblMensaje.setText("Error de conexion con la bd");
+            }
         });
         
         btnCancelar.setOnAction((ActionEvent event) -> {
@@ -47,7 +57,7 @@ public class RegistrarMiembroController implements Initializable {
     }    
     
     
-    private void validarCampos(){        
+    private void validarCampos() throws SQLException{        
         String nombre = txtNombre.getText();
         String apellidoP = txtApellidoP.getText();
         String apellidoM = txtApellidoM.getText();
@@ -56,7 +66,7 @@ public class RegistrarMiembroController implements Initializable {
         if(nombre.equals("") || apellidoP.equals("") || usuario.equals("") || 
                 pass.equals("")){
             lblMensaje.setTextFill(Paint.valueOf("red"));
-            lblMensaje.setText("Por favor completa los campos");
+            lblMensaje.setText("Completa los campos vacíos");
         }else{
             boolean flag;
             if(apellidoM.equals("")){
@@ -68,9 +78,16 @@ public class RegistrarMiembroController implements Initializable {
             }
                     
             if(flag == true){
+                lblMensaje.setTextFill(Paint.valueOf("green"));
                 lblMensaje.setText("Integrante Registrado");
+                txtNombre.setText("");
+                txtApellidoP.setText("");
+                txtApellidoM.setText("");
+                txtUsuario.setText("");
+                txtPass.setText("");
             }else{
-                lblMensaje.setText("Error de conexion con la bd");
+                System.err.println("Error consulta");
+                //lblMensaje.setText("Error de conexion con la bd");
             }
         }
     }

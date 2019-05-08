@@ -6,6 +6,7 @@
 package srpauv.clases;
 
 import DAO.ColaboradorDAO;
+import java.sql.SQLException;
 
 /**
  *
@@ -35,7 +36,7 @@ public class Colaborador {
     public Colaborador() {
     }
     
-    public boolean registrarColaborador(){
+    public boolean registrarColaborador() throws SQLException{
         return ColaboradorDAO.registrar(this);
     }
     

@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import java.sql.SQLException;
 import srpauv.clases.Colaborador;
 
 /**
@@ -12,14 +13,14 @@ import srpauv.clases.Colaborador;
  * @author edson
  */
 public class ColaboradorDAO {
-    public static boolean registrar(Colaborador colaborador){
+    public static boolean registrar(Colaborador colaborador) throws SQLException{
         Conexion conn = new Conexion();
-        String sql = "INSERT INTO `colaborador`(`nombre`, `apellidoP`, "
-                + "`apellidoM`, `cuerpoAcademico`, `institucion`) "
-                + "VALUES ('"+colaborador.getNombre()+"',"
-                + "'"+colaborador.getApellidoP()+"','"+colaborador.getApellidoM()+""
-                + "',''"+colaborador.getCuerpoAcademico()+""
-                + ",'"+colaborador.getInstitucion()+"')";
+        String sql = "INSERT INTO `colaborador` (`nombre`, `apellidoP`, "
+                + "`apellidoM`, `cuerpoAcademico`, `institucion`) VALUES "
+                + "('"+colaborador.getNombre()+"','"+colaborador.getApellidoP()+
+                "','"+colaborador.getApellidoM()+"','"
+                + ""+colaborador.getCuerpoAcademico()+"','"
+                + ""+colaborador.getInstitucion()+"')";
         int flag = conn.ejecutar(sql);
         conn.cerrar();
         return flag == 0;

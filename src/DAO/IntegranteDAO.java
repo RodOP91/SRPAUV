@@ -14,14 +14,26 @@ import srpauv.clases.Integrante;
  * @author edson
  */
 public class IntegranteDAO {
-    public static boolean registrar(Integrante integrante){
+    
+    public static boolean registrar(Integrante integrante) throws SQLException{
         Conexion conn = new Conexion();
-        String sql = "INSERT INTO `integrante` (`idIntegrante`, `apellidoM`, "
+        String sql;
+        
+        if(integrante.getApellidoM() == null){
+            sql = "INSERT INTO `integrante` (`idIntegrante`, `apellidoM`, "
+                + "`apellidoP`, `nombre`, `usuario`, `password`)"
+                + "VALUES (NULL, NULL, '"
+                + integrante.getApellidoP() +"', '"+ integrante.getNombre()+"',"
+                + " '"+ integrante.getUsuario() +"', '"+ integrante.getPassword()
+                +"');";
+        } else {
+            sql = "INSERT INTO `integrante` (`idIntegrante`, `apellidoM`, "
                 + "`apellidoP`, `nombre`, `usuario`, `password`)"
                 + "VALUES (NULL, '"+ integrante.getApellidoM() +"', '"
                 + integrante.getApellidoP() +"', '"+ integrante.getNombre()+"',"
                 + " '"+ integrante.getUsuario() +"', '"+ integrante.getPassword()
                 +"');";
+        }
         int flag = conn.ejecutar(sql);
         conn.cerrar();
         return flag == 0;

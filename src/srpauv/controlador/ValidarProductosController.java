@@ -42,26 +42,39 @@ public class ValidarProductosController implements Initializable {
         }
         
         lstProductosCA.setOnMouseClicked((event) -> {
-            Producto prod = (Producto) lstProductosCA.getSelectionModel().getSelectedItem();
-            txtTitulo.setText(prod.getTitulo());
-            txtLGAC.setText(prod.getLgac());
-            txtIntegrante.setText(prod.getIntegranteR().toString());
+            mostrarDetalleProducto();
+            if(lstProductosCA.getSelectionModel().getSelectedIndex() > -1){
+               btnValidar.setDisable(false);
+            }
         });
         
         btnValidar.setOnAction((event) -> {
-            Producto prod = (Producto) lstProductosCA.getSelectionModel().getSelectedItem();
+            validarProducto();
+        });
+    }    
+    
+    private void validarProducto(){
+        Producto prod = (Producto) lstProductosCA.getSelectionModel().getSelectedItem();
             boolean flag = DAO.ProductosDAO.validarCA(prod.getIdProducto(), prod.getTipoProducto());
             if(flag == true){
                 lblMensaje.setText("Producto Validado");
                 lblMensaje.setTextFill(Paint.valueOf("green"));
+            } else {
+                lblMensaje.setText("Error de conexión con la base de datos");
+                lblMensaje.setTextFill(Paint.valueOf("red"));
             }
-        });
-    }    
+    }
     
     private void recuperarProductosCA() throws SQLException{
         List<Producto> lista = DAO.ProductosDAO.recuperarTodos();
         for(int i = 0; i < lista.size(); i++){
             lstProductosCA.getItems().add(lista.get(i));
         }
+    }
+    private void mostrarDetalleProducto(){
+        Producto prod = (Producto) lstProductosCA.getSelectionModel().getSelectedItem();
+            txtTitulo.setText(prod.getTitulo());
+            txtLGAC.setText(prod.getLgac());
+            txtIntegrante.setText(prod.getIntegranteR().toString());
     }
 }

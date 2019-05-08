@@ -60,6 +60,13 @@ public class Integrante {
         this.password = password;
         this.responsable = responsable;
     }
+
+    public Integrante(int idIntegrante, String usuario) {
+        this.idIntegrante = idIntegrante;
+        this.usuario = usuario;
+    }
+    
+    
     public Integrante(int idIntegrante, String nombre, String apellidoP, String apellidoM) {
         this.idIntegrante = idIntegrante;
         this.nombre = nombre;

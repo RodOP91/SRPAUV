@@ -20,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import srpauv.clases.Integrante;
 
 /**
  * FXML Controller class
@@ -28,6 +29,10 @@ import javafx.stage.Stage;
  */
 public class MenuController implements Initializable {
 
+    private Integrante usuario = new Integrante(3, "edsonM");
+    
+    @FXML Label lblUsuario;
+    
     @FXML Button btnRegistrarIntegrante;
     @FXML Button btnRegistrarProducto;
     @FXML Button btnRegistrarColaborador;
@@ -35,6 +40,23 @@ public class MenuController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        lblUsuario.setText(usuario.getUsuario());
+        
+        lblUsuario.setOnMouseClicked((event) -> {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/srpauv/FXML/MiPerfil.fxml"), rb);
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setResizable(false);
+                //stage.setTitle(rb.getString("tituloG"));
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
         btnRegistrarIntegrante.setOnAction((ActionEvent event) -> {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("/srpauv/FXML/RegistrarMiembro.fxml"), rb);
