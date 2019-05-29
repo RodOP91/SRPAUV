@@ -28,9 +28,32 @@ public class DatosLaboralesDAO {
         rs = conn.consultar(sql);
         while(rs.next()){
             datoslaborales = new DatosLaborales(rs.getInt(1), rs.getBoolean(2), 
-            (rs.getDate(3)).toLocalDate(), rs.getString(4), rs.getString(5), rs.getString(6), 
+            (rs.getDate(3)), rs.getString(4), rs.getString(5), rs.getString(6), 
             rs.getString(7), rs.getString(8));           
         }
+        conn.cerrar();
         return datoslaborales;
+    }
+    
+    public static boolean actualizar(int idIntegrante, DatosLaborales datosActualizados) throws SQLException{
+        Conexion conn = new Conexion();
+        int cont;
+        if(datosActualizados.getContratoPTC()){
+            cont =1;
+        }else{
+            cont=0;
+        }
+        String sql = "UPDATE `datoslaborales` SET `contratoPTC`='"+cont+"',"
+                + "`fechaIngresoUV`='"+datosActualizados.getFechaIngresoUV()+"',"
+                + "`des`='"+datosActualizados.getDes()+"',"
+                + "`nivelSNI`='"+datosActualizados.getNivelSNI()+"',"
+                + "`nombramiento`='"+datosActualizados.getNombramiento()+"',"
+                + "`programaEducativo`='"+datosActualizados.getProgramaEducativo()+"',"
+                + "`unidadAcademica`='"+datosActualizados.getUnidadAcademica()+"' "
+                + "WHERE `idIntegrante` = '"+idIntegrante+"'";
+        
+        int flag = conn.ejecutar(sql);
+        conn.cerrar();
+        return flag==0;
     }
 }

@@ -8,7 +8,6 @@ package srpauv;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import javafx.application.Application;
-import javafx.beans.Observable;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,7 +22,7 @@ public class Srpauv extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         ResourceBundle idioma = ResourceBundle.getBundle("recursos.default_MX_es");        
-        Parent root = FXMLLoader.load(getClass().getResource("/srpauv/FXML/Menu.fxml"), idioma);
+        Parent root = FXMLLoader.load(getClass().getResource("/srpauv/FXML/IniciarSesion.fxml"), idioma);
         
         Scene escena = new Scene(root);
         primaryStage.setScene(escena);

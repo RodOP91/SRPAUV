@@ -5,7 +5,7 @@
  */
 package srpauv.clases;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 /**
  *
@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class DatosLaborales {
     private int idIntegrante;
     private boolean contratoPTC;
-    private LocalDate fechaIngresoUV;
+    private Date fechaIngresoUV;
     private String des;
     private String nombramiento;
     private String nivelSNI;
@@ -23,8 +23,8 @@ public class DatosLaborales {
 
     public DatosLaborales(){}
     
-    public DatosLaborales(int id, boolean contrato, LocalDate fechaIngreso, String des,
-            String nombramiento, String nivelSNI, String programa, String unidad){
+    public DatosLaborales(int id, boolean contrato, Date fechaIngreso, String des,
+            String nivelSNI, String nombramiento, String programa, String unidad){
         this.idIntegrante = id;
         this.contratoPTC = contrato;
         this.fechaIngresoUV = fechaIngreso;
@@ -46,11 +46,11 @@ public class DatosLaborales {
         this.contratoPTC = contratoPTC;
     }
 
-    public LocalDate getFechaIngresoUV() {
+    public Date getFechaIngresoUV() {
         return fechaIngresoUV;
     }
 
-    public void setFechaIngresoUV(LocalDate fechaIngresoUV) {
+    public void setFechaIngresoUV(Date fechaIngresoUV) {
         this.fechaIngresoUV = fechaIngresoUV;
     }
 
@@ -86,11 +86,11 @@ public class DatosLaborales {
         this.programaEducativo = programaEducativo;
     }
 
-    public String getUnidadAcadémica() {
+    public String getUnidadAcademica() {
         return unidadAcademica;
     }
 
-    public void setUnidadAcadémica(String unidadAcadémica) {
+    public void setUnidadAcademica(String unidadAcadémica) {
         this.unidadAcademica = unidadAcadémica;
     }
     

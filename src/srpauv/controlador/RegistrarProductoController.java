@@ -6,6 +6,7 @@
 package srpauv.controlador;
 
 import DAO.DAOregistrarProducto;
+import DAO.LineaDAO;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -569,7 +570,7 @@ public class RegistrarProductoController implements Initializable {
     
     //Método que llena los combos de lgac de cada producto
     private void llenarCombos() throws SQLException{
-        List<Linea> listaLineas = DAOregistrarProducto.recuperarLineas();
+        List<Linea> listaLineas = LineaDAO.recuperarLineas();
         for(int i = 0; i < listaLineas.size(); i++){
             cbxLGACtesis.getItems().add(listaLineas.get(i));
             cbxLGACcl.getItems().add(listaLineas.get(i));

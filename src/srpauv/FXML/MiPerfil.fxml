@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="apnVentanaMiPerfil" prefHeight="700.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="srpauv.controlador.MiPerfilController">
+<AnchorPane id="AnchorPane" fx:id="apnVentanaMiPerfil" prefHeight="700.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="srpauv.controlador.MiPerfilController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -66,11 +68,12 @@
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                 </columnConstraints>
                                 <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="0.0" percentHeight="0.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="467.0" minHeight="10.0" prefHeight="465.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="148.0" minHeight="0.0" percentHeight="0.0" prefHeight="108.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="95.0" minHeight="10.0" percentHeight="0.0" prefHeight="52.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <VBox prefHeight="576.0" prefWidth="400.0">
+                                    <VBox prefHeight="447.0" prefWidth="400.0">
                                        <children>
                                           <Label prefHeight="35.0" prefWidth="187.0" text="Datos Personales">
                                              <font>
@@ -226,33 +229,43 @@
                                                 <Insets top="10.0" />
                                              </VBox.margin>
                                           </GridPane>
-                                          <Label text="IESA:">
-                                             <VBox.margin>
-                                                <Insets top="10.0" />
-                                             </VBox.margin>
-                                          </Label>
-                                          <ComboBox fx:id="cbxIESA" prefHeight="25.0" prefWidth="436.0" />
                                        </children>
                                     </VBox>
-                                    <GridPane GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                                    <GridPane prefHeight="80.0" prefWidth="400.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                       </columnConstraints>
                                       <rowConstraints>
                                         <RowConstraints />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <Button fx:id="btnGuardarDP" mnemonicParsing="false" prefHeight="35.0" prefWidth="129.0" text="Guardar" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                          <Button fx:id="btnCancelarDP" mnemonicParsing="false" prefHeight="35.0" prefWidth="117.0" text="Cancelar" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                          <Button fx:id="btnGuardarDP" mnemonicParsing="false" prefHeight="35.0" prefWidth="129.0" text="Guardar" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                          <Button fx:id="btnCancelarDP" mnemonicParsing="false" prefHeight="35.0" prefWidth="117.0" text="Cancelar" visible="false" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                          <Button fx:id="btnActualizarDP" mnemonicParsing="false" prefHeight="23.0" prefWidth="133.0" text="Actualizar datos " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                                             <GridPane.margin>
+                                                <Insets />
+                                             </GridPane.margin>
+                                          </Button>
                                        </children>
                                     </GridPane>
-                                    <Button fx:id="btnActualizarDP" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" text="Actualizar datos personales" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
-                                       <GridPane.margin>
-                                          <Insets />
-                                       </GridPane.margin>
-                                    </Button>
+                                    <GridPane prefHeight="30.0" prefWidth="400.0" GridPane.rowIndex="2">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="400.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="0.0" prefWidth="0.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="33.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="26.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label fx:id="lblAvisosDatosPersonales" alignment="BASELINE_CENTER" textAlignment="CENTER" />
+                                       </children>
+                                    </GridPane>
                                  </children>
                               </GridPane>
                            </children>
@@ -266,7 +279,7 @@
                                           <Font size="24.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="btnActualizarDL" layoutX="124.0" layoutY="538.0" mnemonicParsing="false" text="Actualizar datos laborales" />
+                                    <Button fx:id="btnActualizarDL" layoutX="114.0" layoutY="455.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="172.0" text="Actualizar datos laborales" />
                                     <Label layoutX="19.0" layoutY="81.0" text="Nombramiento:" />
                                     <Label layoutX="21.0" layoutY="116.0" text="DES:" />
                                     <Label layoutX="20.0" layoutY="156.0" text="Unidad Académica:" />
@@ -276,15 +289,22 @@
                                     <Label layoutX="33.0" layoutY="315.0" text="Nivel SNI:" />
                                     <TextField fx:id="txtNombramiento" layoutX="126.0" layoutY="77.0" />
                                     <TextField fx:id="txtDes" layoutX="49.0" layoutY="112.0" prefHeight="25.0" prefWidth="175.0" />
-                                    <ComboBox fx:id="cbxUnidadAcademica" layoutX="125.0" layoutY="152.0" prefWidth="150.0" />
-                                    <ComboBox fx:id="cbxContratoPtc" layoutX="269.0" layoutY="311.0" prefHeight="10.0" prefWidth="50.0" />
-                                    <ComboBox fx:id="cbxProgramaEducativo" layoutX="137.0" layoutY="226.0" prefHeight="25.0" prefWidth="174.0" />
-                                    <ComboBox fx:id="cbxNivelSni" layoutX="89.0" layoutY="311.0" prefHeight="25.0" prefWidth="39.0" />
-                                    <DatePicker fx:id="dtpFechaIngresoUv" layoutX="151.0" layoutY="190.0" />
-                                    <Button fx:id="btnCancelarDL" layoutX="58.0" layoutY="643.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="84.0" text="Cancelar" visible="false" />
-                                    <Button fx:id="btnGuardarDL" layoutX="259.0" layoutY="643.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="Guardar" visible="false" />
+                                    <ComboBox fx:id="cbxUnidadAcademica" layoutX="125.0" layoutY="152.0" prefWidth="150.0" visible="false" />
+                                    <ComboBox fx:id="cbxContratoPtc" layoutX="269.0" layoutY="311.0" prefHeight="21.0" prefWidth="59.0" visible="false" />
+                                    <ComboBox fx:id="cbxProgramaEducativo" layoutX="137.0" layoutY="226.0" prefHeight="25.0" prefWidth="174.0" visible="false" />
+                                    <ComboBox fx:id="cbxNivelSni" layoutX="89.0" layoutY="311.0" prefHeight="25.0" prefWidth="39.0" visible="false" />
+                                    <DatePicker fx:id="dtpFechaIngresoUv" layoutX="151.0" layoutY="190.0" visible="false" />
+                                    <TextField fx:id="txtUnidadAcademica" layoutX="126.0" layoutY="152.0" />
+                                    <TextField fx:id="txtProgramaEducativo" layoutX="142.0" layoutY="226.0" />
+                                    <TextField fx:id="txtNivelSNI" layoutX="89.0" layoutY="311.0" prefHeight="25.0" prefWidth="61.0" />
+                                    <TextField fx:id="txtContratoPTC" layoutX="269.0" layoutY="309.0" prefHeight="25.0" prefWidth="50.0" />
+                                    <TextField fx:id="txtFechaIngresoUV" layoutX="150.0" layoutY="190.0" />
+                                    <ComboBox fx:id="cbxDES" layoutX="49.0" layoutY="112.0" prefHeight="25.0" prefWidth="173.0" visible="false" />
                                  </children>
                               </Pane>
+                              <Button fx:id="btnCancelarDL" layoutX="70.0" layoutY="530.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="84.0" text="Cancelar" visible="false" />
+                              <Button fx:id="btnGuardarDL" layoutX="245.0" layoutY="532.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="Guardar" visible="false" />
+                              <Label fx:id="lblAvisosDL" layoutX="192.0" layoutY="570.0" prefWidth="0.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane GridPane.columnIndex="2">
@@ -298,28 +318,39 @@
                                     </Label>
                                     <Button fx:id="btnAnadirFP" layoutX="28.0" layoutY="527.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="151.0" text="Añadir grado de estudios" />
                                     <Button fx:id="btnActualizarFP" layoutX="204.0" layoutY="527.0" mnemonicParsing="false" text="Actualizar grado de estudios" />
-                                    <Label layoutX="22.0" layoutY="75.0" text="Nivel de estudios:" />
-                                    <Label layoutX="18.0" layoutY="257.0" text="Estudios en:" />
-                                    <Label layoutX="23.0" layoutY="114.0" text="Área:" />
-                                    <Label layoutX="200.0" layoutY="114.0" text="Disciplina:" />
-                                    <Label layoutX="18.0" layoutY="160.0" text="Institución otorgante:" />
-                                    <Label layoutX="23.0" layoutY="215.0" text="Otra:" />
-                                    <Label layoutX="25.0" layoutY="304.0" text="Fecha de inicio:" />
-                                    <Label layoutX="21.0" layoutY="352.0" text="Fecha de término:" />
-                                    <Label layoutX="23.0" layoutY="406.0" text="Fecha de obtención del grado:" />
-                                    <Button fx:id="btnCancelarFP" layoutX="64.0" layoutY="644.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="84.0" text="Cancelar" visible="false" />
-                                    <Button fx:id="btnGuardarFP" layoutX="265.0" layoutY="644.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="Guardar" visible="false" />
-                                    <ComboBox fx:id="cbxNivelEstudios" layoutX="141.0" layoutY="71.0" prefWidth="150.0" />
-                                    <ComboBox fx:id="cbxAreaFP" layoutX="66.0" layoutY="110.0" prefHeight="17.0" prefWidth="101.0" />
-                                    <ComboBox fx:id="cbxDisciplinaFP" layoutX="267.0" layoutY="110.0" prefHeight="17.0" prefWidth="101.0" />
-                                    <ComboBox fx:id="cbxInstitucionOtorgante" layoutX="143.0" layoutY="156.0" prefHeight="25.0" prefWidth="220.0" />
-                                    <TextField fx:id="txtOtraInstitucion" layoutX="58.0" layoutY="211.0" prefHeight="25.0" prefWidth="236.0" />
-                                    <TextField fx:id="txtEstudiosEn" layoutX="94.0" layoutY="253.0" prefHeight="25.0" prefWidth="220.0" />
-                                    <DatePicker fx:id="dtpFechaInicio" layoutX="122.0" layoutY="300.0" prefHeight="17.0" prefWidth="109.0" />
-                                    <DatePicker fx:id="dtpFechaTermino" layoutX="122.0" layoutY="348.0" prefHeight="17.0" prefWidth="109.0" />
-                                    <DatePicker fx:id="dtpFechaObtencionGrado" layoutX="213.0" layoutY="402.0" prefHeight="17.0" prefWidth="109.0" />
+                                    <Label fx:id="lblNivelEstudiosFP" layoutX="22.0" layoutY="75.0" text="Nivel de estudios:" visible="false" />
+                                    <Label fx:id="lblEstudiosEnFP" layoutX="18.0" layoutY="257.0" text="Estudios en:" visible="false" />
+                                    <Label fx:id="lblAreaFP" layoutX="23.0" layoutY="114.0" text="Área:" visible="false" />
+                                    <Label fx:id="lblDisciplinaFP" layoutX="200.0" layoutY="114.0" text="Disciplina:" visible="false" />
+                                    <Label fx:id="lblInstitucionFP" layoutX="18.0" layoutY="160.0" text="Institución otorgante:" visible="false" />
+                                    <Label fx:id="lblOtraFP" layoutX="23.0" layoutY="215.0" text="Otra:" visible="false" />
+                                    <Label fx:id="lblFechaInicioFP" layoutX="25.0" layoutY="304.0" text="Fecha de inicio:" visible="false" />
+                                    <Label fx:id="lblFechaTerminoFP" layoutX="21.0" layoutY="352.0" text="Fecha de término:" visible="false" />
+                                    <Label fx:id="lblFechaObtencionFP" layoutX="23.0" layoutY="406.0" text="Fecha de obtención del grado:" visible="false" />
+                                    <ComboBox fx:id="cbxNivelEstudios" layoutX="141.0" layoutY="71.0" prefWidth="150.0" visible="false" />
+                                    <ComboBox fx:id="cbxAreaFP" layoutX="66.0" layoutY="110.0" prefHeight="17.0" prefWidth="101.0" visible="false" />
+                                    <ComboBox fx:id="cbxDisciplinaFP" layoutX="267.0" layoutY="110.0" prefHeight="17.0" prefWidth="101.0" visible="false" />
+                                    <ComboBox fx:id="cbxInstitucionOtorgante" layoutX="143.0" layoutY="156.0" prefHeight="25.0" prefWidth="220.0" visible="false" />
+                                    <TextField fx:id="txtOtraInstitucion" layoutX="58.0" layoutY="211.0" prefHeight="25.0" prefWidth="236.0" visible="false" />
+                                    <TextField fx:id="txtEstudiosEn" layoutX="94.0" layoutY="253.0" prefHeight="25.0" prefWidth="220.0" visible="false" />
+                                    <DatePicker fx:id="dtpFechaInicio" layoutX="122.0" layoutY="300.0" prefHeight="17.0" prefWidth="109.0" visible="false" />
+                                    <DatePicker fx:id="dtpFechaTermino" layoutX="122.0" layoutY="348.0" prefHeight="17.0" prefWidth="109.0" visible="false" />
+                                    <DatePicker fx:id="dtpFechaObtencionGrado" layoutX="213.0" layoutY="402.0" prefHeight="17.0" prefWidth="109.0" visible="false" />
+                                    <Label fx:id="lblPaisFP" layoutX="44.0" layoutY="454.0" text="País:" visible="false" />
+                                    <TableView fx:id="tbvFormacionProfesional" layoutX="-1.0" layoutY="77.0" prefHeight="418.0" prefWidth="397.0">
+                                      <columns>
+                                        <TableColumn fx:id="tbcGrado" prefWidth="82.0" text="Grado" />
+                                        <TableColumn fx:id="tbcEstudiosEn" prefWidth="105.0" text="Estudios" />
+                                          <TableColumn fx:id="tbcFechaObtencion" prefWidth="110.0" text="Fecha Obtención de Título" />
+                                          <TableColumn fx:id="tbcInstitucionOtorgante" minWidth="3.0" prefWidth="99.0" text="Institucion Otorgante" />
+                                      </columns>
+                                    </TableView>
+                                    <ComboBox fx:id="cbxPaisFP" layoutX="81.0" layoutY="450.0" prefWidth="150.0" visible="false" />
                                  </children>
                               </Pane>
+                              <Button fx:id="btnCancelarFP" layoutX="27.0" layoutY="562.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="84.0" text="Cancelar" visible="false" />
+                              <Button fx:id="btnGuardarFP" layoutX="129.0" layoutY="563.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="Guardar" visible="false" />
+                              <Label fx:id="lblAvisosFP" layoutX="38.0" layoutY="594.0" />
                            </children>
                         </AnchorPane>
                      </children>

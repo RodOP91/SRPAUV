@@ -24,6 +24,7 @@ public class OpcionesCampos {
     public static List<String> opcionesCbxDisciplina = new ArrayList<String>();
     public static List<String> opcionesCbxNacionalidad = new ArrayList<String>();
     //DATOS LABORALES-----------------------------------------------------------
+    public static List<String> opcionesCbxDes = new ArrayList<String>();
     public static List<String> opcionesCbxUnidadA = new ArrayList<String>();
     public static List<String> opcionesCbxPrograma = new ArrayList<String>();
     public static List<String> opcionesCbxSNI = new ArrayList<String>();
@@ -31,6 +32,7 @@ public class OpcionesCampos {
     
     //ESTUDIOS REALIZADOS-------------------------------------------------------
     public static List<String> opcionesCbxNivelEstudios = new ArrayList<String>();
+    public static List<String> opcionesCbxPais = new ArrayList<String>();
     
     public OpcionesCampos(){
         this.opcionesCbxGenero.add("Masculino");
@@ -51,6 +53,7 @@ public class OpcionesCampos {
         this.opcionesCbxArea.add("Metodologías de desarrollo");
         this.opcionesCbxArea.add("Machine Learning");
         this.opcionesCbxArea.add("Modelado de comunicaciones");
+        this.opcionesCbxArea.add("Ingeniería de Software");
         //----------------------------------------------------------------------
         this.opcionesCbxNacionalidad.add("Argentina");
         this.opcionesCbxNacionalidad.add("Canadiense");
@@ -77,6 +80,24 @@ public class OpcionesCampos {
         this.opcionesCbxInstitucion.add("Universidad Veracruzana");
         this.opcionesCbxInstitucion.add("Universidad Nacional Autónoma de México");
         this.opcionesCbxInstitucion.add("Instituto Politécnico Nacional");
+        //----------------------------------------------------------------------
+        this.opcionesCbxNivelEstudios.add("Licenciatura");
+        this.opcionesCbxNivelEstudios.add("Maestría");
+        this.opcionesCbxNivelEstudios.add("Doctorado");
+        this.opcionesCbxNivelEstudios.add("Post-Doctorado");
+        this.opcionesCbxNivelEstudios.add("Diplomado");
+        //----------------------------------------------------------------------
+        this.opcionesCbxPais.add("México");
+        this.opcionesCbxPais.add("Canadá");
+        this.opcionesCbxPais.add("Estados Unidos");
+        this.opcionesCbxPais.add("Francia");
+        //----------------------------------------------------------------------
+        this.opcionesCbxDes.add("Económico-Administrativo");
+        this.opcionesCbxDes.add("Humanidades");
+        this.opcionesCbxDes.add("Biológica-Agropecuaria");
+        this.opcionesCbxDes.add("Ciencias de la Salud");
+        this.opcionesCbxDes.add("Técnica");
+        
     }
     
     //SETTERS & GETTERS---------------------------------------------------------
@@ -168,5 +189,22 @@ public class OpcionesCampos {
     public static void setOpcionesCbxNivelEstudios(List<String> opcionesCbxNivelEstudios) {
         OpcionesCampos.opcionesCbxNivelEstudios = opcionesCbxNivelEstudios;
     }
+
+    public static List<String> getOpcionesCbxPais() {
+        return opcionesCbxPais;
+    }
+
+    public static void setOpcionesCbxPais(List<String> opcionesCbxPais) {
+        OpcionesCampos.opcionesCbxPais = opcionesCbxPais;
+    }
+
+    public static List<String> getOpcionesCbxDes() {
+        return opcionesCbxDes;
+    }
+
+    public static void setOpcionesCbxDes(List<String> opcionesCbxDes) {
+        OpcionesCampos.opcionesCbxDes = opcionesCbxDes;
+    }
+    
     
 }

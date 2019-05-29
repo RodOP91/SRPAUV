@@ -1,0 +1,17 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+
+.header{
+    -fx-background-color: #3979F0;
+}
+
+.btnIniciar{
+    -fx-background-color: #249108;
+    -fx-border-color: #249108;
+    -fx-border-radius: 0px;
+}

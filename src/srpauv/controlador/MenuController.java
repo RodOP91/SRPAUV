@@ -12,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,7 +28,7 @@ import srpauv.clases.Integrante;
  */
 public class MenuController implements Initializable {
 
-    private Integrante usuario = new Integrante(3, "edsonM");
+    private static Integrante usuario;
     
     @FXML Label lblUsuario;
     
@@ -122,4 +121,11 @@ public class MenuController implements Initializable {
         });
     }    
     
+    public static void setUsuario(Integrante integrante){
+        usuario = integrante;
+    }
+    
+    public static Integrante getUsuario(){
+        return usuario;
+    }
 }

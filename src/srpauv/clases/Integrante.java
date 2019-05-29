@@ -6,6 +6,7 @@
 package srpauv.clases;
 
 import DAO.IntegranteDAO;
+import java.sql.Date;
 import java.time.LocalDate;
 
 /**
@@ -18,7 +19,7 @@ public class Integrante {
     private String apellidoP;
     private String apellidoM;
     private String genero;
-    private LocalDate fechanacimiento;
+    private Date fechanacimiento;
     private String area;
     private String correoUV;
     private String correoAdicional;
@@ -35,8 +36,8 @@ public class Integrante {
     private String password;
     private int responsable;
 
-    public Integrante(int idIntegrante, String nombre, String apellidoP, String apellidoM, String genero,
-            LocalDate fechanacimiento, String area, String correoUV,String correoAdicional, 
+    public Integrante(int idIntegrante, String apellidoM, String apellidoP, String nombre, String genero,
+            Date fechanacimiento, String area, String correoUV,String correoAdicional, 
             String curp, String disciplina, String edoCivil, String nacionalidad, String noPersonal,
             String rfc, String telcasa, String teltrabajo, String usuario, String password, int responsable){
         this.idIntegrante = idIntegrante;
@@ -65,7 +66,11 @@ public class Integrante {
         this.idIntegrante = idIntegrante;
         this.usuario = usuario;
     }
-    
+
+    public Integrante(String usuario, String password) {
+        this.usuario = usuario;
+        this.password = password;
+    }
     
     public Integrante(int idIntegrante, String nombre, String apellidoP, String apellidoM) {
         this.idIntegrante = idIntegrante;
@@ -94,6 +99,18 @@ public class Integrante {
         this.usuario = usuario;
         this.password = password;
     }
+
+    public Integrante(int idIntegrante, String nombre, String apellidoP, String apellidoM, String usuario, String password, int responsable) {
+        this.idIntegrante = idIntegrante;
+        this.nombre = nombre;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
+        this.usuario = usuario;
+        this.password = password;
+        this.responsable = responsable;
+    }
+    
+    
     
     public boolean registrarIntegrante(){
         return IntegranteDAO.registrar(this);
@@ -173,11 +190,11 @@ public class Integrante {
         this.genero = genero;
     }
 
-    public LocalDate getFechanacimiento() {
+    public Date getFechanacimiento() {
         return fechanacimiento;
     }
 
-    public void setFechanacimiento(LocalDate fechanacimiento) {
+    public void setFechanacimiento(Date fechanacimiento) {
         this.fechanacimiento = fechanacimiento;
     }
 
