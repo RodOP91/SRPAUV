@@ -5,7 +5,6 @@
  */
 package DAO;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import srpauv.clases.Integrante;
@@ -54,6 +53,7 @@ public class IntegranteDAO {
                         rs.getString(15), rs.getString(16), rs.getString(17), rs.getString(18), rs.getString(19),           
                         rs.getInt(20));
             }
+            conn.cerrar();
             return integrante;
     }
 
@@ -83,11 +83,16 @@ public class IntegranteDAO {
                 + " `usuario`, `password`, `responsable` FROM `integrante` "
                 + "WHERE usuario = '" + usuario + "'";
         rs = conn.consultar(sql);
-        rs.next();
-        Integrante integrante = new Integrante(rs.getInt(1), rs.getString(4), 
+        
+        if(rs.next()){
+            Integrante integrante = new Integrante(rs.getInt(1), rs.getString(4), 
                 rs.getString(2), rs.getString(3), rs.getString(5), 
                 rs.getString(6), rs.getInt(7));
-        conn.cerrar();
-        return integrante;
+            conn.cerrar();
+            return integrante;
+        } else {
+            conn.cerrar();
+            return null;
+        }
     }
 }

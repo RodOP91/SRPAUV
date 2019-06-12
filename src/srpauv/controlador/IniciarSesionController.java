@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import srpauv.clases.Integrante;
 
@@ -29,9 +30,6 @@ public class IniciarSesionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.rb = rb;
-        
-        txtUsuario.setText("edsonM");
-        txtPassword.setText("123456");
        
         btnIngresar.setOnAction((event) -> {
             validarCampos();
@@ -42,11 +40,13 @@ public class IniciarSesionController implements Initializable {
         String usuario = txtUsuario.getText();
         String pass = txtPassword.getText();
         if(usuario.equals("") || pass.equals("")){
+            lblMensaje.setTextFill(Paint.valueOf("red"));
             lblMensaje.setText("Campos Vacíos");
         } else{
             Integrante integrante = new Integrante(usuario, pass); //añadir el constructor
             try {
                 if(!validarUsuario(integrante)){
+                    lblMensaje.setTextFill(Paint.valueOf("red"));
                     lblMensaje.setText("Contraseña Incorrecta");
                 }
             } catch (SQLException ex) {
@@ -58,11 +58,18 @@ public class IniciarSesionController implements Initializable {
     
     private boolean validarUsuario(Integrante integrante) throws SQLException{
         Integrante integranteRecuperado = IntegranteDAO.recuperarUsuario(integrante.getUsuario());
-        if(integrante.getPassword().equals(integranteRecuperado.getPassword())){
-            ingresar(integranteRecuperado); //El integrante recuperado debe traer el id 
+        
+        if(integranteRecuperado == null){
+            lblMensaje.setTextFill(Paint.valueOf("red"));
+            lblMensaje.setText("Usuario no registrado");
             return true;
         } else {
-             return false;
+            if(integrante.getPassword().equals(integranteRecuperado.getPassword())){
+               ingresar(integranteRecuperado); //El integrante recuperado debe traer el id 
+                return true;
+            } else {
+                 return false;
+            }
         }
     }
     
@@ -76,8 +83,14 @@ public class IniciarSesionController implements Initializable {
             //stage.setTitle(rb.getString("tituloG"));
             stage.setResizable(false);
             stage.show();
+            this.cerrar();
         } catch (IOException ex) {
             Logger.getLogger(IniciarSesionController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private void cerrar(){
+        Stage stage = (Stage) this.btnIngresar.getScene().getWindow();
+        stage.close();
     }
 }

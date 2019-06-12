@@ -36,7 +36,7 @@ public class ArticuloIndexado extends Producto{
 
     @Override
     public int actualizarProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ProductosDAO.editar(this);
     }
 
     @Override

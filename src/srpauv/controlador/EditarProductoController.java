@@ -6,7 +6,7 @@
 package srpauv.controlador;
 
 import DAO.LineaDAO;
-import java.io.IOException;
+import DAO.ProductosDAO;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -15,58 +15,47 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
-import javafx.stage.Stage;
-import srpauv.clases.*;
+import srpauv.clases.Articulo;
+import srpauv.clases.ArticuloArbitrado;
+import srpauv.clases.ArticuloIndexado;
+import srpauv.clases.CapituloLibro;
+import srpauv.clases.Integrante;
+import srpauv.clases.Libro;
+import srpauv.clases.Linea;
+import srpauv.clases.MemoriaExtenso;
+import srpauv.clases.ProduccionInnovadora;
+import srpauv.clases.Producto;
+import srpauv.clases.Prototipo;
+import srpauv.clases.Tesis;
 
 /**
  * FXML Controller class
  *
  * @author edson
  */
-public class RegistrarProductoController implements Initializable {
-    
+public class EditarProductoController implements Initializable {
+
     private static Integrante usuario;
     
-    @FXML Button btnPollo;
+    @FXML ListView<Producto> lstProductos;
     
-    @FXML ListView listProyectos;
-    private Proyecto proySelec = new Proyecto(-1);
+    private List<Linea> listaLineas;
     
     private int flagProducto = 0;
     
-    
-    private static List<Colaborador> colaboradores = null;
-    private static List<Integrante> integrantes = null;
-
-    public static void setColaboradores(List<Colaborador> colaboradores) {
-        RegistrarProductoController.colaboradores = colaboradores;
-    }
-
-    public static void setIntegrantes(List<Integrante> integrantes) {
-        RegistrarProductoController.integrantes = integrantes;
-    }
-    
-    
+    @FXML Button btnPollo;
+    @FXML Label lblMensaje;
     //BOTONES ACCION------------------------------------------------------------
     @FXML Button btnCancelar;
     @FXML Button btnGuardar;
     @FXML Button btnAsociarProyecto;
     @FXML Button btnAgregarColaborador;
-    @FXML Label lblMensaje;
     //--------------------------------------------------------------------------
-
     //PANELES PRODUCTOS---------------------------------------------------------
     @FXML AnchorPane apnTesis;
     @FXML AnchorPane apnArticuloIndexado;
@@ -78,21 +67,8 @@ public class RegistrarProductoController implements Initializable {
     @FXML AnchorPane apnMemoriaExtenso;
     @FXML AnchorPane apnPrototipo;
     //--------------------------------------------------------------------------
-    
-    //BOTONES PRODUCTOS---------------------------------------------------------
-    @FXML ToggleButton btnTesis;
-    @FXML ToggleButton btnArticuloIndexado;
-    @FXML ToggleButton btnArticuloArbitrado;
-    @FXML ToggleButton btnArticulo;
-    @FXML ToggleButton btnCapituloLibro;
-    @FXML ToggleButton btnLibro;
-    @FXML ToggleButton btnProduccionInnovadora;
-    @FXML ToggleButton btnMemoriaExtenso;
-    @FXML ToggleButton btnPrototipo;
-    //--------------------------------------------------------------------------
-    
 //CAMPOS DE PRODUCTOS-------------------------------------------------------------------------
-    // <editor-fold defaultstate="collapsed" desc=" campos productos ">
+    // <editor-fold defaultstate="collapsed" desc=" Campos Productos ">
     //TESIS---------------------------------------------------------------------
     @FXML TextField txtTituloTesis;
     @FXML TextField txtGradoTesis;
@@ -230,340 +206,254 @@ public class RegistrarProductoController implements Initializable {
     // </editor-fold>
 //--------------------------------------------------------------------------------------------
     
-    private ResourceBundle rb;
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        this.rb = rb;
-        
-        try{
+        try {
             llenarCombos();
-            recuperarProyectos();
-        }catch(SQLException ex) {
-            Logger.getLogger(RegistrarProductoController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditarProductoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            recuperarProductosIntegrante();
+        } catch (SQLException ex) {
+            Logger.getLogger(EditarProductoController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
-//VALIDACIONES CAMPOS-----------------------------------------------------------
-        txtNoAlumnosTesis.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("^[0-9]*$")) {
-                    txtNoAlumnosTesis.setText(oldValue);
-                }
-            }
-        });
-//------------------------------------------------------------------------------
-    
-        btnTesis.setOnAction((ActionEvent event) -> {
-            lblMensaje.setText("");
-            btnArticuloIndexado.setSelected(false);
-            btnArticuloArbitrado.setSelected(false);
-            btnArticulo.setSelected(false);
-            btnCapituloLibro.setSelected(false);
-            btnLibro.setSelected(false);
-            btnProduccionInnovadora.setSelected(false);
-            btnMemoriaExtenso.setSelected(false);
-            btnPrototipo.setSelected(false);
-            MostrarProductos();
-            flagProducto = 1;
-            if(listProyectos.isVisible()){
-                listProyectos.setVisible(false);
-            }
-            if(proySelec != null){
-                listProyectos.getSelectionModel().select(-1);
-                proySelec = null;
-            }
+        lstProductos.setOnMouseClicked((event) -> {
+            Producto prod = lstProductos.getSelectionModel().getSelectedItem();
+            String tipoProd = lstProductos.getSelectionModel().getSelectedItem().getTipoProducto();
+            MostrarProductos(tipoProd, prod);
         });
         
-        btnArticuloIndexado.setOnAction((ActionEvent event) -> {
-            lblMensaje.setText("");
-            btnTesis.setSelected(false);
-            btnArticuloArbitrado.setSelected(false);
-            btnArticulo.setSelected(false);
-            btnCapituloLibro.setSelected(false);
-            btnLibro.setSelected(false);
-            btnProduccionInnovadora.setSelected(false);
-            btnMemoriaExtenso.setSelected(false);
-            btnPrototipo.setSelected(false);
-            MostrarProductos();
-            flagProducto = 2;
-            if(listProyectos.isVisible()){
-                listProyectos.setVisible(false);
-            }
-            if(proySelec != null){
-                listProyectos.getSelectionModel().select(-1);
-                proySelec = null;
-            }
-        });
-        
-        btnArticuloArbitrado.setOnAction((ActionEvent event) -> {
-            lblMensaje.setText("");
-            btnTesis.setSelected(false);
-            btnArticuloIndexado.setSelected(false);
-            btnArticulo.setSelected(false);
-            btnCapituloLibro.setSelected(false);
-            btnLibro.setSelected(false);
-            btnProduccionInnovadora.setSelected(false);
-            btnMemoriaExtenso.setSelected(false);
-            btnPrototipo.setSelected(false);
-            MostrarProductos();
-            flagProducto = 3;
-            if(listProyectos.isVisible()){
-                listProyectos.setVisible(false);
-            }
-            if(proySelec != null){
-                listProyectos.getSelectionModel().select(-1);
-                proySelec = null;
-            }
-        });
-        
-        btnArticulo.setOnAction((ActionEvent event) -> {
-            lblMensaje.setText("");
-            btnTesis.setSelected(false);
-            btnArticuloIndexado.setSelected(false);
-            btnArticuloArbitrado.setSelected(false);
-            btnCapituloLibro.setSelected(false);
-            btnLibro.setSelected(false);
-            btnProduccionInnovadora.setSelected(false);
-            btnMemoriaExtenso.setSelected(false);
-            btnPrototipo.setSelected(false);
-            MostrarProductos();
-            flagProducto = 4;
-            if(listProyectos.isVisible()){
-                listProyectos.setVisible(false);
-            }
-            if(proySelec != null){
-                listProyectos.getSelectionModel().select(-1);
-                proySelec = null;
-            }
-        });
-        
-        btnCapituloLibro.setOnAction((ActionEvent event) -> {
-            lblMensaje.setText("");
-            btnTesis.setSelected(false);
-            btnArticuloIndexado.setSelected(false);
-            btnArticuloArbitrado.setSelected(false);
-            btnArticulo.setSelected(false);
-            btnLibro.setSelected(false);
-            btnProduccionInnovadora.setSelected(false);
-            btnMemoriaExtenso.setSelected(false);
-            btnPrototipo.setSelected(false);
-            MostrarProductos();
-            flagProducto = 5;
-            if(listProyectos.isVisible()){
-                listProyectos.setVisible(false);
-            }
-            if(proySelec != null){
-                listProyectos.getSelectionModel().select(-1);
-                proySelec = null;
-            }
-        });
-        
-        btnLibro.setOnAction((ActionEvent event) -> {
-            lblMensaje.setText("");
-            btnTesis.setSelected(false);
-            btnArticuloIndexado.setSelected(false);
-            btnArticuloArbitrado.setSelected(false);
-            btnArticulo.setSelected(false);
-            btnCapituloLibro.setSelected(false);
-            btnProduccionInnovadora.setSelected(false);
-            btnMemoriaExtenso.setSelected(false);
-            btnPrototipo.setSelected(false);
-            MostrarProductos();
-            flagProducto = 6;
-            if(listProyectos.isVisible()){
-                listProyectos.setVisible(false);
-            }
-            if(proySelec != null){
-                listProyectos.getSelectionModel().select(-1);
-                proySelec = null;
-            }
-        });
-        
-        btnProduccionInnovadora.setOnAction((ActionEvent event) -> {
-            lblMensaje.setText("");
-            btnTesis.setSelected(false);
-            btnArticuloIndexado.setSelected(false);
-            btnArticuloArbitrado.setSelected(false);
-            btnArticulo.setSelected(false);
-            btnCapituloLibro.setSelected(false);
-            btnLibro.setSelected(false);
-            btnMemoriaExtenso.setSelected(false);
-            btnPrototipo.setSelected(false);
-            MostrarProductos();
-            flagProducto = 7;
-            if(listProyectos.isVisible()){
-                listProyectos.setVisible(false);
-            }
-            if(proySelec != null){
-                listProyectos.getSelectionModel().select(-1);
-                proySelec = null;
-            }
-        });
-        
-        btnMemoriaExtenso.setOnAction((ActionEvent event) -> {
-            lblMensaje.setText("");
-            btnTesis.setSelected(false);
-            btnArticuloIndexado.setSelected(false);
-            btnArticuloArbitrado.setSelected(false);
-            btnArticulo.setSelected(false);
-            btnCapituloLibro.setSelected(false);
-            btnLibro.setSelected(false);
-            btnProduccionInnovadora.setSelected(false);
-            btnPrototipo.setSelected(false);
-            MostrarProductos();
-            flagProducto = 8;
-            if(listProyectos.isVisible()){
-                listProyectos.setVisible(false);
-            }
-            if(proySelec != null){
-                listProyectos.getSelectionModel().select(-1);
-                proySelec = null;
-            }
-        });
-        
-        btnPrototipo.setOnAction((ActionEvent event) -> {
-            lblMensaje.setText("");
-            btnTesis.setSelected(false);
-            btnArticuloIndexado.setSelected(false);
-            btnArticuloArbitrado.setSelected(false);
-            btnArticulo.setSelected(false);
-            btnCapituloLibro.setSelected(false);
-            btnLibro.setSelected(false);
-            btnProduccionInnovadora.setSelected(false);
-            btnMemoriaExtenso.setSelected(false);
-            MostrarProductos();
-            flagProducto = 9;
-            if(listProyectos.isVisible()){
-                listProyectos.setVisible(false);
-            }
-            if(proySelec != null){
-                listProyectos.getSelectionModel().select(-1);
-                proySelec = null;
-            }
-        });
-        
-        btnGuardar.setOnAction((ActionEvent event) -> {
-            if(listProyectos.isVisible()){
-                listProyectos.setVisible(false);
-            }
+        btnGuardar.setOnAction((event) -> {
+            Producto prod = lstProductos.getSelectionModel().getSelectedItem();
+            
             switch(flagProducto){
                 case 1:
-                    guardarTesis();                    
+                    guardarTesis(prod);                    
                     break;
                 case 2:
-                    guardarArticuloIndexado();
+                    guardarArticuloIndexado(prod);
                     break;
                 case 3:
-                    guardarArticuloArbitrado();
+                    guardarArticuloArbitrado(prod);
                     break;
                 case 4:
-                    guardarArticulo();
+                    guardarArticulo(prod);
                     break;
                 case 5:
-                    guardarCapituloLibro();
+                    guardarCapituloLibro(prod);
                     break;
                 case 6:
-                    guardarLibro();
+                    guardarLibro(prod);
                     break;
                 case 7:
-                    guardarProduccionInnovadora();
+                    guardarProduccionInnovadora(prod);
                     break;
                 case 8:
-                    guardarMemoriaExtenso();
+                    guardarMemoriaExtenso(prod);
                     break;
                 case 9:
-                    guardarPrototipo();
+                    guardarPrototipo(prod);
                     break;
             }
         });
-       
-        btnAsociarProyecto.setOnAction((ActionEvent event) -> {
-            if(listProyectos.isVisible()){
-                listProyectos.setVisible(false);
-            }else{
-                if(proySelec == null){
-                    listProyectos.getSelectionModel().select(-1);
-                }
-                listProyectos.setVisible(true);
-            } 
-        });
-        
-        btnAgregarColaborador.setOnAction((ActionEvent event) -> {
-            try {
-                mostrarVentanaColaboradores();
-            } catch (IOException ex) {
-                Logger.getLogger(RegistrarProductoController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-        
-        listProyectos.setOnMouseClicked((MouseEvent event) -> {
-            proySelec = (Proyecto) listProyectos.getSelectionModel().getSelectedItem();
-        });
-        
-        listProyectos.setOnMouseExited((MouseEvent event) -> {
-            if(listProyectos.isVisible()){
-                Proyecto proy = (Proyecto) listProyectos.getSelectionModel().getSelectedItem();
-                listProyectos.setVisible(false);
-            }
-        });
+    }  
+    
+    private void recuperarProductosIntegrante() throws SQLException {
+        List<Producto> productos = ProductosDAO.recuperarPorIntegrante(usuario.getIdIntegrante());
+        lstProductos.getItems().addAll(productos);
+    }
+
+    /**
+     * @return the usuario
+     */
+    public static Integrante getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param integrante the usuario to set
+     */
+    public static void setUsuario(Integrante integrante) {
+        usuario = integrante;
     }
     
-    //Método que maneja la navegavilidad de la ventana
-    private void MostrarProductos(){
+    private int seleccionarLgac(String lgac){
+        int flag = -1;
+        for(int x = 0; x < listaLineas.size(); x++){
+            if(listaLineas.get(x).getNombre().equals(lgac)){
+                flag = x;
+            }
+        }
+        return flag;
+    }
+    
+    private void MostrarProductos(String tipo, Producto producto){
+        System.err.println(producto.getTipoProducto());
         boolean flag = true;
-        if(btnTesis.isSelected()){
+        if(tipo.equals("tesis")){
+            flagProducto = 1;
             apnTesis.setVisible(true);
+            Tesis tesis = (Tesis) producto;
+            
+            txtTituloTesis.setText(tesis.getTitulo()); 
+            txtGradoTesis.setText(tesis.getGrado());
+            txtNoAlumnosTesis.setText(String.valueOf(tesis.getNumAlumnos()));
+            dtpFechaInicioTesis.setValue(tesis.getFechaInicio().toLocalDate());
+            dtpFechaFinTesis.setValue(tesis.getFechaFin().toLocalDate());
+            cbxLGACtesis.getSelectionModel().select(seleccionarLgac(tesis.getLgac()));
+            chkCAtesis.setSelected(tesis.isConsiderarCA());
+            
             flag = false;
         }else{
             apnTesis.setVisible(false);
         }
-        if(btnArticuloIndexado.isSelected()){
+        if(tipo.equals("articuloIndexado")){
+            flagProducto = 2;
             apnArticuloIndexado.setVisible(true);
+            
+            
             flag = false;
         }else{
             apnArticuloIndexado.setVisible(false);
         }
-        if(btnArticuloArbitrado.isSelected()){
+        if(tipo.equals("articuloArbitrado")){
+            flagProducto = 3;
             apnArticuloArbitrado.setVisible(true);
             flag = false;
         }else{
             apnArticuloArbitrado.setVisible(false);
         }
-        if(btnArticulo.isSelected()){
+        if(tipo.equals("articulo")){
+            flagProducto = 4;
             apnArticulo.setVisible(true);
+            Articulo prod = (Articulo) producto;
+            
+            txtautorarticulo.setText(prod.getAutor());
+            txttituloarticulo.setText(prod.getAutor());
+            txtnomrevistaarticulo.setText(prod.getNomrevista());
+            txteditorialarticulo.setText(prod.getEditorial());
+            txtpropositoarticulo.setText(prod.getProposito());
+            txtissnarticulo.setText(prod.getIssn());
+            txtvolarticulo.setText(prod.getVolumen());
+            txtpagsarticulo.setText(prod.getPaginas());
+            txtpaisarticulo.setText(prod.getPais());
+            txtanoarticulo.setText(prod.getAno());
+            txtedoactualarticulo.setText(prod.getEstado());
+            cbxlgacarticulo.getSelectionModel().select(seleccionarLgac(prod.getLgac()));
+            //txtadescarticulo.setText();
+            chkcaarticulo.setSelected(prod.isConsiderarCA())
+                    ;
             flag = false;
         }else{
             apnArticulo.setVisible(false);
         }
-        if(btnCapituloLibro.isSelected()){
+        if(tipo.equals("capituloLibro")){
+            flagProducto = 5;
             apnCapituloLibro.setVisible(true);
+            CapituloLibro prod = (CapituloLibro) producto;
+            
+            txtTituloCL.setText(prod.getTitulo());
+            txtTituloLibroCL.setText(prod.getTituloLibro());
+            txtEstadoActualCL.setText(prod.getEstado());
+            txtISBNcl.setText(prod.getISBN());
+            txtPropositoCL.setText(prod.getProposito());
+            txtAutoresCL.setText(prod.getAutor_es());
+            txtPaisCL.setText(prod.getPais());
+            txtEditorialCL.setText(prod.getEditorial());
+            txtNoEdicionesCL.setText(String.valueOf(prod.getNoEdiciones()));
+            txtPaginasCL.setText(prod.getPaginas());
+            txtTotalEjemplaresCL.setText(String.valueOf(prod.getTotalEjemplares()));
+            txtAñoCL.setText(prod.getAño());
+            cbxLGACcl.getSelectionModel().select(seleccionarLgac(prod.getLgac()));
+            chkCAcl.setSelected(prod.isConsiderarCA());
+            
             flag = false;
         }else{
             apnCapituloLibro.setVisible(false);
         }
-        if(btnLibro.isSelected()){
+        if(tipo.equals("libro")){
+            flagProducto = 6;
             apnLibro.setVisible(true);
+            Libro prod = (Libro) producto;
+            
+            txtTituloLibro.setText(prod.getTitulo());
+            txtAutoresLibro.setText(prod.getAutor_es());
+            txtISBNlibro.setText(prod.getISBN());
+            txtPropositoLibro.setText(prod.getProposito());
+            txtPaisLibro.setText(prod.getPais());
+            txtEditorialLibro.setText(prod.getEditorial());
+            txtNoEdicionesLibro.setText(String.valueOf(prod.getNoEdiciones()));
+            txtEstadoActualLibro.setText(prod.getEstado());
+            txtTotalEjemplaresLibro.setText(String.valueOf(prod.getTotalEjemplares()));
+            txtAñoLibro.setText(prod.getAño());
+            cbxLGAClibro.getSelectionModel().select(seleccionarLgac(prod.getLgac()));
+            chkCAlibro.setSelected(prod.isConsiderarCA());
+            
             flag = false;
         }else{
             apnLibro.setVisible(false);
         }
-        if(btnProduccionInnovadora.isSelected()){
+        if(tipo.equals("produccionInnovadora")){
+            flagProducto = 7;
             apnProduccionInnovadora.setVisible(true);
+            ProduccionInnovadora prod = (ProduccionInnovadora) producto;
+            
+            txttituloprod.setText(prod.getTitulo());
+            txtparticipanteprod.setText(prod.getParticipante());
+            txtclasifprod.setText(prod.getClasifinternacional());
+            txtnumregprod.setText(String.valueOf(prod.getNumregistro()));
+            txtpaisprod.setText(prod.getPais());
+            txtpropositoprod.setText(prod.getProposito());
+            txtadescprod.setText(prod.getDescripcion());
+            dtpfechaprod.setValue(prod.getFechapub().toLocalDate());
+            cbxlgacprod.getSelectionModel().select(seleccionarLgac(prod.getLgac()));
+            chkcaprod.setSelected(prod.isConsiderarCA());
+            
             flag = false;
         }else{
             apnProduccionInnovadora.setVisible(false);
         }
-        if(btnMemoriaExtenso.isSelected()){
+        if(tipo.equals("memoriaExtenso")){
+            flagProducto = 8;
             apnMemoriaExtenso.setVisible(true);
+            MemoriaExtenso prod = (MemoriaExtenso) producto;
+            
+            txtautormem.setText(prod.getAutor());
+            txttitulopresmem.setText(prod.getTitulo());
+            txtpagsmem.setText(prod.getRangopags());
+            txtedomem.setText(prod.getEstadoG());
+            txtpaismem.setText(prod.getPais());
+            txtciudadmem.setText(prod.getCiudad());
+            txtanomem.setText(prod.getAno());
+            txtedoactualmem.setText(prod.getEstado());
+            txtcongresomem.setText(prod.getCongreso());
+            cbxlgacmem.getSelectionModel().select(seleccionarLgac(prod.getLgac()));
+            txtapropositomem.setText(prod.getProposito());
+            chkcamem.setSelected(prod.isConsiderarCA());
+            
             flag = false;
         }else{
             apnMemoriaExtenso.setVisible(false);
         }
-        if(btnPrototipo.isSelected()){
+        if(tipo.equals("prototipo")){
+            flagProducto = 9;
             apnPrototipo.setVisible(true);
+            Prototipo prod = (Prototipo) producto;
+            
+            txtNombreProto.setText(prod.getTitulo());
+            txtInstitucionCreadoraProto.setText(prod.getInstitucion());
+            txtAñoProto.setText(prod.getAño());
+            txtPaisProto.setText(prod.getPais());
+            txtEstadoActualProto.setText(prod.getEstado());
+            txaObjetivosProto.setText(prod.getObjetivos());
+            txaCaracteristicasProto.setText(prod.getCaracteristicas());
+            txaPropositoProto.setText(prod.getProposito());
+            cbxLGACproto.getSelectionModel().select(seleccionarLgac(prod.getLgac()));
+            chkCAproto.setSelected(prod.isConsiderarCA());
+            
             flag = false;
         }else{
             apnPrototipo.setVisible(false);
@@ -572,19 +462,18 @@ public class RegistrarProductoController implements Initializable {
             btnPollo.setVisible(flag);
             btnCancelar.setVisible(!flag);
             btnGuardar.setVisible(!flag);
-            btnAsociarProyecto.setVisible(!flag);
-            btnAgregarColaborador.setVisible(!flag);
+            //btnAsociarProyecto.setVisible(!flag);
+            //btnAgregarColaborador.setVisible(!flag);
         }else{
             btnPollo.setVisible(flag);
             btnGuardar.setVisible(!flag);
-            btnAsociarProyecto.setVisible(!flag);
-            btnAgregarColaborador.setVisible(!flag);
+            //btnAsociarProyecto.setVisible(!flag);
+            //btnAgregarColaborador.setVisible(!flag);
         }
     }
     
-    //Método que llena los combos de lgac de cada producto
     private void llenarCombos() throws SQLException{
-        List<Linea> listaLineas = LineaDAO.recuperarLineas();
+        listaLineas = LineaDAO.recuperarLineas();
         for(int i = 0; i < listaLineas.size(); i++){
             cbxLGACtesis.getItems().add(listaLineas.get(i));
             cbxLGACcl.getItems().add(listaLineas.get(i));
@@ -598,28 +487,8 @@ public class RegistrarProductoController implements Initializable {
         }
     }
     
-    //Método que llena la lista de proyectos
-    private void recuperarProyectos() throws SQLException{
-        List<Proyecto> listaProyectos = DAO.DAOregistrarProducto.recuperarProyectos();
-        for(int i = 0; i < listaProyectos.size(); i++){
-            listProyectos.getItems().add(listaProyectos.get(i));
-        }
-    }
-    
-    //
-    private void mostrarVentanaColaboradores() throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource("/srpauv/FXML/AgregarColaborador.fxml"), rb);
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        //stage.setTitle(rb.getString("tituloG"));
-        stage.show();
+    private void guardarTesis(Producto prod){
         
-    }
-    
-    //Método que recupera y valida los campos de Tesis
-    private void guardarTesis(){
         String titulo = txtTituloTesis.getText();
         String grado = txtGradoTesis.getText();
         String numAlumnos = txtNoAlumnosTesis.getText();
@@ -632,65 +501,41 @@ public class RegistrarProductoController implements Initializable {
             String lgac = cbxLGACtesis.getSelectionModel().getSelectedItem().getNombre();
             
             if(titulo.isEmpty() || grado.isEmpty() || numAlumnos.isEmpty()){
-                System.err.println("campos vacios");
                 lblMensaje.setTextFill(Paint.valueOf("red"));
-                lblMensaje.setText("Campos Vacíos");
+                lblMensaje.setText("Campos vacios"); 
             }else{
                 if(fechaInicio == null || fechaFin == null){
-                    System.out.println("selecciona ambas fechas");
                     lblMensaje.setTextFill(Paint.valueOf("red"));
                     lblMensaje.setText("Selecciona ambas fechas");
                 }else{
-                    if(fechaInicio.isAfter(fechaFin)){
-                        lblMensaje.setTextFill(Paint.valueOf("red"));
-                        lblMensaje.setText("La fecha de fin debe ser mayor a la fecha de inicio");
-                    } else {
-                        Tesis tesis = new Tesis();
-                        tesis.setTitulo(titulo);                    
-                        tesis.setGrado(grado);
-                        tesis.setNumAlumnos(Integer.parseInt(numAlumnos));
-                        tesis.setLgac(lgac);
-                        tesis.setValidadoCA(ca);
-                        tesis.setFechaInicio(Date.valueOf(fechaInicio));
-                        tesis.setFechaFin(Date.valueOf(fechaFin));
-
-                        tesis.setIntegranteR(usuario);//integrante que registra el producto
-                        if(proySelec != null){
-                           tesis.setProyectoAsociado(proySelec);
-                        }
-                        if(integrantes != null){
-                            tesis.setIntegrantes(integrantes);
-                        }
-                        if(colaboradores != null){
-                            tesis.setColaboradores(colaboradores);
-                        }
-                        if(tesis.registrarProducto() == 0){
-                            lblMensaje.setTextFill(Paint.valueOf("green"));
-                            lblMensaje.setText("Producto Registrado");
-                        }
+                    Tesis tesis = (Tesis) prod;
+                    tesis.setTitulo(titulo);                    
+                    tesis.setGrado(grado);
+                    tesis.setNumAlumnos(Integer.parseInt(numAlumnos));
+                    tesis.setLgac(lgac);
+                    tesis.setConsiderarCA(ca);
+                    tesis.setFechaInicio(Date.valueOf(fechaInicio));
+                    tesis.setFechaFin(Date.valueOf(fechaFin));
+                    
+                    if(tesis.actualizarProducto()== 0){
+                        lblMensaje.setTextFill(Paint.valueOf("green"));
+                        lblMensaje.setText("Producto Actualizado");
                     }
                 }
             }
         }catch(NullPointerException ex){
-            ex.printStackTrace();
             lblMensaje.setTextFill(Paint.valueOf("red"));
-            lblMensaje.setText("No se ha seleccionado una LGAC");
+            lblMensaje.setText("Selecciona una LGAC");
         }
     }
     
-    /*
-    .setIdIntegranteR(1);
-    .setProyectoAsociado(proySelec);
-    .setIntegrantes(integrantes);
-    .setColaboradores(colaboradores);
-    */
     
     //Método que recupera y valida los campos de Articulo Indexado
-    private void guardarArticuloIndexado(){
+    private void guardarArticuloIndexado(Producto prod){
         /**
          * Recopilación de datos de campos de texto
          */
-        ArticuloIndexado articuloindexado = new ArticuloIndexado();
+        ArticuloIndexado articuloindexado = (ArticuloIndexado) prod;
         String titulo = txttituloindexado.getText();
         String autor = txtautorindexado.getText();
         String nomrevista = txtnomrevistaindexado.getText();
@@ -713,9 +558,8 @@ public class RegistrarProductoController implements Initializable {
                 || proposito.isEmpty() || issn.isEmpty() || direlec.isEmpty()||
                 vol.isEmpty() || pags.isEmpty() || pais.isEmpty() || ano.isEmpty()
                 || edoactual.isEmpty()){
-                System.err.println("Campos Vacíos");
                 lblMensaje.setTextFill(Paint.valueOf("red"));
-                lblMensaje.setText("Campos Vacíos");
+                lblMensaje.setText("Campos vacios"); 
             }else{
                 articuloindexado.setTitulo(titulo);          
                 articuloindexado.setAutor(autor); 
@@ -727,38 +571,27 @@ public class RegistrarProductoController implements Initializable {
                 articuloindexado.setAno(ano);
                 articuloindexado.setEstado(edoactual);
                 articuloindexado.setLgac(lgac);
-                articuloindexado.setValidadoCA(ca); 
+                articuloindexado.setConsiderarCA(ca);     
+                //articuloindexado.setProyectoAsociado(proySelec);
                 
-                articuloindexado.setIntegranteR(usuario);
-                if(proySelec != null){
-                    articuloindexado.setProyectoAsociado(proySelec);
-                }
-                if(integrantes != null){
-                        articuloindexado.setIntegrantes(integrantes);
-                    }
-                if(colaboradores != null){
-                    articuloindexado.setColaboradores(colaboradores);
-                }
-                if(articuloindexado.registrarProducto() == 0){
+                if(articuloindexado.actualizarProducto()== 0){
                     lblMensaje.setTextFill(Paint.valueOf("green"));
-                    lblMensaje.setText("Producto Registrado");
-                    
+                    lblMensaje.setText("Producto Actualizado");
                 }
             }
         }catch(NullPointerException ex){
-            System.err.println("lgac nula");
             lblMensaje.setTextFill(Paint.valueOf("red"));
-            lblMensaje.setText("No se ha seleccionado una LGAC");
+            lblMensaje.setText("Selecciona una LGAC"); 
         }
         
     }
     
     //Método que recupera y valida los campos de Articulo Arbitrado
-    private void guardarArticuloArbitrado(){
+    private void guardarArticuloArbitrado(Producto prod){
         /**
          * Recopilación de datos de campos de texto
          */
-        ArticuloArbitrado articuloarbitrado = new ArticuloArbitrado();
+        ArticuloArbitrado articuloarbitrado = (ArticuloArbitrado) prod;
         String titulo = txttituloarbitrado.getText();
         String autor = txtautorarbitrado.getText();
         String nomrevista = txtnomrevistaarbitrado.getText();
@@ -782,9 +615,8 @@ public class RegistrarProductoController implements Initializable {
                 || proposito.isEmpty() || issn.isEmpty() || direlec.isEmpty()||
                 vol.isEmpty() || pags.isEmpty() || pais.isEmpty() || ano.isEmpty()
                 || edoactual.isEmpty()){
-                System.err.println("Campos Vacíos");
-                lblMensaje.setTextFill(Paint.valueOf("red"));
-                lblMensaje.setText("Campos Vacíos");
+             lblMensaje.setTextFill(Paint.valueOf("red"));
+                lblMensaje.setText("Campos vacios"); 
             }else{               
                 articuloarbitrado.setTitulo(titulo);          
                 articuloarbitrado.setAutor(autor); 
@@ -796,38 +628,28 @@ public class RegistrarProductoController implements Initializable {
                 articuloarbitrado.setAno(ano);
                 articuloarbitrado.setEstado(edoactual);
                 articuloarbitrado.setLgac(lgac);
-                articuloarbitrado.setValidadoCA(ca);
+                articuloarbitrado.setConsiderarCA(ca);  
+                //articuloarbitrado.setProyectoAsociado(proySelec);
                 
-                articuloarbitrado.setIntegranteR(usuario);
-                if(proySelec != null){
-                    articuloarbitrado.setProyectoAsociado(proySelec);
+                if(articuloarbitrado.actualizarProducto()== 0){
+                        lblMensaje.setTextFill(Paint.valueOf("green"));
+                        lblMensaje.setText("Producto Actualizado");
+                    }
+                    
                 }
-                if(integrantes != null){
-                    articuloarbitrado.setIntegrantes(integrantes);
-                }
-                if(colaboradores != null){
-                    articuloarbitrado.setColaboradores(colaboradores);
-                }
-                if(articuloarbitrado.registrarProducto() == 0){
-                    lblMensaje.setTextFill(Paint.valueOf("green"));
-                    lblMensaje.setText("Producto Registrado");
-                }
-
+        
+            }catch(NullPointerException ex){
+                lblMensaje.setTextFill(Paint.valueOf("red"));
+            lblMensaje.setText("Selecciona una LGAC");
             }
-
-        }catch(NullPointerException ex){
-            System.err.println("lgac nula");
-            lblMensaje.setTextFill(Paint.valueOf("red"));
-            lblMensaje.setText("No se ha seleccionado una LGAC");
-        }
-    }
+}
     
     //Método que recupera y valida los campos de Articulo
-    private void guardarArticulo(){
+    private void guardarArticulo(Producto prod){
         /**
          * Recopilación de datos de campos de texto
          */
-        Articulo articulo = new Articulo();
+        Articulo articulo = (Articulo) prod;
         String titulo = txttituloarticulo.getText();
         String autor = txtautorarticulo.getText();
         String nomrevista = txtnomrevistaarticulo.getText();
@@ -850,9 +672,8 @@ public class RegistrarProductoController implements Initializable {
                 || proposito.isEmpty() || issn.isEmpty() || vol.isEmpty() || 
                 pags.isEmpty() || pais.isEmpty() || ano.isEmpty()
                 || edoactual.isEmpty()){
-            System.err.println("Campos Vacíos");
-            lblMensaje.setTextFill(Paint.valueOf("red"));
-            lblMensaje.setText("Campos Vacíos");
+             lblMensaje.setTextFill(Paint.valueOf("red"));
+                lblMensaje.setText("Campos vacios"); 
             }else{
                     articulo.setTitulo(titulo);          
                     articulo.setAutor(autor); 
@@ -864,37 +685,26 @@ public class RegistrarProductoController implements Initializable {
                     articulo.setAno(ano);
                     articulo.setEstado(edoactual);
                     articulo.setLgac(lgac);
-                    articulo.setValidadoCA(ca);  
-                    articulo.setIssn(issn);
+                    articulo.setConsiderarCA(ca);   
                     articulo.setProposito(proposito);
+                    articulo.setIssn(issn);
+                    //articulo.setProyectoAsociado(proySelec);
                     
-                    articulo.setIntegranteR(usuario);
-                    if(proySelec != null){
-                       articulo.setProyectoAsociado(proySelec);
-                    }
-                    if(integrantes != null){
-                        articulo.setIntegrantes(integrantes);
-                    }
-                    if(colaboradores != null){
-                        articulo.setColaboradores(colaboradores);
-                    }
-                    
-                    if(articulo.registrarProducto() == 0){
+                    if(articulo.actualizarProducto()== 0){
                         lblMensaje.setTextFill(Paint.valueOf("green"));
-                        lblMensaje.setText("Producto Registrado");
+                        lblMensaje.setText("Producto Actualizado");
                     }
 
                 }
         }catch(NullPointerException ex){
-            System.err.println("lgac nula");
             lblMensaje.setTextFill(Paint.valueOf("red"));
-            lblMensaje.setText("No se ha seleccionado una LGAC");
+            lblMensaje.setText("Selecciona una LGAC");
         }
         
 }
     
     //Método que recupera y valida los campos de Cap de Libro
-    private void guardarCapituloLibro(){
+    private void guardarCapituloLibro(Producto prod){
         String titulo = txtTituloCL.getText();
         String tituloLibro = txtTituloLibroCL.getText();
         String estadoActual = txtEstadoActualCL.getText();
@@ -916,11 +726,10 @@ public class RegistrarProductoController implements Initializable {
                     || isbn.isEmpty() || proposito.isEmpty() || autores.isEmpty()
                     || pais.isEmpty() || editorial.isEmpty() || noEdiciones.isEmpty()
                     || paginas.isEmpty() || totalEjemplares.isEmpty() || año.isEmpty()){
-                System.err.println("campos vacios");
-                lblMensaje.setTextFill(Paint.valueOf("red"));
-                lblMensaje.setText("Campos Vacíos");
+                 lblMensaje.setTextFill(Paint.valueOf("red"));
+                lblMensaje.setText("Campos vacios"); 
             }else{
-                CapituloLibro capLib = new CapituloLibro();
+                CapituloLibro capLib = (CapituloLibro) prod;
                 capLib.setTitulo(titulo);
                 capLib.setTituloLibro(tituloLibro);
                 capLib.setAutor_es(autores);
@@ -935,31 +744,21 @@ public class RegistrarProductoController implements Initializable {
                 capLib.setProposito(proposito);
                 capLib.setTotalEjemplares(Integer.parseInt(totalEjemplares));
                 capLib.setEstado(estadoActual);
+                //capLib.setProyectoAsociado(proySelec);
                 
-                capLib.setIntegranteR(usuario);
-                if(proySelec != null){
-                    capLib.setProyectoAsociado(proySelec);
-                }
-                if(integrantes != null){
-                    capLib.setIntegrantes(integrantes);
-                }
-                if(colaboradores != null){
-                    capLib.setColaboradores(colaboradores);
-                }
-                if(capLib.registrarProducto() == 0){
-                    lblMensaje.setTextFill(Paint.valueOf("green"));
-                    lblMensaje.setText("Producto Registrado");
-                }
+                if(capLib.actualizarProducto()== 0){
+                        lblMensaje.setTextFill(Paint.valueOf("green"));
+                        lblMensaje.setText("Producto Actualizado");
+                    }
             }   
         }catch(NullPointerException ex){
-            System.out.println("lgac no seleccionada");
             lblMensaje.setTextFill(Paint.valueOf("red"));
-            lblMensaje.setText("No se ha seleccionado una LGAC");
+            lblMensaje.setText("Selecciona una LGAC");
         }
     }
     
     //Método que recupera y valida los campos de Libro
-    private void guardarLibro(){
+    private void guardarLibro(Producto prod){
         String titulo = txtTituloLibro.getText();
         String autor_es = txtAutoresLibro.getText();
         String isbn = txtISBNlibro.getText();
@@ -979,11 +778,10 @@ public class RegistrarProductoController implements Initializable {
                     proposito.isEmpty() || pais.isEmpty() || editorial.isEmpty()
                     || noEdiciones.isEmpty() || estadoActual.isEmpty() || 
                     totalEjemplares.isEmpty() || año.isEmpty()){
-                System.err.println("campos vacios");
-                lblMensaje.setTextFill(Paint.valueOf("red"));
-                lblMensaje.setText("Campos Vacíos");
+                 lblMensaje.setTextFill(Paint.valueOf("red"));
+                lblMensaje.setText("Campos vacios"); 
             }else{
-                Libro libro = new Libro();
+                Libro libro = (Libro) prod;
                 libro.setTitulo(titulo);
                 libro.setAutor_es(autor_es);
                 libro.setISBN(isbn);
@@ -995,101 +793,74 @@ public class RegistrarProductoController implements Initializable {
                 libro.setTotalEjemplares(Integer.parseInt(totalEjemplares));
                 libro.setConsiderarCA(ca);
                 libro.setLgac(lgac);
+                //libro.setProyectoAsociado(proySelec);
                 
-                libro.setIntegranteR(usuario);
-                if(proySelec != null){
-                    libro.setProyectoAsociado(proySelec);
-                }
-                if(integrantes != null){
-                    libro.setIntegrantes(integrantes);
-                }
-                if(colaboradores != null){
-                    libro.setColaboradores(colaboradores);
-                }
-                if(libro.registrarProducto() == 0){
-                    lblMensaje.setTextFill(Paint.valueOf("green"));
-                    lblMensaje.setText("Producto Registrado");
-                }
+                if(libro.actualizarProducto()== 0){
+                        lblMensaje.setTextFill(Paint.valueOf("green"));
+                        lblMensaje.setText("Producto Actualizado");
+                    }
             }
         }catch(NullPointerException ex){
-            System.out.println("lgac no seleccionada");
             lblMensaje.setTextFill(Paint.valueOf("red"));
-            lblMensaje.setText("No se ha seleccionado una LGAC");
+            lblMensaje.setText("Selecciona una LGAC");
         }
     }
     
     //Método que recupera y valida los campos de Prod Innov
-    private void guardarProduccionInnovadora(){
+    private void guardarProduccionInnovadora(Producto prod){
         /**
          * Recopilación de datos de campos de texto
          */
-        ProduccionInnovadora produccioninnovadora = new ProduccionInnovadora();
+        ProduccionInnovadora produccioninnovadora = (ProduccionInnovadora) prod;
         String titulo = txttituloprod.getText();
         String participante = txtparticipanteprod.getText();
         String clasifinter = txtclasifprod.getText();
         String numreg = txtnumregprod.getText();
         LocalDate fecha = dtpfechaprod.getValue();
-        String descripcion = txtadescprod.getText();
         String proposito = txtpropositoprod.getText();
         String pais = txtpaisprod.getText();
         
-        boolean ca = chkcaprod.isSelected();
+        boolean ca = chkcaindexado.isSelected();
         /**
          * Validación de campos vacíos
          */
         try{
             String lgac = cbxlgacprod.getSelectionModel().getSelectedItem().getNombre();
             if(titulo.isEmpty() || participante.isEmpty() || clasifinter.isEmpty() || numreg.isEmpty()
-                || proposito.isEmpty()){
-                System.err.println("Campos Vacíos");
-                lblMensaje.setTextFill(Paint.valueOf("red"));
-                lblMensaje.setText("Campos Vacíos");
+                || proposito.isEmpty() || fecha == null){
+             lblMensaje.setTextFill(Paint.valueOf("red"));
+                lblMensaje.setText("Campos vacios"); 
             }else{
 
-                if(fecha != null){
-                    produccioninnovadora.setTitulo(titulo);          
-                    produccioninnovadora.setParticipante(participante); 
-                    produccioninnovadora.setClasifinternacional(clasifinter); 
-                    produccioninnovadora.setNumregistro(numreg); 
-                    produccioninnovadora.setFechapub(Date.valueOf(fecha));
-                    produccioninnovadora.setPais(pais);
-                    produccioninnovadora.setDescripcion(descripcion);
-                    produccioninnovadora.setLgac(lgac);
-                    produccioninnovadora.setValidadoCA(ca); 
-
-                    produccioninnovadora.setIntegranteR(usuario);
-                    if(proySelec != null){
-                        produccioninnovadora.setProyectoAsociado(proySelec);
-                    }
-                    if(integrantes != null){
-                        produccioninnovadora.setIntegrantes(integrantes);
-                    }
-                    if(colaboradores != null){
-                        produccioninnovadora.setColaboradores(colaboradores);
-                    }
-                    if(produccioninnovadora.registrarProducto() == 0){
+                        produccioninnovadora.setTitulo(titulo);          
+                        produccioninnovadora.setParticipante(participante); 
+                        produccioninnovadora.setClasifinternacional(clasifinter); 
+                        produccioninnovadora.setNumregistro(numreg); 
+                        produccioninnovadora.setFechapub(Date.valueOf(fecha));
+                        produccioninnovadora.setPais(pais);
+                        produccioninnovadora.setLgac(lgac);
+                        produccioninnovadora.setConsiderarCA(ca);  
+                        //produccioninnovadora.setProyectoAsociado(proySelec);
+                        
+                        if(produccioninnovadora.actualizarProducto()== 0){
                         lblMensaje.setTextFill(Paint.valueOf("green"));
-                        lblMensaje.setText("Producto Registrado");
+                        lblMensaje.setText("Producto Actualizado");
                     }
-                } else {
-                    lblMensaje.setTextFill(Paint.valueOf("red"));
-                    lblMensaje.setText("Ingresa una fecha");
+
                 }
-            }
         }catch(NullPointerException ex){
-            ex.printStackTrace();
             lblMensaje.setTextFill(Paint.valueOf("red"));
-            lblMensaje.setText("No se ha seleccionado una LGAC");
+            lblMensaje.setText("Selecciona una LGAC");
         }
         
 }
    
     //Método que recupera y valida los campos de Memoria en extenso
-    private void guardarMemoriaExtenso(){
+    private void guardarMemoriaExtenso(Producto prod){
         /**
          * Recopilación de datos de campos de texto
          */
-        MemoriaExtenso memoriaextenso = new MemoriaExtenso();
+        MemoriaExtenso memoriaextenso = (MemoriaExtenso)prod;
         String titulo = txttitulopresmem.getText();
         String autor = txtautormem.getText();
         String congreso = txtcongresomem.getText();
@@ -1110,9 +881,8 @@ public class RegistrarProductoController implements Initializable {
             if(titulo.isEmpty() || autor.isEmpty() || congreso.isEmpty() || estado.isEmpty()
                 || ciudad.isEmpty() || pags.isEmpty() || pais.isEmpty() || ano.isEmpty()
                 || edoactual.isEmpty()){
-            System.err.println("Campos Vacíos");
-            lblMensaje.setTextFill(Paint.valueOf("red"));
-            lblMensaje.setText("Campos Vacíos");
+             lblMensaje.setTextFill(Paint.valueOf("red"));
+                lblMensaje.setText("Campos vacios"); 
             }else{
             
                     memoriaextenso.setTitulo(titulo);          
@@ -1126,34 +896,24 @@ public class RegistrarProductoController implements Initializable {
                     memoriaextenso.setProposito(proposito);
                     memoriaextenso.setEstado(edoactual);
                     memoriaextenso.setLgac(lgac);
-                    memoriaextenso.setValidadoCA(ca);  
+                    memoriaextenso.setConsiderarCA(ca);  
+                   // memoriaextenso.setProyectoAsociado(proySelec);
                     
-                    memoriaextenso.setIntegranteR(usuario);
-                    if(proySelec != null){
-                       memoriaextenso.setProyectoAsociado(proySelec);
-                    }
-                    if(integrantes != null){
-                        memoriaextenso.setIntegrantes(integrantes);
-                    }
-                    if(colaboradores != null){
-                        memoriaextenso.setColaboradores(colaboradores);
-                    }
-                    if(memoriaextenso.registrarProducto() == 0){
+                    if(memoriaextenso.actualizarProducto()== 0){
                         lblMensaje.setTextFill(Paint.valueOf("green"));
-                        lblMensaje.setText("Producto Registrado");
+                        lblMensaje.setText("Producto Actualizado");
                     }
                 }
         }catch(NullPointerException ex){
-            System.err.println("lgac nula");
             lblMensaje.setTextFill(Paint.valueOf("red"));
-            lblMensaje.setText("No se ha seleccionado una LGAC");
+            lblMensaje.setText("Selecciona una LGAC");
         }
         
             
 }
     
     //Método que recupera y valida los campos de Prototipo
-    private void guardarPrototipo(){
+    private void guardarPrototipo(Producto prod){
         String nombre = txtNombreProto.getText();
         String institucion = txtInstitucionCreadoraProto.getText();
         String año = txtAñoProto.getText();
@@ -1170,11 +930,10 @@ public class RegistrarProductoController implements Initializable {
             if(nombre.isEmpty() || institucion.isEmpty() || año.isEmpty() ||
                     pais.isEmpty() || estado.isEmpty() || objetivos.isEmpty() ||
                     caracteristicas.isEmpty() || proposito.isEmpty()){
-                System.err.println("campos vacios");
-                lblMensaje.setTextFill(Paint.valueOf("red"));
-                lblMensaje.setText("Campos Vacíos");
+                 lblMensaje.setTextFill(Paint.valueOf("red"));
+                lblMensaje.setText("Campos vacios"); 
             }else{
-                Prototipo proto = new Prototipo();
+                Prototipo proto = (Prototipo) prod;
                 proto.setTitulo(nombre);
                 proto.setInstitucion(institucion);
                 proto.setAño(año);
@@ -1185,40 +944,19 @@ public class RegistrarProductoController implements Initializable {
                 proto.setProposito(proposito);
                 proto.setConsiderarCA(ca);
                 proto.setLgac(lgac);
+                //proto.setProyectoAsociado(proySelec);
                 
-                proto.setIntegranteR(usuario);
-                if(proySelec != null){
-                    proto.setProyectoAsociado(proySelec);
-                }
-                if(integrantes != null){
-                    proto.setIntegrantes(integrantes);
-                }
-                if(colaboradores != null){
-                    proto.setColaboradores(colaboradores);
-                }
-                if(proto.registrarProducto() == 0){
-                    lblMensaje.setTextFill(Paint.valueOf("green"));
-                    lblMensaje.setText("Producto Registrado");
-                }
+                if(proto.actualizarProducto()== 0){
+                        lblMensaje.setTextFill(Paint.valueOf("green"));
+                        lblMensaje.setText("Producto Actualizado");
+                    }
             }
         }catch(NullPointerException ex){
-            System.out.println("lgac no seleccionada");
             lblMensaje.setTextFill(Paint.valueOf("red"));
-            lblMensaje.setText("No se ha seleccionado una LGAC");
+            lblMensaje.setText("Selecciona una LGAC");
         }
     }
-
-    /**
-     * @return the usuario
-     */
-    public static Integrante getUsuario() {
-        return usuario;
-    }
-
-    /**
-     * @param aUsuario the usuario to set
-     */
-    public static void setUsuario(Integrante aUsuario) {
-        usuario = aUsuario;
-    }
 }
+
+// <editor-fold defaultstate="collapsed" desc="">
+// </editor-fold>

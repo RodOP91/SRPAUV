@@ -6,15 +6,10 @@
 package srpauv.controlador;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import srpauv.clases.OpcionesCampos;
@@ -26,9 +21,6 @@ import java.sql.Date;
 import java.sql.SQLException;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import srpauv.clases.DatosLaborales;
 import srpauv.clases.EstudiosRealizados;
@@ -40,7 +32,9 @@ import srpauv.clases.EstudiosRealizados;
  */
 public class MiPerfilController implements Initializable {
     OpcionesCampos opciones = new OpcionesCampos();
-    Integrante integrante;
+    private static Integrante usuario;
+    
+    private Integrante integrante;
     DatosLaborales datoslaborales;
     ObservableList<EstudiosRealizados> estudios;
     EstudiosRealizados estudioSeleccionado;
@@ -220,24 +214,37 @@ public class MiPerfilController implements Initializable {
         llenarOpcionesComboBox();
         // <editor-fold defaultstate="collapsed" desc=" Consultas: Integrante, DatosLaborales y EstudiosRealizados ">
         try {
-            integrante = DAO.IntegranteDAO.getDatosIntegrante(4);
-            datoslaborales = DAO.DatosLaboralesDAO.getDatosLaborales(4);
-            estudios = DAO.EstudiosRealizadosDAO.getEstudiosRealizados(4);
+            setIntegrante(DAO.IntegranteDAO.getDatosIntegrante(usuario.getIdIntegrante()));
+            datoslaborales = DAO.DatosLaboralesDAO.getDatosLaborales(usuario.getIdIntegrante());
+            
+            System.err.println(datoslaborales.toString() + "lab");
+            
+            estudios = DAO.EstudiosRealizadosDAO.getEstudiosRealizados(usuario.getIdIntegrante());
+            
+            System.err.println(estudios.toString() + "est");
+            
         } catch (SQLException ex) {
             lblAvisosDatosPersonales.setText("Error en la conexión con la Base de datos");
-            System.out.println(ex.getMessage());
+            System.err.println(ex.getMessage());
+            
         } catch (NullPointerException ex) {
-            lblAvisosDatosPersonales.setText("Error en la conexión con la Base de datos");
-            System.out.println(ex.getMessage());
+            //lblAvisosDatosPersonales.setText("Error en la conexión con la Base de datos");
+            System.err.println(ex.getMessage());
         }
 
 // </editor-fold>
 
        // Llenando campos con datos recuperados y deshabilitando la edición de los campos
-        llenarCamposDatosPersonales(integrante);
-        System.out.println(datoslaborales.getNombramiento());
-        llenarCamposDatosLaborales(datoslaborales);
-        llenarCamposFormacionProfesional(estudios);
+        llenarCamposDatosPersonales(getIntegrante());
+        deshabilitarCampos();
+        
+        if(datoslaborales != null){
+            llenarCamposDatosLaborales(datoslaborales);
+        }
+        if(estudios != null){
+            llenarCamposFormacionProfesional(estudios);
+        }
+        
         
         //ACTUALIZAR DATOS PERSONALES-------------------------------------------
         // <editor-fold defaultstate="collapsed" desc=" BtnActualizarDP onAction ">
@@ -255,12 +262,12 @@ public class MiPerfilController implements Initializable {
             if (validarCamposDatosPersonales()) {
                 lblAvisosDatosPersonales.setText("Datos actualizados con éxito");
                 try {
-                    integrante = IntegranteDAO.getDatosIntegrante(this.integrante.getIdIntegrante());
+                    setIntegrante(IntegranteDAO.getDatosIntegrante(this.getIntegrante().getIdIntegrante()));
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                     
                 }
-                llenarCamposDatosPersonales(integrante);
+                llenarCamposDatosPersonales(getIntegrante());
                 manipularCamposDatosPersonales();
                 btnGuardarDP.setVisible(false);
                 btnCancelarDP.setVisible(false);
@@ -305,7 +312,7 @@ public class MiPerfilController implements Initializable {
                     lblAvisosFP.setText("Datos actualizados con éxito");
                     manipularCamposFormacionProfesional();
                     try {
-                        estudios = EstudiosRealizadosDAO.getEstudiosRealizados(this.integrante.getIdIntegrante());
+                        estudios = EstudiosRealizadosDAO.getEstudiosRealizados(this.getIntegrante().getIdIntegrante());
 
                     } catch (SQLException ex) {
                         ex.printStackTrace();
@@ -321,7 +328,7 @@ public class MiPerfilController implements Initializable {
                 lblAvisosFP.setText("Estudios registrados con éxito");
                 manipularCamposFormacionProfesional();
                     try {
-                        estudios = EstudiosRealizadosDAO.getEstudiosRealizados(this.integrante.getIdIntegrante());
+                        estudios = EstudiosRealizadosDAO.getEstudiosRealizados(this.getIntegrante().getIdIntegrante());
 
                     } catch (SQLException ex) {
                         ex.printStackTrace();
@@ -386,7 +393,7 @@ public class MiPerfilController implements Initializable {
             if(validarCamposDatosLaborales()){
                 lblAvisosDL.setText("Datos Actualizados con éxito");
                 try{
-                    datoslaborales = DatosLaboralesDAO.getDatosLaborales(integrante.getIdIntegrante());
+                    datoslaborales = DatosLaboralesDAO.getDatosLaborales(getIntegrante().getIdIntegrante());
                 }catch(SQLException ex){
                     ex.printStackTrace();
                 }
@@ -518,21 +525,21 @@ public class MiPerfilController implements Initializable {
             this.txtNombre.setDisable(false); 
             this.txtApellidoPaterno.setDisable(false);          
             this.txtApellidoMaterno.setDisable(false);            
-            this.cbxEdoCivil.setPromptText(integrante.getEstadoCivil());
+            this.cbxEdoCivil.setPromptText(getIntegrante().getEstadoCivil());
             this.cbxEdoCivil.setVisible(true);
             this.cbxEdoCivil.setDisable(false);         
             this.txtRfc.setDisable(false);           
             this.txtCurp.setDisable(false);         
             this.txtTelCasa.setDisable(false);          
             this.txtTelTrabajo.setDisable(false);
-            this.cbxNacionalidad.setPromptText(integrante.getNacionalidad());
+            this.cbxNacionalidad.setPromptText(getIntegrante().getNacionalidad());
             this.cbxNacionalidad.setDisable(true);                                
             this.txtFechaNacimiento.setDisable(true);            
             this.txtCorreoUv.setDisable(false);           
             this.txtCorreoAdicional.setDisable(false);
-            this.cbxArea.setPromptText(integrante.getArea());
+            this.cbxArea.setPromptText(getIntegrante().getArea());
             this.cbxArea.setDisable(false);           
-            this.cbxDisciplina.setPromptText(integrante.getDisciplina());
+            this.cbxDisciplina.setPromptText(getIntegrante().getDisciplina());
             this.cbxDisciplina.setDisable(false);
             
             //Habilitar Botones Guardar y Cancelar DP---------------------------
@@ -547,67 +554,76 @@ public class MiPerfilController implements Initializable {
             this.txtNombre.setDisable(true); 
             this.txtApellidoPaterno.setDisable(true);          
             this.txtApellidoMaterno.setDisable(true);            
-            this.cbxEdoCivil.setPromptText(integrante.getEstadoCivil());
+            this.cbxEdoCivil.setPromptText(getIntegrante().getEstadoCivil());
             this.cbxEdoCivil.setDisable(true);         
             this.txtRfc.setDisable(true);           
             this.txtCurp.setDisable(true);         
             this.txtTelCasa.setDisable(true);          
             this.txtTelTrabajo.setDisable(true);
-            this.cbxNacionalidad.setPromptText(integrante.getNacionalidad());
+            this.cbxNacionalidad.setPromptText(getIntegrante().getNacionalidad());
             this.cbxNacionalidad.setDisable(true);                                
             this.txtFechaNacimiento.setDisable(true);            
             this.txtCorreoUv.setDisable(true);           
             this.txtCorreoAdicional.setDisable(true);
-            this.cbxArea.setPromptText(integrante.getArea());
+            this.cbxArea.setPromptText(getIntegrante().getArea());
             this.cbxArea.setDisable(true);           
-            this.cbxDisciplina.setPromptText(integrante.getDisciplina());
+            this.cbxDisciplina.setPromptText(getIntegrante().getDisciplina());
             this.cbxDisciplina.setDisable(true);
             //Dehabilitando botones Guardar y Cancelar DP-----------------------
             this.btnGuardarDP.setVisible(false);
             this.btnCancelarDP.setVisible(false);
             this.btnActualizarDP.setDisable(false);
             indicadorDP=0;
-        }
-        
+        }   
+    }
+    
+    private void deshabilitarCampos(){
+        this.txtNombramiento.setDisable(true);
+        this.txtDes.setDisable(true);
+        this.txtUnidadAcademica.setDisable(true);
+        this.txtFechaIngresoUV.setDisable(true);
+        this.txtProgramaEducativo.setDisable(true);
+        this.txtNivelSNI.setDisable(true);
+        this.txtContratoPTC.setDisable(true);
+        this.txtContratoPTC.setDisable(true);
     }
     
     private void llenarCamposDatosLaborales(DatosLaborales datoslaborales){
         this.txtNombramiento.setText(datoslaborales.getNombramiento());
-        this.txtNombramiento.setDisable(true);
-        System.out.println(datoslaborales.getNombramiento());
+        
         this.txtDes.setText(datoslaborales.getDes());
-        this.txtDes.setDisable(true);
+        
         this.cbxDES.getSelectionModel().select(datoslaborales.getDes());
        
         
         this.cbxUnidadAcademica.setPromptText(datoslaborales.getUnidadAcademica());
         this.cbxUnidadAcademica.getSelectionModel().select(datoslaborales.getUnidadAcademica());
         this.txtUnidadAcademica.setText(datoslaborales.getUnidadAcademica());
-        this.txtUnidadAcademica.setDisable(true);
+        
         
         this.txtFechaIngresoUV.setText(datoslaborales.getFechaIngresoUV().toString());
-        this.txtFechaIngresoUV.setDisable(true);
+        
         
         this.cbxProgramaEducativo.setPromptText(datoslaborales.getProgramaEducativo());
         this.cbxProgramaEducativo.getSelectionModel().select(datoslaborales.getProgramaEducativo());
         this.txtProgramaEducativo.setText(datoslaborales.getProgramaEducativo());
-        this.txtProgramaEducativo.setDisable(true);
+        
         
         this.cbxNivelSni.setPromptText(datoslaborales.getNivelSNI());
         this.cbxNivelSni.getSelectionModel().select(datoslaborales.getNivelSNI());
         this.txtNivelSNI.setText(datoslaborales.getNivelSNI());
-        this.txtNivelSNI.setDisable(true);
+        
         
         if(datoslaborales.getContratoPTC()){
             this.cbxContratoPtc.setPromptText("Sí");
             this.cbxContratoPtc.getSelectionModel().select("Sí");            
             this.txtContratoPTC.setText("Sí");
-            this.txtContratoPTC.setDisable(true);
+            
         }else{
             this.cbxContratoPtc.setPromptText("No");
             this.cbxContratoPtc.getSelectionModel().select("No"); 
             this.txtContratoPTC.setText("No");
-            this.txtContratoPTC.setDisable(true);
+            
         }
         
     }
@@ -780,7 +796,7 @@ public class MiPerfilController implements Initializable {
     
     private boolean actualizarDatosPersonales(){
         boolean flag=false;
-        Integrante integranteActualizado = integrante;
+        Integrante integranteActualizado = getIntegrante();
         integranteActualizado.setNombre(this.txtNombre.getText());
         integranteActualizado.setApellidoP(this.txtApellidoPaterno.getText());
         integranteActualizado.setApellidoM(this.txtApellidoMaterno.getText());
@@ -848,7 +864,7 @@ public class MiPerfilController implements Initializable {
         
         
         try{
-            EstudiosRealizadosDAO.registrar(this.integrante.getIdIntegrante(),nuevoEstudio);
+            EstudiosRealizadosDAO.registrar(this.getIntegrante().getIdIntegrante(),nuevoEstudio);
             return flag = true;
         }catch(SQLException ex){
             ex.printStackTrace();
@@ -974,7 +990,7 @@ public class MiPerfilController implements Initializable {
         }else{
             
         }
-        DatosLaborales datosActualizados = new DatosLaborales(integrante.getIdIntegrante(), 
+        DatosLaborales datosActualizados = new DatosLaborales(getIntegrante().getIdIntegrante(), 
         contrato,
         Date.valueOf(this.dtpFechaIngresoUv.getValue()),
         this.cbxDES.getSelectionModel().getSelectedItem().toString(),
@@ -987,7 +1003,7 @@ public class MiPerfilController implements Initializable {
         System.out.println("Des: " + datosActualizados.getDes());
         System.out.println("Nivel SNI: " + datosActualizados.getNivelSNI());
         try{
-            DatosLaboralesDAO.actualizar(integrante.getIdIntegrante(),datosActualizados);
+            DatosLaboralesDAO.actualizar(getIntegrante().getIdIntegrante(),datosActualizados);
             return flag = true;
         }catch(SQLException ex){
             ex.printStackTrace();
@@ -995,7 +1011,26 @@ public class MiPerfilController implements Initializable {
         }
         
     }
+
+    /**
+     * @return the integrante
+     */
+    public static Integrante getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param integrante the integrante to set
+     */
+    public static void setUsuario(Integrante user) {
+        MiPerfilController.usuario = user;
+    }
     
-    
+    private Integrante getIntegrante(){
+        return integrante;
+    }
+    private void setIntegrante(Integrante integ){
+        integrante = integ;
+    }
     
 }

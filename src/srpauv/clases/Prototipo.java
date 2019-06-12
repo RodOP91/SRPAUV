@@ -22,6 +22,20 @@ public class Prototipo extends Producto{
     private String objetivos;
     private String caracteristicas;
     private String institucion;
+
+    public Prototipo(String autor_es, String pais, String año, String proposito, 
+            String objetivos, String caracteristicas, String institucion, 
+            int idProducto, boolean considerarCA, String lgac, String titulo, 
+            String estado, int idProyecto, String tipoProducto) {
+        super(idProducto, considerarCA, lgac, titulo, estado, idProyecto, tipoProducto);
+        this.autor_es = autor_es;
+        this.pais = pais;
+        this.año = año;
+        this.proposito = proposito;
+        this.objetivos = objetivos;
+        this.caracteristicas = caracteristicas;
+        this.institucion = institucion;
+    }
     
     public Prototipo(int id, String lgac, String titulo, Integrante integrante){
         super(id, lgac, titulo, integrante);
@@ -34,7 +48,7 @@ public class Prototipo extends Producto{
     
     @Override
     public int actualizarProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ProductosDAO.editar(this);
     }
 
     @Override

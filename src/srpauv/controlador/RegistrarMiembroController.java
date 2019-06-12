@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.paint.Paint;
+import javafx.stage.Stage;
 import srpauv.clases.Integrante;
 
 /**
@@ -52,7 +53,8 @@ public class RegistrarMiembroController implements Initializable {
         });
         
         btnCancelar.setOnAction((ActionEvent event) -> {
-            
+            Stage stage = (Stage)btnCancelar.getScene().getWindow();
+            stage.close();
         });
     }    
     

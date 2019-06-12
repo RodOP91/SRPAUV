@@ -30,6 +30,10 @@ public class Proyecto {
 
     public Proyecto(){};
     
+    public Proyecto(int id){
+        this.idProyecto = id;
+    }
+    
     public Proyecto(int idProyecto, String tituloProyecto) {
         this.idProyecto = idProyecto;
         this.tituloProyecto = tituloProyecto;

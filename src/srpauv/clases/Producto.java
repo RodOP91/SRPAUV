@@ -27,6 +27,18 @@ public abstract class Producto {
     
     private String tipoProducto;
 
+    public Producto(int idProducto, boolean considerarCA, String lgac, String titulo, String estado, int idProyecto, String tipoProducto) {
+        this.idProducto = idProducto;
+        this.considerarCA = considerarCA;
+        this.lgac = lgac;
+        this.titulo = titulo;
+        this.estado = estado;
+        this.idProyecto = idProyecto;
+        this.tipoProducto = tipoProducto;
+    }
+    
+    
+
     public Producto(int idProducto, String lgac, String titulo, Integrante integrante) {
         this.idProducto = idProducto;
         this.lgac = lgac;

@@ -6,7 +6,7 @@
 package srpauv.clases;
 
 import DAO.ProductosDAO;
-import java.time.LocalDate;
+import java.sql.Date;
 
 /**
  *
@@ -14,10 +14,20 @@ import java.time.LocalDate;
  */
 public class Tesis extends Producto{
      
-    private LocalDate fechaInicio;
-    private LocalDate fechaFin;
+    private Date fechaInicio;
+    private Date fechaFin;
     private String grado;
     private int numAlumnos;
+
+    public Tesis(Date fechaInicio, Date fechaFin, String grado, int numAlumnos, 
+            int idProducto, boolean considerarCA, String lgac, String titulo, 
+            String estado, int idProyecto, String tipoProducto) {
+        super(idProducto, considerarCA, lgac, titulo, estado, idProyecto, tipoProducto);
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.grado = grado;
+        this.numAlumnos = numAlumnos;
+    }
     
     public Tesis(int id, String lgac, String titulo, Integrante integrante){
         super(id, lgac, titulo, integrante);
@@ -30,7 +40,7 @@ public class Tesis extends Producto{
     
     @Override
     public int actualizarProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ProductosDAO.editar(this);
     }
 
     @Override
@@ -51,28 +61,28 @@ public class Tesis extends Producto{
     /**
      * @return the fechaInicio
      */
-    public LocalDate getFechaInicio() {
+    public Date getFechaInicio() {
         return fechaInicio;
     }
 
     /**
      * @param fechaInicio the fechaInicio to set
      */
-    public void setFechaInicio(LocalDate fechaInicio) {
+    public void setFechaInicio(Date fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
     /**
      * @return the fechaFin
      */
-    public LocalDate getFechaFin() {
+    public Date getFechaFin() {
         return fechaFin;
     }
 
     /**
      * @param fechaFin the fechaFin to set
      */
-    public void setFechaFin(LocalDate fechaFin) {
+    public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
     }
 

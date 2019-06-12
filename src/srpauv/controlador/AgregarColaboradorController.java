@@ -55,7 +55,6 @@ public class AgregarColaboradorController implements Initializable {
             RegistrarProductoController.setIntegrantes(listI);
             RegistrarProductoController.setColaboradores(listC);
             
-            
             Stage stage = (Stage) this.integrantes.getScene().getWindow();
             stage.close();
         });

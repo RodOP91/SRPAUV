@@ -36,14 +36,23 @@ public class MenuController implements Initializable {
     @FXML Button btnRegistrarProducto;
     @FXML Button btnRegistrarColaborador;
     @FXML Button btnValidarProductos;
+    @FXML Button btnEditarProducto;
+    @FXML Button btnRegistrarProyecto;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        if(usuario.getResponsable() == 0){
+            btnRegistrarIntegrante.setVisible(false);
+            btnRegistrarColaborador.setVisible(false);
+            btnValidarProductos.setVisible(false);
+        }
         
         lblUsuario.setText(usuario.getUsuario());
         
         lblUsuario.setOnMouseClicked((event) -> {
             try {
+                MiPerfilController.setUsuario(usuario);
                 Parent root = FXMLLoader.load(getClass().getResource("/srpauv/FXML/MiPerfil.fxml"), rb);
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
@@ -58,6 +67,7 @@ public class MenuController implements Initializable {
         
         btnRegistrarIntegrante.setOnAction((ActionEvent event) -> {
             try {
+                RegistrarProductoController.setUsuario(usuario);
                 Parent root = FXMLLoader.load(getClass().getResource("/srpauv/FXML/RegistrarMiembro.fxml"), rb);
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
@@ -72,6 +82,7 @@ public class MenuController implements Initializable {
         
         btnRegistrarProducto.setOnAction((ActionEvent event) -> {
             try {
+                RegistrarProductoController.setUsuario(usuario);
                 Parent root = FXMLLoader.load(getClass().getResource("/srpauv/FXML/RegistrarProducto.fxml"), rb);
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
@@ -109,6 +120,44 @@ public class MenuController implements Initializable {
         btnValidarProductos.setOnAction((event) -> {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("/srpauv/FXML/ValidarProductos.fxml"), rb);
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                //stage.setTitle(rb.getString("tituloG"));
+                stage.setResizable(false);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        btnEditarProducto.setOnAction((event) -> {
+            try {
+                EditarProductoController.setUsuario(usuario);
+                Parent root = FXMLLoader.load(getClass().getResource("/srpauv/FXML/EditarProducto.fxml"), rb);
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                //stage.setTitle(rb.getString("tituloG"));
+                
+                stage.setMaximized(true);
+                stage.setMinWidth(1000);
+                stage.setMinHeight(650);
+                stage.maximizedProperty().addListener((Observable observable) -> {
+                    stage.setWidth(1000);
+                    stage.setHeight(650);
+                });
+                
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        btnRegistrarProyecto.setOnAction((event) -> {
+            try {
+                RegistrarProyectoController.setUsuario(usuario);
+                Parent root = FXMLLoader.load(getClass().getResource("/srpauv/FXML/RegistrarProyecto.fxml"), rb);
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);

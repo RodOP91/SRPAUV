@@ -13,8 +13,6 @@ import DAO.ProductosDAO;
  */
 public class ArticuloArbitrado extends Producto{
     
-    
-    
     private String autor;
     private String descripcion;
     private String proposito;
@@ -38,7 +36,7 @@ public class ArticuloArbitrado extends Producto{
     
     @Override
     public int actualizarProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ProductosDAO.editar(this);
     }
 
     @Override

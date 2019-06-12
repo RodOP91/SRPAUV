@@ -50,6 +50,12 @@ public class ValidarProductosController implements Initializable {
         
         btnValidar.setOnAction((event) -> {
             validarProducto();
+            try {
+                lstProductosCA.getItems().clear();
+                recuperarProductosCA();
+            } catch (SQLException ex) {
+                Logger.getLogger(ValidarProductosController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
     }    
     

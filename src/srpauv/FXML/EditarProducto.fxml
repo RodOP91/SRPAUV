@@ -11,11 +11,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1300.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="srpauv.controlador.RegistrarProductoController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="srpauv.controlador.EditarProductoController">
     <stylesheets>
-        <URL value="@/srpauv/FXML/css/registrarproducto.css" />
+        <URL value="@/srpauv/FXML/css/editarproducto.css" />
     </stylesheets>
-   <children>
+    <children>
       <AnchorPane prefHeight="100.0" prefWidth="1300.0" styleClass="header" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="250.0" layoutY="24.0" text="SRPAUV" AnchorPane.leftAnchor="250.0">
@@ -24,60 +24,9 @@
                </font>
             </Label>
          </children></AnchorPane>
-      <AnchorPane fx:id="apnProductos" layoutY="106.0" prefWidth="250.0" styleClass="listProductos" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="100.0">
+      <AnchorPane fx:id="apnProductos" layoutY="100.0" prefWidth="250.0" styleClass="listProductos" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="100.0">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <ToggleButton fx:id="btnTesis" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="btnProducto" text="%btnTesis">
-                     <VBox.margin>
-                        <Insets left="20.0" right="20.0" />
-                     </VBox.margin>
-                  </ToggleButton>
-                  <ToggleButton fx:id="btnArticuloIndexado" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="btnProducto" text="%btnArtIndex">
-                     <VBox.margin>
-                        <Insets left="20.0" right="20.0" />
-                     </VBox.margin>
-                  </ToggleButton>
-                  <ToggleButton fx:id="btnArticuloArbitrado" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="btnProducto" text="%btnArtArb">
-                     <VBox.margin>
-                        <Insets left="20.0" right="20.0" />
-                     </VBox.margin>
-                  </ToggleButton>
-                  <ToggleButton fx:id="btnArticulo" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="btnProducto" text="%btnArt">
-                     <VBox.margin>
-                        <Insets left="20.0" right="20.0" />
-                     </VBox.margin>
-                  </ToggleButton>
-                  <ToggleButton fx:id="btnCapituloLibro" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="btnProducto" text="%btnCapLibro">
-                     <VBox.margin>
-                        <Insets left="20.0" right="20.0" />
-                     </VBox.margin>
-                  </ToggleButton>
-                  <ToggleButton fx:id="btnLibro" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="btnProducto" text="%btnLibro">
-                     <VBox.margin>
-                        <Insets left="20.0" right="20.0" />
-                     </VBox.margin>
-                  </ToggleButton>
-                  <ToggleButton fx:id="btnProduccionInnovadora" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="btnProducto" text="%btnProdInnov">
-                     <VBox.margin>
-                        <Insets left="20.0" right="20.0" />
-                     </VBox.margin>
-                  </ToggleButton>
-                  <ToggleButton fx:id="btnMemoriaExtenso" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="btnProducto" text="%btnMemExtenso">
-                     <VBox.margin>
-                        <Insets left="20.0" right="20.0" />
-                     </VBox.margin>
-                  </ToggleButton>
-                  <ToggleButton fx:id="btnPrototipo" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="btnProducto" text="%btnProto">
-                     <VBox.margin>
-                        <Insets left="20.0" right="20.0" />
-                     </VBox.margin>
-                  </ToggleButton>
-               </children>
-               <padding>
-                  <Insets bottom="30.0" top="30.0" />
-               </padding>
-            </VBox>
+            <ListView fx:id="lstProductos" layoutX="7.0" layoutY="70.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="250.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #C4C4C4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
@@ -193,7 +142,7 @@
                               <Insets left="30.0" right="30.0" top="150.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField fx:id="txtpropositoindexado" prefHeight="30.0" GridPane.valignment="TOP">
+                        <TextField fx:id="txtapropositoindexado" prefHeight="30.0" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="30.0" right="30.0" top="210.0" />
                            </GridPane.margin>
@@ -355,7 +304,7 @@
                               <Insets left="30.0" right="30.0" top="150.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField fx:id="txtpropositoarbitrado" prefHeight="30.0" GridPane.valignment="TOP">
+                        <TextField fx:id="txtapropositoarbitrado" prefHeight="30.0" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="30.0" right="30.0" top="210.0" />
                            </GridPane.margin>
@@ -983,7 +932,7 @@
                                     <Insets left="15.0" right="30.0" top="60.0" />
                                  </GridPane.margin>
                               </DatePicker>
-                              <Label text="Clasificación Interna" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                              <Label text="Claseificación Interna" GridPane.rowIndex="1" GridPane.valignment="TOP">
                                  <GridPane.margin>
                                     <Insets left="30.0" top="-15.0" />
                                  </GridPane.margin>
@@ -1109,7 +1058,7 @@
                                     <Insets left="30.0" right="15.0" top="120.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField fx:id="txtedoactual" prefHeight="30.0" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                              <TextField fx:id="txtedoactualmem" prefHeight="30.0" GridPane.columnIndex="1" GridPane.valignment="TOP">
                                  <GridPane.margin>
                                     <Insets left="15.0" right="30.0" top="120.0" />
                                  </GridPane.margin>
@@ -1281,7 +1230,7 @@
                               <Insets left="30.0" right="30.0" top="270.0" />
                            </GridPane.margin>
                         </TextArea>
-                        <Label text="Nombre del Prototipo" GridPane.valignment="TOP">
+                        <Label text="Nombre del Prototipo{" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="30.0" top="15.0" />
                            </GridPane.margin>

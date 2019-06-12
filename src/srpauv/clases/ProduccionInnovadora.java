@@ -6,15 +6,39 @@
 package srpauv.clases;
 
 import DAO.ProductosDAO;
-import java.time.LocalDate;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
  * @author ferzo
  */
 public class ProduccionInnovadora extends Producto {
+    
+    private String participante;
+    private String descripcion;
+    private String pais;
+    private String proposito;
+    private String clasifinternacional;
+    private Date fechapub;
+    private String numregistro;
+    private String usuario;
 
+    public ProduccionInnovadora(String participante, String descripcion, 
+            String pais, String proposito, String clasifinternacional, 
+            Date fechapub, String numregistro, String usuario, int idProducto, 
+            boolean considerarCA, String lgac, String titulo, String estado, 
+            int idProyecto, String tipoProducto) {
+        super(idProducto, considerarCA, lgac, titulo, estado, idProyecto, tipoProducto);
+        this.participante = participante;
+        this.descripcion = descripcion;
+        this.pais = pais;
+        this.proposito = proposito;
+        this.clasifinternacional = clasifinternacional;
+        this.fechapub = fechapub;
+        this.numregistro = numregistro;
+        this.usuario = usuario;
+    }
+    
     public ProduccionInnovadora(int id, String lgac, String titulo, Integrante integrante){
         super(id, lgac, titulo, integrante);
         this.setTipoProducto("produccionInnovadora");
@@ -23,20 +47,10 @@ public class ProduccionInnovadora extends Producto {
     public ProduccionInnovadora() {
         this.setTipoProducto("produccionInnovadora");
     }
-    private String participante;
-
-    
-    private String descripcion;
-    private String pais;
-    private String proposito;
-    private String clasifinternacional;
-    private LocalDate fechapub;
-    private String numregistro;
-    private String usuario;
 
     @Override
     public int actualizarProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ProductosDAO.editar(this);
     }
 
     @Override
@@ -94,11 +108,11 @@ public class ProduccionInnovadora extends Producto {
         this.clasifinternacional = clasifinternacional;
     }
 
-    public LocalDate getFechapub() {
+    public Date getFechapub() {
         return fechapub;
     }
 
-    public void setFechapub(LocalDate fechapub) {
+    public void setFechapub(Date fechapub) {
         this.fechapub = fechapub;
     }
 

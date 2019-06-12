@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package srpauv.clases;
 
 import DAO.ProductosDAO;
@@ -12,7 +7,7 @@ import DAO.ProductosDAO;
  * @author ferzo
  */
 public class MemoriaExtenso extends Producto{
-    private String autor;    
+    private String autor; 
     private String congreso;
     private String estadoGeo;
     private String ciudad;
@@ -20,6 +15,21 @@ public class MemoriaExtenso extends Producto{
     private String pais;
     private String ano;
     private String proposito;
+
+    public MemoriaExtenso(String autor, String congreso, String estadoGeo, 
+            String ciudad, String rangopags, String pais, String ano, 
+            String proposito, int idProducto, boolean considerarCA, String lgac, 
+            String titulo, String estado, int idProyecto, String tipoProducto) {
+        super(idProducto, considerarCA, lgac, titulo, estado, idProyecto, tipoProducto);
+        this.autor = autor;
+        this.congreso = congreso;
+        this.estadoGeo = estadoGeo;
+        this.ciudad = ciudad;
+        this.rangopags = rangopags;
+        this.pais = pais;
+        this.ano = ano;
+        this.proposito = proposito;
+    }
     
     public MemoriaExtenso(int id, String lgac, String titulo, Integrante integrante){
         super(id, lgac, titulo, integrante);
@@ -33,7 +43,7 @@ public class MemoriaExtenso extends Producto{
     
     @Override
     public int actualizarProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ProductosDAO.editar(this);
     }
 
     @Override
@@ -68,11 +78,11 @@ public class MemoriaExtenso extends Producto{
     }
 
     public String getEstadoG() {
-        return estadoGeo;
+        return getEstadoGeo();
     }
 
     public void setEstadoG(String estado) {
-        this.estadoGeo = estado;
+        this.setEstadoGeo(estado);
     }
 
     public String getCiudad() {
@@ -113,6 +123,20 @@ public class MemoriaExtenso extends Producto{
 
     public void setProposito(String proposito) {
         this.proposito = proposito;
+    }
+
+    /**
+     * @return the estadoGeo
+     */
+    public String getEstadoGeo() {
+        return estadoGeo;
+    }
+
+    /**
+     * @param estadoGeo the estadoGeo to set
+     */
+    public void setEstadoGeo(String estadoGeo) {
+        this.estadoGeo = estadoGeo;
     }
     
 }

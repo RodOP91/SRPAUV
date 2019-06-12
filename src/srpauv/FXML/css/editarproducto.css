@@ -1,0 +1,43 @@
+/*
+ * Empty Stylesheet file.
+ */
+.mainFxmlClass {
+
+}
+.header{
+    -fx-background-color: #3979F0;
+}
+.listProductos{
+    -fx-background-color: #E2E2E2;
+}
+
+/*
+BOTONES PRODUCTOS
+*/
+.btnProducto{
+    -fx-background-color: #C4C4C4;
+    -fx-border-color: #c4c4c4;
+    -fx-border-radius: 0px;
+}
+.btnProducto:selected{
+    -fx-background-color: #249108;
+}
+
+/*
+BOTONES ACCION
+*/
+.btnGuardar{
+    -fx-background-color: #249108;
+    -fx-border-color: #249108;
+    -fx-border-radius: 0px;
+}
+.btnAsociar{
+    -fx-background-color: #00AEE6;
+    -fx-border-color: #00AEE6;
+    -fx-border-radius: 0px;
+}
+.btnCancelar{
+    -fx-background-color: #DB0000;
+    -fx-border-color: #DB0000;
+    -fx-border-radius: 0px;
+}

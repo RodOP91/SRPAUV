@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Paint;
+import javafx.stage.Stage;
 import srpauv.clases.Colaborador;
 
 /**
@@ -54,6 +55,8 @@ public class RegistrarColaboradorController implements Initializable {
         });
         
         btnCancelar.setOnAction((event) -> {
+            Stage stage = (Stage)btnCancelar.getScene().getWindow();
+            stage.close();
         });
     }    
     

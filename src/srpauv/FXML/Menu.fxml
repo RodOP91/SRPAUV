@@ -22,7 +22,7 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblUsuario" layoutX="477.0" layoutY="24.0" text="usuario" AnchorPane.rightAnchor="50.0">
+                  <Label id="lblusuario" fx:id="lblUsuario" layoutX="477.0" layoutY="24.0" text="usuario" AnchorPane.rightAnchor="50.0">
                      <font>
                         <Font size="18.0" />
                      </font></Label>
@@ -46,9 +46,11 @@
                     </rowConstraints>
                      <children>
                         <Button fx:id="btnRegistrarProducto" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="botones" text="Registrar Producto" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <Button fx:id="btnRegistrarIntegrante" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="botones" text="Registrar Integrante" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <Button fx:id="btnRegistrarColaborador" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="botones" text="Registrar Colaborador" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <Button fx:id="btnValidarProductos" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Validar Productos CA" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                        <Button fx:id="btnRegistrarIntegrante" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="botones" text="Registrar Integrante" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                        <Button fx:id="btnRegistrarColaborador" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="botones" text="Registrar Colaborador" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                        <Button fx:id="btnValidarProductos" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="botones" text="Validar Productos CA" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                        <Button fx:id="btnEditarProducto" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="botones" text="Editar Producto" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <Button fx:id="btnRegistrarProyecto" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="botones" text="Registrar Proyecto" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>
                </children>

@@ -21,6 +21,21 @@ public class Libro extends Producto{
     private int noEdiciones;
     private int totalEjemplares;
     private String ISBN;
+
+    public Libro(String autor_es, String editorial, String pais, String año, 
+            String proposito, int noEdiciones, int totalEjemplares, String ISBN, 
+            int idProducto, boolean considerarCA, String lgac, String titulo, 
+            String estado, int idProyecto, String tipoProducto) {
+        super(idProducto, considerarCA, lgac, titulo, estado, idProyecto, tipoProducto);
+        this.autor_es = autor_es;
+        this.editorial = editorial;
+        this.pais = pais;
+        this.año = año;
+        this.proposito = proposito;
+        this.noEdiciones = noEdiciones;
+        this.totalEjemplares = totalEjemplares;
+        this.ISBN = ISBN;
+    }
     
     public Libro(int id, String lgac, String titulo, Integrante integrante){
         super(id, lgac, titulo, integrante);
@@ -33,7 +48,7 @@ public class Libro extends Producto{
 
     @Override
     public int actualizarProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ProductosDAO.editar(this);
     }
 
     @Override
