@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportProductosCA_subreportTesis" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="792" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="60fe9694-b3d7-4681-b84a-fb06bb9726d5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fecha_inicio" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha_fin" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select `tesis`.`idProducto`,`tesis`.`titulo`,`tesis`.`estado`,`tesis`.`fechaInicio`,`tesis`.`fechaFin`,`tesis`.`noAlumnos`,`tesis`.`lgac`,`tesis`.`ca`,`tesis`.`tipo`,`tesis`.`grado`, `integrante`.`nombre`,`integrante`.`apellidoP`,`integrante`.`apellidoM` 
+from (`tesis` inner join `integrante`) 
+where `tesis`.`idIntegrante` = `integrante`.`idIntegrante` AND `tesis`.`ca` = 2 
+AND `fechaRegistro` BETWEEN $P{fecha_inicio} AND $P{fecha_fin}]]>
+	</queryString>
+	<field name="idProducto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="titulo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaInicio" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaFin" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="noAlumnos" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="lgac" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ca" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="grado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellidoP" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellidoM" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="792" height="26" uuid="03922241-8733-491e-b252-101472c8fd09"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[TESIS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="89" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="51" height="20" uuid="1ce2a042-8d11-40c9-ba03-1dc7ac66b253"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="51" y="0" width="49" height="20" uuid="87239fd2-059d-492d-ac14-c7fffaebfa17"/>
+				<textFieldExpression><![CDATA[$F{idProducto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="20" uuid="9257fdd8-b482-466e-b7e3-1c8d65cb6f6d"/>
+				<text><![CDATA[TITULO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="200" y="0" width="174" height="20" uuid="13cfc9cf-eb3a-4d64-ae9c-49e26b4e7498"/>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="374" y="0" width="100" height="20" uuid="3f11954e-df21-4a19-98dd-1b05d4ff3c4c"/>
+				<text><![CDATA[ESTADO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="474" y="0" width="100" height="20" uuid="e7bba75c-1b4b-42fa-8e60-a50a8c6a2a7e"/>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="574" y="0" width="100" height="20" uuid="4c5025a8-f893-475a-a57b-f7df79f2c8bc"/>
+				<text><![CDATA[FECHA INICIO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="674" y="0" width="118" height="20" uuid="3f5144e0-b0f2-423f-aa79-54e4b669c15b"/>
+				<textFieldExpression><![CDATA[$F{fechaInicio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="574" y="20" width="100" height="20" uuid="b13bf87d-a5ee-40a1-875d-6417c06f5d31"/>
+				<text><![CDATA[FECHA FIN]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="674" y="20" width="118" height="20" uuid="86fe54a7-7de3-4216-81ed-9e976efd96b3"/>
+				<textFieldExpression><![CDATA[$F{fechaFin}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="374" y="20" width="100" height="20" uuid="d29db7a3-1545-42e4-887b-be8af62cf77c"/>
+				<text><![CDATA[NUM. ALUMNOS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="474" y="20" width="100" height="20" uuid="6aa90ce6-1236-4dd3-ae7e-77771122989a"/>
+				<textFieldExpression><![CDATA[$F{noAlumnos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="100" height="20" uuid="b24dd7bb-a3c6-4373-85a7-c080f06538c4"/>
+				<text><![CDATA[LGAC]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="20" width="274" height="20" uuid="daeae419-8d62-4571-88d5-191d6c7763ad"/>
+				<textFieldExpression><![CDATA[$F{lgac}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="40" width="100" height="20" uuid="c832a3d8-4678-4745-a3b8-ce15d28f3316"/>
+				<text><![CDATA[GRADO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="40" width="100" height="20" uuid="3bd6397e-1c6a-4979-b499-e930f7ce39f6"/>
+				<textFieldExpression><![CDATA[$F{grado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="200" y="40" width="52" height="20" uuid="e94b75cf-c585-4093-8770-59a06ace4dc9"/>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="252" y="40" width="100" height="20" uuid="34e46d64-1d63-41f9-acb1-233d0cd38378"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="352" y="40" width="114" height="20" uuid="62dd9504-da86-4f95-bde0-b5db52cb41db"/>
+				<text><![CDATA[APELLIDO PATERNO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="466" y="40" width="100" height="20" uuid="2016f889-f741-44b7-a6b9-57043671f567"/>
+				<textFieldExpression><![CDATA[$F{apellidoP}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="566" y="40" width="108" height="20" uuid="35f93855-1cde-4113-8a72-5f26c755d9e8"/>
+				<text><![CDATA[APELLIDO MATERNO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="674" y="40" width="118" height="20" uuid="71eeca6c-062c-4a0e-9bac-cbcddb6a3a34"/>
+				<textFieldExpression><![CDATA[$F{apellidoM}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="74" width="792" height="1" uuid="844b5107-99ff-4a63-83dd-2e3436a84039"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

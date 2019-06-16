@@ -38,14 +38,15 @@ public class MenuController implements Initializable {
     @FXML Button btnValidarProductos;
     @FXML Button btnEditarProducto;
     @FXML Button btnRegistrarProyecto;
+    @FXML Button btnGenerarReporte;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
         if(usuario.getResponsable() == 0){
             btnRegistrarIntegrante.setVisible(false);
-            btnRegistrarColaborador.setVisible(false);
             btnValidarProductos.setVisible(false);
+            btnGenerarReporte.setVisible(false);
         }
         
         lblUsuario.setText(usuario.getUsuario());
@@ -158,6 +159,21 @@ public class MenuController implements Initializable {
             try {
                 RegistrarProyectoController.setUsuario(usuario);
                 Parent root = FXMLLoader.load(getClass().getResource("/srpauv/FXML/RegistrarProyecto.fxml"), rb);
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                //stage.setTitle(rb.getString("tituloG"));
+                stage.setResizable(false);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        btnGenerarReporte.setOnAction((event) -> {
+            try {
+                GenerarReporteController.setUsuario(usuario);
+                Parent root = FXMLLoader.load(getClass().getResource("/srpauv/FXML/GenerarReporte.fxml"), rb);
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);

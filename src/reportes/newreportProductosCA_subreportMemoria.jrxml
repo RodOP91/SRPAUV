@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportProductosCA_subreportTesis" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="792" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="60fe9694-b3d7-4681-b84a-fb06bb9726d5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fecha_inicio" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha_fin" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select `memoriaextenso`.`idProducto`,`memoriaextenso`.`titulo`,`memoriaextenso`.`estadoActual`,
+`memoriaextenso`.`lgac`,`memoriaextenso`.`autor_es`,`memoriaextenso`.`paginas`,
+`memoriaextenso`.`pais`,`memoriaextenso`.`año`,`memoriaextenso`.`proposito`,
+`memoriaextenso`.`tituloPresentacion`,`memoriaextenso`.`nombreCongreso`,`memoriaextenso`.`estado`,
+`memoriaextenso`.`ciudad`,
+
+`integrante`.`nombre`,`integrante`.`apellidoP`,`integrante`.`apellidoM` 
+from (`memoriaextenso` inner join `integrante`) 
+where `memoriaextenso`.`idIntegrante` = `integrante`.`idIntegrante` AND `memoriaextenso`.`ca` = 2 
+AND `fechaRegistro` BETWEEN $P{fecha_inicio} AND $P{fecha_fin}]]>
+	</queryString>
+	<field name="idProducto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="titulo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estadoActual" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="lgac" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="autor_es" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="paginas" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pais" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="año" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="proposito" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tituloPresentacion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombreCongreso" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ciudad" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellidoP" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellidoM" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="792" height="26" uuid="03922241-8733-491e-b252-101472c8fd09"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[MEMORIA EN EXTENSO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="159" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="26" height="20" uuid="dd5bb173-bedf-4bb2-8024-ebdfdeeb04d3"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="26" y="0" width="28" height="20" uuid="a53a3c58-8d28-41ce-9f15-3508188c7466"/>
+				<textFieldExpression><![CDATA[$F{idProducto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="54" y="0" width="100" height="20" uuid="7d78119d-537b-409c-afdb-bcb1719beab3"/>
+				<text><![CDATA[TITULO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="154" y="0" width="228" height="20" uuid="3a8c0a1b-4be1-4761-b652-ee055fa77619"/>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="382" y="0" width="100" height="20" uuid="c47f0a90-19b0-426a-9728-a3f07455b680"/>
+				<text><![CDATA[ESTADO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="482" y="0" width="100" height="20" uuid="c7b4bc24-9ccb-4bbc-8600-ff2037bd6bf3"/>
+				<textFieldExpression><![CDATA[$F{estadoActual}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="54" height="20" uuid="434b8d18-7566-4b4d-ba8b-4e826fc9af62"/>
+				<text><![CDATA[LGAC]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="54" y="20" width="328" height="20" uuid="e2f13560-e11b-40f6-80a6-61fedc81ba05"/>
+				<textFieldExpression><![CDATA[$F{lgac}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="382" y="20" width="100" height="20" uuid="a091e851-77ef-46c9-8808-103d7b56e317"/>
+				<text><![CDATA[AUTOR_ES]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="482" y="20" width="310" height="20" uuid="f0ba772d-5e35-4837-8758-6a2a5b78a45b"/>
+				<textFieldExpression><![CDATA[$F{autor_es}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="582" y="0" width="100" height="20" uuid="00a803d0-1b77-4397-b771-9ef13b42274c"/>
+				<text><![CDATA[PAGINAS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="682" y="0" width="110" height="20" uuid="0e4df96a-1f1e-427c-8759-6e693b6217d9"/>
+				<textFieldExpression><![CDATA[$F{paginas}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="40" width="54" height="20" uuid="107baa4d-df3e-4c36-9dc6-26d309795f8b"/>
+				<text><![CDATA[PAIS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="54" y="40" width="153" height="20" uuid="e5b11567-229e-4722-99f4-136979bfcefd"/>
+				<textFieldExpression><![CDATA[$F{pais}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="207" y="40" width="37" height="20" uuid="6c54288c-7e56-42a0-8d87-2c3b897e26ae"/>
+				<text><![CDATA[AÑO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="244" y="40" width="66" height="20" uuid="4271ea2a-1f10-4b5c-842c-22d8ded2260a"/>
+				<textFieldExpression><![CDATA[$F{año}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="310" y="40" width="72" height="20" uuid="b77f00ca-2907-498e-afea-7a5ab2754319"/>
+				<text><![CDATA[PROPOSITO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="382" y="40" width="410" height="20" uuid="e727a8e7-0265-4430-97f6-880eb0b4802d"/>
+				<textFieldExpression><![CDATA[$F{proposito}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="154" height="20" uuid="e0862299-c1f4-4435-88c2-d08eb382623f"/>
+				<text><![CDATA[TITULO DE PRESENTACION]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="154" y="60" width="228" height="20" uuid="20160feb-5160-485f-bfee-88b128c1d9e3"/>
+				<textFieldExpression><![CDATA[$F{tituloPresentacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="382" y="60" width="139" height="20" uuid="e7841296-8c78-48e3-98f0-7aa9cf810fd0"/>
+				<text><![CDATA[NOMBRE DEL CONGRESO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="521" y="60" width="271" height="20" uuid="c6b0e1e7-4c6f-4555-b466-1aaf7208db09"/>
+				<textFieldExpression><![CDATA[$F{nombreCongreso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="80" width="89" height="20" uuid="b4ec3b21-0a98-4d14-b1ea-c6d8bf7ffe1d"/>
+				<text><![CDATA[ESTADO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="89" y="80" width="221" height="20" uuid="3b991bac-8c2f-4133-8740-c199d3fcd10b"/>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="310" y="80" width="72" height="20" uuid="21b8eef9-c9ce-4dae-9477-72bac258d6ff"/>
+				<text><![CDATA[CIUDAD]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="382" y="80" width="410" height="20" uuid="1e0ee357-c46c-4ced-9faf-839de4e00601"/>
+				<textFieldExpression><![CDATA[$F{ciudad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="100" width="100" height="20" uuid="6e6d64d9-42ff-48ea-aa3a-77c3fe250e1a"/>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="100" width="168" height="20" uuid="6385aff7-9580-4c77-ba67-d851f1d9a261"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="268" y="100" width="114" height="20" uuid="4bce1a03-91d7-45ce-af73-91fd9643c702"/>
+				<text><![CDATA[APELLIDO PATERNO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="382" y="100" width="168" height="20" uuid="b31e609e-3c32-45dd-8206-7d9c178230e6"/>
+				<textFieldExpression><![CDATA[$F{apellidoP}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="550" y="100" width="114" height="20" uuid="0c80fce0-b388-45a4-ba41-cf0edde73567"/>
+				<text><![CDATA[APELLIDO MATERNO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="664" y="100" width="128" height="20" uuid="24270c7f-371f-4911-9328-eeaadf98218e"/>
+				<textFieldExpression><![CDATA[$F{apellidoM}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="141" width="792" height="1" uuid="c727d399-cafd-45fc-83f8-5e45e48efa60"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

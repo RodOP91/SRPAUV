@@ -45,12 +45,34 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="btnRegistrarProducto" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="botones" text="Registrar Producto" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <Button fx:id="btnRegistrarIntegrante" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="botones" text="Registrar Integrante" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                        <Button fx:id="btnRegistrarColaborador" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="botones" text="Registrar Colaborador" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                        <Button fx:id="btnValidarProductos" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="botones" text="Validar Productos CA" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                        <Button fx:id="btnEditarProducto" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="botones" text="Editar Producto" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <Button fx:id="btnRegistrarProyecto" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="botones" text="Registrar Proyecto" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Button fx:id="btnRegistrarProducto" mnemonicParsing="false" prefHeight="50.0" prefWidth="175.0" styleClass="botones" text="Registrar Producto" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Button>
+                        <Button fx:id="btnRegistrarIntegrante" mnemonicParsing="false" prefHeight="50.0" prefWidth="175.0" styleClass="botones" text="Registrar Integrante" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Button>
+                        <Button fx:id="btnRegistrarColaborador" mnemonicParsing="false" prefHeight="50.0" prefWidth="175.0" styleClass="botones" text="Registrar Colaborador" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Button>
+                        <Button fx:id="btnValidarProductos" mnemonicParsing="false" prefHeight="50.0" prefWidth="175.0" styleClass="botones" text="Validar Productos CA" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Button>
+                        <Button fx:id="btnEditarProducto" mnemonicParsing="false" prefHeight="50.0" prefWidth="175.0" styleClass="botones" text="Editar Producto" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Button>
+                        <Button fx:id="btnRegistrarProyecto" mnemonicParsing="false" prefHeight="50.0" prefWidth="175.0" styleClass="botones" text="Registrar Proyecto" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Button>
+                        <Button fx:id="btnGenerarReporte" mnemonicParsing="false" prefHeight="50.0" prefWidth="175.0" styleClass="botones" text="Generar Reporte" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></Button>
                      </children>
                   </GridPane>
                </children>

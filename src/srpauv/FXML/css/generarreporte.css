@@ -1,0 +1,21 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+.header{
+    -fx-background-color: #3979F0;
+}
+
+.botones{
+    -fx-background-color: #249108;
+    -fx-border-color: #249108;
+    -fx-border-radius: 0px;
+}
+.botones:hover{
+    -fx-background-color: #00CC98;
+    -fx-border-color: #249108;
+    -fx-border-radius: 0px;
+}

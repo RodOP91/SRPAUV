@@ -1,7 +1,9 @@
 package DAO;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import srpauv.clases.CapituloLibro;
@@ -12,6 +14,8 @@ import srpauv.clases.*;
  * @author edson
  */
 public class ProductosDAO {
+    
+    private static LocalDate fechaActual = LocalDate.now();
     
     public static int editar(Producto producto){
         int flag = -1;
@@ -214,13 +218,13 @@ public class ProductosDAO {
             Conexion conn = new Conexion();
             String sql = "INSERT INTO `tesis`(`idProducto`, `titulo`, `estado`, "
                     + "`fechaInicio`, `fechaFin`, `noAlumnos`, `lgac`, `ca`, `tipo`, `grado`, "
-                    + "`idIntegrante`, `idProyecto`) "
+                    + "`idIntegrante`, `idProyecto`, `fechaRegistro`) "
                     + "VALUES (NULL,'"+tesis.getTitulo()+"','"+tesis.getEstado()+"'"
                     + ",'"+tesis.getFechaInicio()+"','"+tesis.getFechaFin()+"'"
                     + ","+tesis.getNumAlumnos()+",'"+tesis.getLgac()+"',"+tesis.isConsiderarCA()+""
                     + ",'"+tesis.getTipoProducto()+"','"+tesis.getGrado()+"',"
                     + ""+tesis.getIntegranteR().getIdIntegrante()+", "
-                    + ""+tesis.getIdProyecto()+")";
+                    + ""+tesis.getIdProyecto()+",'"+fechaActual.toString()+"')";
             flag = conn.ejecutar(sql);
             conn.cerrar();
         }
@@ -232,7 +236,7 @@ public class ProductosDAO {
             String sql ="INSERT INTO `articulo_ind_arb`(`idProducto`, `titulo`,"
                     + " `estado`, `lgac`, `ca`, `autor_es`, `descripcion`, `nombreRevista`, "
                     + "`editorial`, `volumen`, `isnn`, `rangoPaginas`, `pais`, `año`, "
-                    + "`direccionElectronica`, `proposito`, `idIntegrante`, `idProyecto`) VALUES "
+                    + "`direccionElectronica`, `proposito`, `idIntegrante`, `idProyecto`, `fechaRegistro`) VALUES "
                     + "(null,'" + articuloindexado.getTitulo() + "','" + articuloindexado.getEstado() + "',"
                     + "'" + articuloindexado.getLgac() + "'," + articuloindexado.isConsiderarCA() + ","
                     + "'" + articuloindexado.getAutor() + "','" + articuloindexado.getDescripcion() + "',"
@@ -241,7 +245,8 @@ public class ProductosDAO {
                     + "'" + articuloindexado.getPags() + "','" + articuloindexado.getPais() + "',"
                     + "'" + articuloindexado.getAno() + "','" + articuloindexado.getDirelectronica() + "',"
                     + "'" + articuloindexado.getProposito() + "',"
-                    + ""+articuloindexado.getIntegranteR().getIdIntegrante()+", "+articuloindexado.getIdProyecto()+")";
+                    + ""+articuloindexado.getIntegranteR().getIdIntegrante()+", "
+                    + ""+articuloindexado.getIdProyecto()+" ,'"+fechaActual.toString()+"')";
             flag = conn.ejecutar(sql);
             conn.cerrar();
         }
@@ -253,7 +258,7 @@ public class ProductosDAO {
             String sql ="INSERT INTO `articulo_ind_arb`(`idProducto`, `titulo`,"
                     + " `estado`, `lgac`, `ca`, `autor_es`, `descripcion`, `nombreRevista`, "
                     + "`editorial`, `volumen`, `isnn`, `rangoPaginas`, `pais`, `año`, "
-                    + "`direccionElectronica`, `proposito`, `idIntegrante`, `idProyecto`) VALUES "
+                    + "`direccionElectronica`, `proposito`, `idIntegrante`, `idProyecto`, `fechaRegistro`) VALUES "
                     + "(null,'" + articuloarbitrado.getTitulo() + "','" + articuloarbitrado.getEstado() + "',"
                     + "'" + articuloarbitrado.getLgac() + "'," + articuloarbitrado.isConsiderarCA() + ","
                     + "'" + articuloarbitrado.getAutor() + "','" + articuloarbitrado.getDescripcion() + "',"
@@ -263,7 +268,7 @@ public class ProductosDAO {
                     + "'" + articuloarbitrado.getAno() + "','',"
                     + "'" + articuloarbitrado.getProposito() + "',"
                     + ""+articuloarbitrado.getIntegranteR().getIdIntegrante()+", "
-                    + ""+articuloarbitrado.getIdProyecto()+")";
+                    + ""+articuloarbitrado.getIdProyecto()+",'"+fechaActual.toString()+"')";
             flag = conn.ejecutar(sql);
             conn.cerrar();
         }
@@ -275,7 +280,7 @@ public class ProductosDAO {
             String sql ="INSERT INTO `articulo`(`idProducto`, `titulo`, "
                     + "`estadoActual`, `lgac`, `ca`, `autor_es`, `nombre_revista`,"
                     + " `editorial`, `volumen`, `issn`, `paginas`, `pais`, `año`,"
-                    + " `proposito`, `idIntegrante`, `idProyecto`) "
+                    + " `proposito`, `idIntegrante`, `idProyecto`, `fechaRegistro`) "
                     + "VALUES (null,'"+articulo.getTitulo()+"','"+articulo.getEstado()+"',"
                     + "'"+articulo.getLgac()+"',"+articulo.isConsiderarCA()+","
                     + "'"+articulo.getAutor()+"','"+articulo.getNomrevista()+"',"
@@ -283,7 +288,7 @@ public class ProductosDAO {
                     + "'"+articulo.getIssn()+"','"+articulo.getPaginas()+"',"
                     + "'"+articulo.getPais()+"','"+articulo.getAno()+"',"
                     + "'"+articulo.getProposito()+"',"+articulo.getIntegranteR().getIdIntegrante()+","
-                    + "'"+articulo.getIdProyecto()+"')";
+                    + ""+articulo.getIdProyecto()+",'"+fechaActual.toString()+"')";
             flag = conn.ejecutar(sql);
             conn.cerrar();
         }
@@ -295,7 +300,8 @@ public class ProductosDAO {
             String sql = "INSERT INTO `capitulolibro`(`idProducto`, `titulo`, "
                     + "`estado`, `lgac`, `ca`, `autor_es`, `editorial`, "
                     + "`rangoPaginas`, `pais`, `año`, `proposito`, `noEdiciones`,"
-                    + " `totalEjemplares`, `isbn`, `tituloibro`, `idIntegrante`, `idProyecto`) VALUES "
+                    + " `totalEjemplares`, `isbn`, `tituloibro`, `idIntegrante`, "
+                    + "`idProyecto`, `fechaRegistro`) VALUES "
                     + "(NULL,'"+capLib.getTitulo()+"','"+capLib.getEstado()+"',"
                     + "'"+capLib.getLgac()+"',"+capLib.isConsiderarCA()+",'"
                     + ""+capLib.getAutor_es()+"','"+capLib.getEditorial()+"',"
@@ -303,7 +309,7 @@ public class ProductosDAO {
                     + "'"+capLib.getProposito()+"',"+capLib.getNoEdiciones()+","
                     + ""+capLib.getTotalEjemplares()+",'"+capLib.getISBN()+"',"
                     + "'"+capLib.getTituloLibro()+"',"+capLib.getIntegranteR().getIdIntegrante()+", "
-                    + ""+capLib.getIdProyecto()+")";
+                    + ""+capLib.getIdProyecto()+",'"+fechaActual.toString()+"')";
             flag = conn.ejecutar(sql);
             conn.cerrar();
         }
@@ -313,13 +319,15 @@ public class ProductosDAO {
             
             String sql = "INSERT INTO `libro`(`idProducto`, `titulo`, `estado`, "
                     + "`lgac`, `ca`, `autor_es`, `aditorial`, `pais`, `año`, "
-                    + "`proposito`, `noEdiciones`, `totalEjemplares`, `isbn`, `idIntegrante`, `idProyecto`) "
+                    + "`proposito`, `noEdiciones`, `totalEjemplares`, `isbn`, "
+                    + "`idIntegrante`, `idProyecto`, `fechaRegistro`) "
                     + "VALUES (NULL,'"+libro.getTitulo()+"','"+libro.getEstado()+"',"
                     + "'"+libro.getLgac()+"',"+libro.isConsiderarCA()+",'"+libro.getAutor_es()+"',"
                     + "'"+libro.getEditorial()+"','"+libro.getPais()+"','"+libro.getAño()+"',"
                     + "'"+libro.getProposito()+"',"+libro.getNoEdiciones()+","
                     + ""+libro.getTotalEjemplares()+",'"+libro.getISBN()+"',"
-                    + ""+libro.getIntegranteR().getIdIntegrante()+", "+libro.getIdProyecto()+")";
+                    + ""+libro.getIntegranteR().getIdIntegrante()+", "+libro.getIdProyecto()+""
+                    + ",'"+fechaActual.toString()+"')";
             flag = conn.ejecutar(sql);
             conn.cerrar();
         }
@@ -331,7 +339,7 @@ public class ProductosDAO {
             String sql ="INSERT INTO `produccioninovadora`(`idProducto`, `titulo`,"
                     + " `estadoActual`, `lgac`, `ca`, `descripcion`, `pais`, `proposito`,"
                     + " `clasifInterna`, `fechaPublicacion`, `numRegistro`, `usuario`, "
-                    + "`participante`, `idIntegrante`, `idProyecto`) "
+                    + "`participante`, `idIntegrante`, `idProyecto`, `fechaRegistro`) "
                     + "VALUES (null,'"+produccioninnovadora.getTitulo()+"',"
                     + "'"+produccioninnovadora.getEstado()+"','"+produccioninnovadora.getLgac()+"',"
                     + ""+produccioninnovadora.isConsiderarCA()+","
@@ -340,7 +348,7 @@ public class ProductosDAO {
                     + "'"+produccioninnovadora.getClasifinternacional()+"','"+produccioninnovadora.getFechapub()+"',"
                     + "'"+produccioninnovadora.getNumregistro()+"','"+produccioninnovadora.getUsuario()+"',"
                     + "'"+produccioninnovadora.getParticipante()+"',"+produccioninnovadora.getIntegranteR().getIdIntegrante()+","
-                    + ""+produccioninnovadora.getIdProyecto()+")";
+                    + ""+produccioninnovadora.getIdProyecto()+",'"+fechaActual.toString()+"')";
             flag = conn.ejecutar(sql);
             conn.cerrar();
         }
@@ -352,7 +360,7 @@ public class ProductosDAO {
             String sql ="INSERT INTO `memoriaextenso`(`idProducto`, `titulo`,"
                     + " `estadoActual`, `lgac`, `ca`, `autor_es`, `paginas`, "
                     + "`pais`, `año`, `proposito`, `nombreCongreso`, `estado`, "
-                    + "`ciudad`, `idIntegrante`, `idProyecto`)"
+                    + "`ciudad`, `idIntegrante`, `idProyecto`, `fechaRegistro`)"
                     + " VALUES (null,'"+memoriaextenso.getTitulo()+"','"+memoriaextenso.getEstado()+"',"
                     + "'"+memoriaextenso.getLgac()+"',"+memoriaextenso.isConsiderarCA()+","
                     + "'"+memoriaextenso.getAutor()+"','"+memoriaextenso.getRangopags()+"',"
@@ -360,7 +368,8 @@ public class ProductosDAO {
                     + "'"+memoriaextenso.getProposito()+"',"
                     + "'"+memoriaextenso.getCongreso()+"',"
                     + "'"+memoriaextenso.getEstadoG()+"','"+memoriaextenso.getCiudad()+"',"
-                    + ""+memoriaextenso.getIntegranteR().getIdIntegrante()+","+memoriaextenso.getIdProyecto()+")";
+                    + ""+memoriaextenso.getIntegranteR().getIdIntegrante()+","+memoriaextenso.getIdProyecto()+""
+                    + ",'"+fechaActual.toString()+"')";
             flag = conn.ejecutar(sql);
             conn.cerrar();
         }
@@ -372,12 +381,13 @@ public class ProductosDAO {
             String sql = "INSERT INTO `prototipo`(`idProducto`, `titulo`, `estado`, "
                     + "`lgac`, `ca`, `autor_es`, `pais`, `año`, `proposito`, "
                     + "`objetivos`, `caracteristicas`, `institucion`, `idIntegrante`,"
-                    + " `idProyecto`) VALUES "
+                    + " `idProyecto`, `fechaRegistro`) VALUES "
                     + "(NULL,'"+proto.getTitulo()+"','"+proto.getEstado()+"',"
                     + "'"+proto.getLgac()+"',"+proto.isConsiderarCA()+" ,'"+proto.getAutor_es()+"','"+proto.getPais()+"',"
                     + "'"+proto.getAño()+"','"+proto.getProposito()+"','"+proto.getObjetivos()+"',"
                     + "'"+proto.getCaracteristicas()+"','"+proto.getInstitucion()+"',"
-                    + ""+proto.getIntegranteR().getIdIntegrante()+", "+proto.getIdProyecto()+")";
+                    + ""+proto.getIntegranteR().getIdIntegrante()+", "+proto.getIdProyecto()+""
+                    + ",'"+fechaActual.toString()+"')";
             flag = conn.ejecutar(sql);
             conn.cerrar();
         }        

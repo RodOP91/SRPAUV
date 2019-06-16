@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportProductosCA_subreportTesis" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="792" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="60fe9694-b3d7-4681-b84a-fb06bb9726d5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fecha_inicio" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha_fin" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select 
+`articulo_ind_arb`.`idProducto`,`articulo_ind_arb`.`titulo`,`articulo_ind_arb`.`estado`,
+`articulo_ind_arb`.`lgac`,`articulo_ind_arb`.`autor_es`,`articulo_ind_arb`.`descripcion`,
+`articulo_ind_arb`.`nombreRevista`,`articulo_ind_arb`.`editorial`,`articulo_ind_arb`.`volumen`,
+`articulo_ind_arb`.`isnn`,`articulo_ind_arb`.`rangoPaginas`,`articulo_ind_arb`.`pais`,
+`articulo_ind_arb`.`año`,`articulo_ind_arb`.`direccionElectronica`,`articulo_ind_arb`.`proposito`,
+
+`integrante`.`nombre`,`integrante`.`apellidoP`,`integrante`.`apellidoM` 
+from (`articulo_ind_arb` inner join `integrante`) 
+where `articulo_ind_arb`.`idIntegrante` = `integrante`.`idIntegrante` AND `articulo_ind_arb`.`ca` = 2 
+AND `fechaRegistro` BETWEEN $P{fecha_inicio} AND $P{fecha_fin}]]>
+	</queryString>
+	<field name="idProducto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="titulo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="lgac" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="autor_es" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombreRevista" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="editorial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="volumen" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="isnn" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rangoPaginas" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pais" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="año" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccionElectronica" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="proposito" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellidoP" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellidoM" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="792" height="26" uuid="03922241-8733-491e-b252-101472c8fd09"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[ARTICULO INDEXADO Y ARBITRADO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="144" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="30" height="20" uuid="29d888b4-8256-4613-951e-0b5aa2eaaeed"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="30" y="0" width="29" height="20" uuid="023902bd-b8e5-4d57-960d-61eb58c0b9a5"/>
+				<textFieldExpression><![CDATA[$F{idProducto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="59" y="0" width="68" height="20" uuid="76b94d2b-36e7-4ab0-ae9b-6badda0c053f"/>
+				<text><![CDATA[TITULO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="127" y="0" width="165" height="20" uuid="8a280a1a-bbcd-46ef-8f3c-854c6d7bed68"/>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="292" y="0" width="100" height="20" uuid="58bc03e7-5ad1-404b-9cda-45e58504ca4f"/>
+				<text><![CDATA[ESTADO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="392" y="0" width="100" height="20" uuid="1b099bde-d7ca-4990-b745-d98d0c3a3521"/>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="59" height="20" uuid="be17859c-e163-4901-b775-5a0229ab416d"/>
+				<text><![CDATA[LGAC]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="59" y="20" width="233" height="20" uuid="b829349f-1a6e-4545-8810-41b2b63684d5"/>
+				<textFieldExpression><![CDATA[$F{lgac}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="492" y="0" width="100" height="20" uuid="40f6e4b1-49fc-4e80-a16a-75eec0550824"/>
+				<text><![CDATA[AUTOR_ES]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="592" y="0" width="200" height="20" uuid="7fd4bf93-5389-4882-b930-0a0440c48974"/>
+				<textFieldExpression><![CDATA[$F{autor_es}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="292" y="20" width="100" height="20" uuid="58fa9a3e-9431-41b0-a9b8-34190c1bb2ca"/>
+				<text><![CDATA[DESCRIPCION]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="392" y="20" width="400" height="20" uuid="e2755e38-04b2-4f3d-af8a-f0be133bfa60"/>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="40" width="59" height="20" uuid="cd563eaa-e6d1-44c4-b49a-bcd88335110c"/>
+				<text><![CDATA[REVISTA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="59" y="40" width="233" height="20" uuid="4a5039ea-ff0d-4c28-b5a5-bca992e75370"/>
+				<textFieldExpression><![CDATA[$F{nombreRevista}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="292" y="40" width="100" height="20" uuid="9b7ac11a-c083-4e19-9599-385a685aade5"/>
+				<text><![CDATA[EDITORIAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="392" y="40" width="100" height="20" uuid="3ee8b7da-e659-4f48-a8fe-40d411c83994"/>
+				<textFieldExpression><![CDATA[$F{editorial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="492" y="40" width="60" height="20" uuid="5855f8d6-551a-4afa-8964-7c98b0af210e"/>
+				<text><![CDATA[VOLUMEN]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="552" y="40" width="68" height="20" uuid="feab11d2-9fb1-4118-8013-0a53d89eadd5"/>
+				<textFieldExpression><![CDATA[$F{volumen}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="59" height="20" uuid="834f215f-3813-44ad-953b-8180b2b73389"/>
+				<text><![CDATA[ISSN]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="59" y="60" width="233" height="20" uuid="8a07402d-f104-4b21-aa42-a7f9f31ba705"/>
+				<textFieldExpression><![CDATA[$F{isnn}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="620" y="40" width="72" height="20" uuid="2a03cb26-d0c7-4b61-b851-ec08461a2b82"/>
+				<text><![CDATA[PAGINAS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="692" y="40" width="100" height="20" uuid="72ddfdd0-a548-46db-854f-5fd9c6e154db"/>
+				<textFieldExpression><![CDATA[$F{rangoPaginas}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="292" y="60" width="100" height="20" uuid="0397537c-2dc2-44bb-86b6-a68510a72909"/>
+				<text><![CDATA[PAIS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="392" y="60" width="160" height="20" uuid="39a74fc6-4f2c-4b6d-aa2c-c1a99cd6719c"/>
+				<textFieldExpression><![CDATA[$F{pais}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="620" y="60" width="72" height="20" uuid="d887e0c6-d98b-4f30-aa95-a97a82872149"/>
+				<text><![CDATA[AÑO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="692" y="60" width="100" height="20" uuid="ced82678-4e8c-448f-9130-7e0bb55ea833"/>
+				<textFieldExpression><![CDATA[$F{año}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="80" width="145" height="20" uuid="9fc2f6cb-48ee-4995-9ce5-bb93609099de"/>
+				<text><![CDATA[DIRECCION ELECTRONICA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="145" y="80" width="247" height="20" uuid="049db027-c0dc-4c1d-a3b4-ca6878457a28"/>
+				<textFieldExpression><![CDATA[$F{direccionElectronica}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="392" y="80" width="100" height="20" uuid="9bd8c198-aad9-4762-89ff-9e8c5f2f5929"/>
+				<text><![CDATA[PROPOSITO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="492" y="80" width="300" height="20" uuid="c5bab4a4-446d-447d-afa6-9dbe466c6070"/>
+				<textFieldExpression><![CDATA[$F{proposito}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="100" width="100" height="20" uuid="1a4d0328-91e2-4748-b9c7-b017e090aa4e"/>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="100" width="192" height="20" uuid="100f7329-2241-4ca2-9815-89646ccf38dd"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="292" y="100" width="117" height="20" uuid="08645b29-1f92-4c86-a6d6-d149a02886e1"/>
+				<text><![CDATA[APELLIDO PATERNO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="409" y="100" width="143" height="20" uuid="34d280e6-7600-4cba-946d-23887414685c"/>
+				<textFieldExpression><![CDATA[$F{apellidoP}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="552" y="100" width="108" height="20" uuid="76fbbed0-631e-4585-bb5c-3b978be85df2"/>
+				<text><![CDATA[APELLIDO MATERNO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="660" y="100" width="132" height="20" uuid="edffb9f4-4543-475e-9792-c0af678902c4"/>
+				<textFieldExpression><![CDATA[$F{apellidoM}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="130" width="792" height="1" uuid="62dc9ecc-ba69-4af3-a142-d0712268fa04"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

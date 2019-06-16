@@ -26,7 +26,8 @@ public class Conexion {
     public void conectar(){
         try{
             Class.forName("com.mysql.jdbc.Driver");//DRIVER
-            cnx = DriverManager.getConnection("jdbc:mysql://13.65.93.86:3306/srpauv_db", "srpauv_user", "970208");//CONECCION (DATOS: DIRECCION DE LA BASE, USER, PASS)
+            //cnx = DriverManager.getConnection("jdbc:mysql://13.65.93.86:3306/srpauv_db", "srpauv_user", "970208");//CONECCION (DATOS: DIRECCION DE LA BASE, USER, PASS)
+            cnx = DriverManager.getConnection("jdbc:mysql://localhost/srpauv_db", "root", "");//CONECCION (DATOS: DIRECCION DE LA BASE, USER, PASS)
             if(cnx != null){
                 sentencia = cnx.createStatement();//CREAR LA CONEXION
                 System.out.println("Conexión exitosa");
@@ -98,5 +99,9 @@ public class Conexion {
     
     public void setCnxNull(){
         this.cnx = null;
+    }
+    
+    public Connection getConexion(){
+        return this.cnx;
     }
 }
