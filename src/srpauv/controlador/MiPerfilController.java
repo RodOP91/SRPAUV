@@ -36,7 +36,7 @@ public class MiPerfilController implements Initializable {
     
     private Integrante integrante;
     DatosLaborales datoslaborales;
-    ObservableList<EstudiosRealizados> estudios;
+    ObservableList<EstudiosRealizados> estudios = null;
     EstudiosRealizados estudioSeleccionado;
     int indicadorDP=0;
     int indicadorFP=0;
