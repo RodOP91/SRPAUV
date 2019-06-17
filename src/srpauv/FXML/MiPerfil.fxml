@@ -396,7 +396,7 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <Label fx:id="lblAvisosDL" prefWidth="0.0" />
+                                          <Label fx:id="lblAvisosDL" prefHeight="17.0" prefWidth="428.0" />
                                        </children>
                                     </GridPane>
                                  </children>

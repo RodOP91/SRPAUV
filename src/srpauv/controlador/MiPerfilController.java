@@ -35,7 +35,7 @@ public class MiPerfilController implements Initializable {
     private static Integrante usuario;
     
     private Integrante integrante;
-    DatosLaborales datoslaborales;
+    DatosLaborales datoslaborales = null;
     ObservableList<EstudiosRealizados> estudios = null;
     EstudiosRealizados estudioSeleccionado;
     int indicadorDP=0;
@@ -777,7 +777,7 @@ public class MiPerfilController implements Initializable {
            
     private boolean validarCamposDatosPersonales(){
         boolean flag = false;
-        if(txtNoPersonal.getText().equals("")||
+        if(  //txtNoPersonal.getText().equals("")||
                 txtNombre.getText().equals("")||
                 txtApellidoPaterno.getText().equals("")||
                 txtApellidoMaterno.getText().equals("")||
@@ -823,9 +823,9 @@ public class MiPerfilController implements Initializable {
     
     private boolean validarCamposRegistrarEstudios(){
         boolean flag = false;
+        
+        
         if(this.txtEstudiosEn.getText().equals("") ||
-                this.dtpFechaInicio.getValue().equals(null) ||
-                this.dtpFechaTermino.getValue().equals(null) ||
                 this.dtpFechaObtencionGrado.getValue().equals(null) ||
                 this.cbxNivelEstudios.getSelectionModel().isEmpty() ||
                 this.cbxAreaFP.getSelectionModel().isEmpty() ||
@@ -837,12 +837,16 @@ public class MiPerfilController implements Initializable {
             
             return flag;
         }else{
-            if(modificarFP){
-                modificarEstudiosRealizados();
-                return flag=true;
-            }else{
-                registrarEstudiosRealizados();
-                return flag=true;
+            if(this.dtpFechaInicio.getValue().isAfter(this.dtpFechaTermino.getValue())){
+                return flag;
+            } else {
+                if(modificarFP){
+                    modificarEstudiosRealizados();
+                    return flag=true;
+                }else{
+                    registrarEstudiosRealizados();
+                    return flag=true;
+                }
             }
             
         }
@@ -987,9 +991,8 @@ public class MiPerfilController implements Initializable {
         boolean flag = false;
         if(this.cbxContratoPtc.getSelectionModel().getSelectedItem().equals("Sí")){
             contrato = true;
-        }else{
-            
         }
+        
         DatosLaborales datosActualizados = new DatosLaborales(getIntegrante().getIdIntegrante(), 
         contrato,
         Date.valueOf(this.dtpFechaIngresoUv.getValue()),
@@ -1003,6 +1006,7 @@ public class MiPerfilController implements Initializable {
         System.out.println("Des: " + datosActualizados.getDes());
         System.out.println("Nivel SNI: " + datosActualizados.getNivelSNI());
         try{
+            System.err.println("Actualizando DL");
             DatosLaboralesDAO.actualizar(getIntegrante().getIdIntegrante(),datosActualizados);
             return flag = true;
         }catch(SQLException ex){
